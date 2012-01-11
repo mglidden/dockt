@@ -1,6 +1,8 @@
 Docs::Application.routes.draw do
   resources :groups do
-    resources :documents
+    resources :documents do
+      resources :comments
+    end
   end
 
   get "home/index"
