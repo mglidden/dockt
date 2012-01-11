@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @document }
+      format.json { render json: @comment}
     end
   end
 end
