@@ -6,6 +6,7 @@ class DocumentsController < ApplicationController
   end
   
   def show
+    @group = Group.find(params[:group_id])
     @document = Document.find(params[:id])
     @comments = @document.comments
 
