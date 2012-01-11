@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @group.name %>
+</p>
+
+<p>
+  <b>Modified:</b>
+  <%= @group.modified %>
+</p>
+
+<h2>Documents:</h2>
+<%= render @group.documents %>
+
+<h2>Add a document:</h2>
+<%= render "documents/form" %>
+
+<br />
+
+<%= link_to 'Edit', edit_group_path(@group) %> |
+<%= link_to 'Back', groups_path %>
