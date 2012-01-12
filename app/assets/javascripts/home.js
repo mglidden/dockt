@@ -14,7 +14,9 @@ function addTableClick(table_name, request_fn) {
   $.each($(table_name+' tr'), function(index, row) {
     if (index != 0) {
       $(row).click(function() {
-        request_fn($(this).children()[0].innerText);
+        if (request_fn) {
+          request_fn($(this).children()[0].innerText);
+        }
       });
     }
   });
@@ -37,7 +39,6 @@ function populateTableFunction(table_name, getCols, request_fn) {
       var cols = getCols(item);
       $(table_name).append('<tr><td>' + getCols(item).join('</td><td>') +
                              '</td></tr>');
-      window.console.log(item)
     });
     addTableHover(table_name);
     addTableClick(table_name, request_fn)
