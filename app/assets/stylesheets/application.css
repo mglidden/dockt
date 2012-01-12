@@ -13,6 +13,7 @@ html, body {
 
 #container {
   min-height:100%;
+  overflow:hidden;
   position:relative;
 }
 
@@ -28,9 +29,11 @@ html, body {
 }
 
 #content {
-  background: green;
+  margin:auto;
+  overflow:hidden;
   padding: 10px;
   padding-bottom: 60px;
+  width:800px;
 }
 
 #footer {
@@ -47,6 +50,12 @@ html, body {
 .card {
   display:inline;
   float:left;
-  width:30em;
+  width:800px;
+}
 
+#slider {
+  left:0;
+  margin:0;
+  position:relative;
+  width:3000px;
 }

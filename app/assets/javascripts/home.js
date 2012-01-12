@@ -2,6 +2,10 @@ var slider = {};
 slider.selectedGroup;
 slider.selectedDocument;
 slider.selectedComment;
+slider.CARD_WIDTH = 800;
+
+slider.ID = {};
+slider.ID.SLIDER = 'slider';
 
 slider.addTableHover = function(table_name) {
   $.each($(table_name+' tr'), function(index, row) {
@@ -62,6 +66,7 @@ slider.requestDocuments = function(groupId) {
   $.getJSON('/groups/'+groupId+'/documents.json', response_fn);
   // hack, find a better way to keep track of current groupid
   slider.selectedGroup = groupId;
+  slider.animateSlider(-800);
 };
 
 slider.requestComments = function(docId) {
@@ -71,8 +76,22 @@ slider.requestComments = function(docId) {
   $.getJSON('/groups/'+slider.selectedGroup+'/documents/'+docId+'/comments.json',
       response_fn);
   slider.selectedDocument = docId;
+  slider.animateSlider(-800);
 };
 
 $(document).ready(function() {
   slider.requestGroups();
+  if (window.location.pathname.indexOf('comments') != -1) {
+    slider.moveSlider(-slider.CARD_WIDTH*2);
+  } else if (window.location.pathname.indexOf('documents') != -1) {
+    slider.moveSlider(-slider.CARD_WIDTH);
+  }
 });
+
+slider.moveSlider = function(pixels) {
+  $('#slider').css('left', parseInt($('#slider').css('left')) + pixels + 'px');
+};
+
+slider.animateSlider = function(pixels) {
+  $('#slider').animate({left:'+='+pixels}, 'fast', null);
+};
