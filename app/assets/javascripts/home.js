@@ -1,16 +1,21 @@
-function addTableHover(table_name, request_fn) {
-  $.each($(table_name+" tr"), function(index, row) {
+var slider = {};
+slider.selectedGroup;
+slider.selectedDocument;
+slider.selectedComment;
+
+slider.addTableHover = function(table_name) {
+  $.each($(table_name+' tr'), function(index, row) {
     if (index != 0) {
       $(row).hover(function() {
-        $(row).addClass("hovered");
+        $(row).addClass('hovered');
       }, function() {
-        $(row).removeClass("hovered");
+        $(row).removeClass('hovered');
       });
     }
   });
-}
+};
 
-function addTableClick(table_name, request_fn) {
+slider.addTableClick = function(table_name, request_fn) {
   $.each($(table_name+' tr'), function(index, row) {
     if (index != 0) {
       $(row).click(function() {
@@ -20,19 +25,19 @@ function addTableClick(table_name, request_fn) {
       });
     }
   });
-}
+};
 
-function clearTable(table_name) {
-  $.each($(table_name + " tr"), function(index, row) {
+slider.clearTable = function(table_name) {
+  $.each($(table_name + ' tr'), function(index, row) {
     if (index != 0) {
       $(row).remove();
     }
   });
-}
+};
 
-function populateTableFunction(table_name, getCols, request_fn) {
+slider.populateTableFunction = function (table_name, getCols, request_fn) {
   return function(data) {
-    clearTable(table_name)
+    slider.clearTable(table_name);
     items = [];
 
     $.each(data, function(index, item) {
@@ -40,29 +45,34 @@ function populateTableFunction(table_name, getCols, request_fn) {
       $(table_name).append('<tr><td>' + getCols(item).join('</td><td>') +
                              '</td></tr>');
     });
-    addTableHover(table_name);
-    addTableClick(table_name, request_fn)
+    slider.addTableHover(table_name);
+    slider.addTableClick(table_name, request_fn)
   }
-}
+};
 
-var selectedGroup;
-function requestDocuments(groupId) {
-  var response_fn = populateTableFunction('#docs-table', function(item) {
-    return [item['id'], item['title'], item['url']]; }, requestComments);
-  $.getJSON("/groups/"+groupId+"/documents.json", response_fn);
+slider.requestGroups = function() {
+  $.getJSON('/groups.json', slider.populateTableFunction('#classes-table', 
+      function(item) { return [item['id'], item['name'], item['updated_at']]; },
+      slider.requestDocuments));
+};
+
+slider.requestDocuments = function(groupId) {
+  var response_fn = slider.populateTableFunction('#docs-table', function(item) {
+    return [item['id'], item['title'], item['url']]; }, slider.requestComments);
+  $.getJSON('/groups/'+groupId+'/documents.json', response_fn);
   // hack, find a better way to keep track of current groupid
-  selectedGroup = groupId;
-}
+  slider.selectedGroup = groupId;
+};
 
-function requestComments(docId) {
-  var response_fn = populateTableFunction('#comments-table', function(item) {
-    return [item['id'], item['commenter'], item['body']]; }, null);
-  $.getJSON('/groups/'+selectedGroup+'/documents/'+docId+'/comments.json',
+slider.requestComments = function(docId) {
+  var response_fn = slider.populateTableFunction('#comments-table', function(item) {
+    return [item['id'], item['commenter'], item['body']]; },
+        function(commentId) { slider.selectedComment = commentId; });
+  $.getJSON('/groups/'+slider.selectedGroup+'/documents/'+docId+'/comments.json',
       response_fn);
-}
+  slider.selectedDocument = docId;
+};
 
 $(document).ready(function() {
-  $.getJSON('/groups.json', populateTableFunction('#classes-table', function(item) {
-    return [item['id'], item['name'], item['updated_at']];
-  }, requestDocuments));
+  slider.requestGroups();
 });
