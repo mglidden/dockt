@@ -1,0 +1,20 @@
+<h2>Classes</h2>
+<div class=card id=classes>
+  <table id=classes-table class=data-table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Last Modified</th>
+    </tr>
+    <% if @groups %>
+      <% @groups.each do |group| %>
+        <tr>
+          <td><%= group.id %></td>
+          <td><%= group.name %></td>
+          <td><%= group.modified %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+</div>
+

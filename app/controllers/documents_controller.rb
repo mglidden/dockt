@@ -7,6 +7,7 @@ class DocumentsController < ApplicationController
   
   def show
     @group = Group.find(params[:group_id])
+    @documents = @group.documents
     @document = Document.find(params[:id])
     @comments = @document.comments
 
@@ -18,6 +19,7 @@ class DocumentsController < ApplicationController
 
   def index
     @group = Group.find(params[:group_id])
+    @documents = @group.documents
     
     respond_to do |format|
       format.html

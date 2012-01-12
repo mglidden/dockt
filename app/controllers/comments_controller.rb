@@ -7,6 +7,9 @@ class CommentsController < ApplicationController
   end
 
   def show
+    @group = Group.find(params[:group_id])
+    @documents = @group.documents
+    @comments = Document.find(params[:document_id]).comments
     @comment = Comment.find(params[:id])
 
     respond_to do |format|
@@ -16,7 +19,11 @@ class CommentsController < ApplicationController
   end
 
   def index
+    @group = Group.find(params[:group_id])
+    @documents = @group.documents
     @document = Document.find(params[:document_id])
+    @comments = @document.comments
+
 
     respond_to do |format|
       format.html
