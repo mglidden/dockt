@@ -15,4 +15,13 @@ class DocumentsController < ApplicationController
       format.json { render json: @document }
     end
   end
+
+  def index
+    @group = Group.find(params[:group_id])
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @group.documents }
+    end
+  end
 end

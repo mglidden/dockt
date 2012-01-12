@@ -11,7 +11,16 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @comment}
+      format.json { render json: @comment }
+    end
+  end
+
+  def index
+    @document = Document.find(params[:document_id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @document.comments }
     end
   end
 end
