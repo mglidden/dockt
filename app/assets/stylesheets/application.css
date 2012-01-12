@@ -40,3 +40,13 @@ html, body {
   position: absolute;
   width: 100%
 }
+
+.data-table {
+}
+
+.card {
+  display:inline;
+  float:left;
+  width:30em;
+
+}
