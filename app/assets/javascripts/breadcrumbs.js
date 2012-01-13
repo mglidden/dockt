@@ -26,7 +26,6 @@ bc.init = function() {
 };
 
 bc.changeCard = function(newCard) {
-  window.console.log('called ' + newCard + ' ' + bc.card);
   if (newCard > bc.card) {
     var firstBC;
     for (var i = bc.card + 1; i <= newCard; i++) {
@@ -40,22 +39,34 @@ bc.changeCard = function(newCard) {
     $(firstBC).animate({marginLeft:'-=800'}, 'fast', null);
     bc.card = newCard;
   } else if (newCard < bc.card) {
-    var toAnimate = $('#'+bc.ID['BC'+(1+newCard)]);
-    toAnimate.animate({marginLeft:'+=800'}, 'fast', function() {
-      for (var i = bc.card; i > newCard; i--) {
-        bc.getBar().removeChild(document.getElementById(bc.ID['BC'+i]))
-      }
-      bc.card = newCard;
-    });
+    bc.removeBCs(newCard);
   }
 };
 
+bc.removeBCs = function(newHighest) {
+  var toAnimate = $('#'+bc.ID['BC'+(1+newHighest)]);
+  toAnimate.animate({marginLeft:'+=800'}, 'fast', function() {
+    for (var i = bc.card; i > newHighest; i--) {
+      bc.getBar().removeChild(document.getElementById(bc.ID['BC'+i]))
+    }
+    bc.card = newHighest;
+  });
+};
+
+
 bc.createBC = function(id, text) {
-  el = document.createElement('div');
+  el = document.createElement('a');
   el.innerText = text;
   el.id = id;
   el.className = bc.CLASS.CRUMB;
+  el.onclick = bc.clicked;
   return el;
+};
+
+bc.clicked = function(event) {
+  var target = parseInt(event.target.id.charAt(2));
+  bc.removeBCs(target); 
+  slider.centerOn(target, true);
 };
 
 bc.getBar = function() {
