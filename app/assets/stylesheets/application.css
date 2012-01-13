@@ -26,14 +26,16 @@ html, body {
 #breadcrumbs {
   background: red;
   height: 20px;
+  overflow:hidden;
+}
+
+.breadcrumb {
+  display:inline;
 }
 
 #content {
-  margin:auto;
-  overflow:hidden;
   padding: 10px;
   padding-bottom: 60px;
-  width:800px;
 }
 
 #footer {
@@ -41,7 +43,7 @@ html, body {
   bottom: 0;
   height: 40px;
   position: absolute;
-  width: 100%
+  width: 100%;
 }
 
 .data-table {
@@ -58,4 +60,10 @@ html, body {
   margin:0;
   position:relative;
   width:3000px;
+}
+
+.centered {
+  margin:auto;
+  overflow:hidden;
+  width:800px;
 }

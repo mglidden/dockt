@@ -2,7 +2,7 @@ var slider = {};
 slider.selectedGroup;
 slider.selectedDocument;
 slider.selectedComment;
-slider.hasPushedState = false;
+slider.currCenter = 0;
 
 slider.CARD_WIDTH = 800;
 slider.ID = {};
@@ -66,9 +66,9 @@ slider.requestDocuments = function(groupId) {
     return [item['id'], item['title'], item['url']]; }, slider.requestComments);
   $.getJSON('/groups/'+groupId+'/documents.json', response_fn);
   slider.selectedGroup = groupId;
-  slider.animateSlider(-slider.CARD_WIDTH);
-  history.pushState({}, '', groupId + '/documents/');
-  slider.hasPushedState = true;
+  slider.currCenter = 1;
+  slider.centerOn(slider.currCenter)
+  window.history.pushState({center:slider.currCenter}, '', groupId + '/documents/');
 };
 
 slider.requestComments = function(docId) {
@@ -78,33 +78,44 @@ slider.requestComments = function(docId) {
   $.getJSON('/groups/'+slider.selectedGroup+'/documents/'+docId+'/comments.json',
       response_fn);
   slider.selectedDocument = docId;
-  slider.animateSlider(-slider.CARD_WIDTH);
-  history.pushState({}, '', docId + '/comments/');
-  slider.hasPushedState = true;
+  slider.currCenter = 2;
+  slider.centerOn(slider.currCenter)
+  window.history.pushState({center:slider.currCenter}, '', docId + '/comments/');
 };
-
-$(document).ready(function() {
-  slider.requestGroups();
-  if (window.location.pathname.indexOf('comments') != -1) {
-    slider.moveSlider(-slider.CARD_WIDTH*2);
-  } else if (window.location.pathname.indexOf('documents') != -1) {
-    slider.moveSlider(-slider.CARD_WIDTH);
-  }
-  window.onpopstate = slider.popstate;
-});
 
 slider.moveSlider = function(pixels) {
   $('#slider').css('left', parseInt($('#slider').css('left')) + pixels + 'px');
 };
 
-slider.animateSlider = function(pixels) {
+slider.animateSliderDist = function(pixels) {
   $('#slider').animate({left:'+='+pixels}, 'fast', null);
 };
 
-slider.popstate = function(state) {
+slider.animateSliderTo = function(pixels) {
+  slider.animateSliderDist(-parseInt($('#slider').css('left')) - pixels);
+};
+
+slider.centerOn = function(card) {
+  slider.animateSliderTo(slider.CARD_WIDTH*card);
+  bc.changeCard(card);
+};
+
+slider.popstate = function(event) {
   // on popstate is fired on first page load, so we only respond if we have
   // already pushed something onto the history stack
-  if (slider.hasPushedState) {
-    slider.animateSlider(slider.CARD_WIDTH);
+  if (event['state'] && event['state']['center']) {
+    slider.centerOn(event['state']['center']);
+  } else {
+    slider.centerOn(0);
   }
+};
+
+slider.init = function() {
+  slider.requestGroups();
+  if (window.location.pathname.indexOf('comments') != -1) {
+    slider.centerOn(2);
+  } else if (window.location.pathname.indexOf('documents') != -1) {
+    slider.centerOn(1);
+  }
+  window.onpopstate = slider.popstate;
 };
