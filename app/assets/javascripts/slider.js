@@ -112,6 +112,7 @@ slider.popstate = function(event) {
     slider.firstPop = false;
     return;
   }
+  window.console.log(event['state']['center'])
   if (event['state'] && event['state']['center']) {
     slider.centerOn(event['state']['center'], true);
   } else {
