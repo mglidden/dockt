@@ -3,6 +3,7 @@ slider.selectedGroup;
 slider.selectedDocument;
 slider.selectedComment;
 slider.currCenter = 0;
+slider.firstPop = true;
 
 slider.CARD_WIDTH = 800;
 slider.ID = {};
@@ -67,7 +68,7 @@ slider.requestDocuments = function(groupId) {
   $.getJSON('/groups/'+groupId+'/documents.json', response_fn);
   slider.selectedGroup = groupId;
   slider.currCenter = 1;
-  slider.centerOn(slider.currCenter)
+  slider.centerOn(slider.currCenter, true)
   window.history.pushState({center:slider.currCenter}, '', groupId + '/documents/');
 };
 
@@ -79,7 +80,7 @@ slider.requestComments = function(docId) {
       response_fn);
   slider.selectedDocument = docId;
   slider.currCenter = 2;
-  slider.centerOn(slider.currCenter)
+  slider.centerOn(slider.currCenter, true)
   window.history.pushState({center:slider.currCenter}, '', docId + '/comments/');
 };
 
@@ -95,27 +96,36 @@ slider.animateSliderTo = function(pixels) {
   slider.animateSliderDist(-parseInt($('#slider').css('left')) - pixels);
 };
 
-slider.centerOn = function(card) {
-  slider.animateSliderTo(slider.CARD_WIDTH*card);
+slider.centerOn = function(card, animate) {
+  window.console.log(card)
+  if (animate) {
+    slider.animateSliderTo(-slider.CARD_WIDTH*card);
+  } else {
+    slider.moveSlider(-slider.CARD_WIDTH*card);
+  }
   bc.changeCard(card);
 };
 
 slider.popstate = function(event) {
   // on popstate is fired on first page load, so we only respond if we have
   // already pushed something onto the history stack
+  if (slider.firstPop) {
+    slider.firstPop = false;
+    return;
+  }
   if (event['state'] && event['state']['center']) {
-    slider.centerOn(event['state']['center']);
+    slider.centerOn(event['state']['center'], true);
   } else {
-    slider.centerOn(0);
+    slider.centerOn(0, true);
   }
 };
 
 slider.init = function() {
   slider.requestGroups();
   if (window.location.pathname.indexOf('comments') != -1) {
-    slider.centerOn(2);
+    slider.centerOn(2, false);
   } else if (window.location.pathname.indexOf('documents') != -1) {
-    slider.centerOn(1);
+    slider.centerOn(1, false);
   }
   window.onpopstate = slider.popstate;
 };
