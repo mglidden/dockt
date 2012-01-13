@@ -26,6 +26,7 @@ bc.init = function() {
 };
 
 bc.changeCard = function(newCard) {
+  window.console.log('called ' + newCard + ' ' + bc.card);
   if (newCard > bc.card) {
     var firstBC;
     for (var i = bc.card + 1; i <= newCard; i++) {
