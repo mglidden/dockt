@@ -39,7 +39,7 @@ html, body {
 #footer {
   background: yellow;
   bottom: 0;
-  height: 60px;
+  height: 40px;
   position: absolute;
   width: 100%
 }

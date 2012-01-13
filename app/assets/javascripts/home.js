@@ -2,8 +2,9 @@ var slider = {};
 slider.selectedGroup;
 slider.selectedDocument;
 slider.selectedComment;
-slider.CARD_WIDTH = 800;
+slider.hasPushedState = false;
 
+slider.CARD_WIDTH = 800;
 slider.ID = {};
 slider.ID.SLIDER = 'slider';
 
@@ -64,9 +65,10 @@ slider.requestDocuments = function(groupId) {
   var response_fn = slider.populateTableFunction('#docs-table', function(item) {
     return [item['id'], item['title'], item['url']]; }, slider.requestComments);
   $.getJSON('/groups/'+groupId+'/documents.json', response_fn);
-  // hack, find a better way to keep track of current groupid
   slider.selectedGroup = groupId;
-  slider.animateSlider(-800);
+  slider.animateSlider(-slider.CARD_WIDTH);
+  history.pushState({}, '', groupId + '/documents/');
+  slider.hasPushedState = true;
 };
 
 slider.requestComments = function(docId) {
@@ -76,7 +78,9 @@ slider.requestComments = function(docId) {
   $.getJSON('/groups/'+slider.selectedGroup+'/documents/'+docId+'/comments.json',
       response_fn);
   slider.selectedDocument = docId;
-  slider.animateSlider(-800);
+  slider.animateSlider(-slider.CARD_WIDTH);
+  history.pushState({}, '', docId + '/comments/');
+  slider.hasPushedState = true;
 };
 
 $(document).ready(function() {
@@ -86,6 +90,7 @@ $(document).ready(function() {
   } else if (window.location.pathname.indexOf('documents') != -1) {
     slider.moveSlider(-slider.CARD_WIDTH);
   }
+  window.onpopstate = slider.popstate;
 });
 
 slider.moveSlider = function(pixels) {
@@ -94,4 +99,12 @@ slider.moveSlider = function(pixels) {
 
 slider.animateSlider = function(pixels) {
   $('#slider').animate({left:'+='+pixels}, 'fast', null);
+};
+
+slider.popstate = function(state) {
+  // on popstate is fired on first page load, so we only respond if we have
+  // already pushed something onto the history stack
+  if (slider.hasPushedState) {
+    slider.animateSlider(slider.CARD_WIDTH);
+  }
 };
