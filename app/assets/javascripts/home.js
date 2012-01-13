@@ -97,9 +97,8 @@ slider.animateSliderTo = function(pixels) {
 };
 
 slider.centerOn = function(card, animate) {
-  window.console.log(card)
   if (animate) {
-    slider.animateSliderTo(-slider.CARD_WIDTH*card);
+    slider.animateSliderTo(slider.CARD_WIDTH*card);
   } else {
     slider.moveSlider(-slider.CARD_WIDTH*card);
   }
