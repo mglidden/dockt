@@ -14,6 +14,7 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @group = Group.find(params[:id])
+    @documents = @group.documents
 
     respond_to do |format|
       format.html # show.html.erb

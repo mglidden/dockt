@@ -5,3 +5,57 @@
  *= require_self
  *= require_tree . 
 */
+html, body {
+  height:100%;
+  margin:0;
+  padding:0;
+}
+
+#container {
+  min-height:100%;
+  overflow:hidden;
+  position:relative;
+}
+
+#header {
+  background: blue;
+  height: 100px;
+  padding: 10px;
+}
+
+#breadcrumbs {
+  background: red;
+  height: 20px;
+}
+
+#content {
+  margin:auto;
+  overflow:hidden;
+  padding: 10px;
+  padding-bottom: 60px;
+  width:800px;
+}
+
+#footer {
+  background: yellow;
+  bottom: 0;
+  height: 40px;
+  position: absolute;
+  width: 100%
+}
+
+.data-table {
+}
+
+.card {
+  display:inline;
+  float:left;
+  width:800px;
+}
+
+#slider {
+  left:0;
+  margin:0;
+  position:relative;
+  width:3000px;
+}

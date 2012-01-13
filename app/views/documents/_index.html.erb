@@ -1,0 +1,19 @@
+<table>
+  <tr>
+    <th>Title</th>
+    <th>URL</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @documents.each do |doc| %>
+    <tr>
+      <td><%= doc.title %></td>
+      <td><%= doc.url %></td>
+      <td><%= link_to 'Show', group_document_path(@group, doc) %></td>
+      <td></td>
+      <td></td>
+    </tr>
+  <% end %>
+</table>

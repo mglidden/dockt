@@ -1,0 +1,20 @@
+<div class=card id=comments>
+  <h2>Comments</h2>
+  <table id=comments-table class=data-table>
+    <tr>
+      <th>ID</th>
+      <th>Commenter</th>
+      <th>Body</th>
+    </tr>
+    <% if @comments %>
+      <% @comments.each do |comment| %>
+        <tr>
+          <td><%= comment.id %></td>
+          <td><%= comment.commenter %></td>
+          <td><%= comment.body %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+</div>
+

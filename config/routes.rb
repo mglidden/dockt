@@ -1,6 +1,8 @@
 Docs::Application.routes.draw do
   resources :groups do
-    resources :documents
+    resources :documents do
+      resources :comments
+    end
   end
 
   get "home/index"
@@ -54,7 +56,7 @@ Docs::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'groups#index'
+  root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 
