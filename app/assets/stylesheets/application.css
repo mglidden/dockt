@@ -119,3 +119,7 @@ tr {
 .idCol {
   display:none;
 }
+
+.leftCol {
+  padding-left:8px;
+}

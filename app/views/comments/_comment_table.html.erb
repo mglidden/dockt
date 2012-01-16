@@ -2,14 +2,14 @@
   <table id=comments-table class=data-table>
     <tr>
       <th class=idCol>ID</th>
-      <th>Commenter</th>
+      <th class=leftCol>Commenter</th>
       <th>Body</th>
     </tr>
     <% if @comments %>
       <% @comments.each do |comment| %>
         <tr>
           <td class=idCol><%= comment.id %></td>
-          <td><%= comment.commenter %></td>
+          <td class=leftCol><%= comment.commenter %></td>
           <td><%= comment.body %></td>
         </tr>
       <% end %>

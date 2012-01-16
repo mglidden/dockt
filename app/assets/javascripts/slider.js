@@ -48,8 +48,9 @@ slider.populateTableFunction = function (table_name, getCols, request_fn) {
 
     $.each(data, function(index, item) {
       var cols = getCols(item);
-      $(table_name).append('<tr><td class=idCol>' + getCols(item).join('</td><td>') +
-                             '</td></tr>');
+      $(table_name).append('<tr><td class=idCol>' + 
+          getCols(item).join('</td><td>').replace('<td>', '<td class=leftCol>') +
+          '</td></tr>');
     });
     slider.addTableHover(table_name);
     slider.addTableClick(table_name, request_fn)

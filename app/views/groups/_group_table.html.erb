@@ -2,14 +2,14 @@
   <table id=classes-table class=data-table>
     <tr class='table-header'>
       <th class=idCol>ID</th>
-      <th>Name</th>
+      <th class=leftCol>Name</th>
       <th>Last Modified</th>
     </tr>
     <% if @groups %>
       <% @groups.each do |group| %>
         <tr>
           <td class=idCol><%= group.id %></td>
-          <td><%= group.name %></td>
+          <td class=leftCol><%= group.name %></td>
           <td><%= group.modified %></td>
         </tr>
       <% end %>
