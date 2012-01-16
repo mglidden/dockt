@@ -1,0 +1,78 @@
+Design 1:
+  pros:
+    -slider shows you where comments are without cluttering the pdf
+    -comment bar gives an overview of all comments
+    -comment markers in the pdf show which line the comments refer to without cluttering up the design
+  cons:
+    -comments bar takes up space, shrinks the pdf
+    -will have to use a non-standard slider
+    -no obvious link between markers in the scrollbar and the comments
+
+Design 2:
+  pros:
+    -takes up least amount of space
+    -no confusing interface elements
+    -easiest to code
+  cons:
+    -can't see where comments are in relation to the pdf
+    -pdf may be too large for the page, resulting in excessive scrolling
+    -need one more click to see comments
+
+Design 3:
+  pros:
+    -comments don't take up extra space
+    -can see exactly where the comments refer to
+    -can click to place a comment
+  cons:
+    -comments cover up sections of the pdf
+    -can't get an overview of all the comments
+    -no easy way to see density of comments throughout the pdf
+
+
+Identify at least one user variable (technical expertise, familiarity with topic, frequency of visits).
+The user variable is the size of groups that want to collaborate on a subject.
+
+Sit down with three people, and conduct user research interviews on each of them. Briefly summarize these interviews.
+
+Shavinesh Sukesh: An easier way for people to show others snippets of a paper would be nice. Classes right now use mandatory forums like Piazza where people are required to post or where people post a lot. These are usually not helpful when trying to glean information from a specific source. Tagging specific locations in a paper would also be an easier way of doing citations, both as a single user and in small groups. During group research projects, tagging where information is located can help others look it up and perhaps gain more information that they could put elsewhere. If users are not located together, rather than emailing a pdf and separate associated notes you wrote, you could share it online. Google Docs almost does this, but does not work with pdfs.
+
+Darci Reed: Having an easier way to share documents in research projects would help. There are times when you are working on a research project, and there are hundreds of pages of material to sift through. The process would usually involve telling group members a page number and what you're trying to find, and continually checking in. This requires partners to meet in person, which isn't always feasible.
+
+Kirsten: The main problem with online textbooks is that there exists this giant pdf that requires you to scroll up and down until you find exactly what you're looking for. If you're looking for a specific topic, it takes a lot of time to even find it. She would like a way to immediately jump to a specific page in the textbook. As for over 5 people gets cluttered
+
+Use these interviews to develop your personas.
+Two personas:
+A single person wanting to annotate pdfs for their own personal notes.
+A small research group wanting to share and comment on sources.
+
+Identify one use case for your site.
+A group of students creating notes for a class. As the semester progresses, new documents are added, and each person in the group points out specific points in the notes which are important or useful.
+
+
+What problem does your application address? Aim for 1-2 sentences.
+Our application addresses the problem of annotating pdfs, and makes it easier for users to collaborate on these documents.
+
+How does your application address the problem above? Aim for one sentence. The next question is a better place for elaborate explanations.
+Our application allows users to mark notes within a pdf, and share it with other users, who can then comment and add their own notes.
+
+What is the killer feature of your application?
+The ability to jump directly to a specific place in a pdf where a comment has been made. / scrape a site for its pdfs
+
+Which of the themes does your application match? Your answer should be one sentence if the match is reasonably obvious. Be as brief as you can. If your application matches both themes, list the one where the matching is more obvious.
+The match is in education, enabling others to organize their learning.
+
+What technology do you plan to use for your server-side programming (e.g. PHP, Ruby on Rails, etc)?
+Ruby on Rails
+
+Who is on your team? You may list at most 3 people. For each member list the full legal name, .edu e-mail, school, major(s), year, and graduate/undergraduate status.
+Mason Glidden: mglidden@mit.edu, MIT, Course 6-3, Undergraduate Class of 2014 
+Christopher Tam: tchris@mit.edu, MIT, Course 6-3, Undergraduate Class of 2014
+
+How did the team members meet? This will help us know you better.
+Same living group
+
+What risks do you envision preventing you from successfully implementing your idea? Consider this an exercise of imagination, not a test of confidence.
+Not being able to embed pdfs within the site.
+
+Are you planning to participate in the competition? Your answer will solely be used for planning purposes.
+yes
