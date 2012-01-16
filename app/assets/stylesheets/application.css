@@ -115,3 +115,7 @@ tr {
   border-width:1px;
   height:30px;
 }
+
+.idCol {
+  display:none;
+}
