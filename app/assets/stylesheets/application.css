@@ -7,6 +7,7 @@
 */
 html, body {
   height:100%;
+  line-height:1.4;
   margin:0;
   padding:0;
 }
@@ -36,7 +37,7 @@ html, body {
 }
 
 #content {
-  padding: 10px;
+  padding-top: 20px;
   padding-bottom: 60px;
 }
 
@@ -49,11 +50,15 @@ html, body {
 }
 
 .data-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width:100%;
 }
 
 .card {
   display:inline;
   float:left;
+  margin:0;
   width:800px;
 }
 
@@ -85,5 +90,28 @@ html, body {
 #search {
   border: 1px solid #999;
   border-radius:12px;
-  -webkit-border-radius:1px;
+  color:#a6a6a6;
+  padding-bottom:1px;
+  padding-left:5px;
+  -webkit-border-radius:12px;
+}
+
+th {
+  background-image: -webkit-linear-gradient(top, rgb(48, 97, 153), rgb(30, 61, 96));
+  color:#a6a6a6;
+  font-size:16px;
+  height:30px;
+  text-align:left;
+}
+
+#table-header {
+}
+
+tr {
+  background-color:#c2c7cc;
+  border-collapse:separate;
+  border-bottom-style:solid;
+  border-bottom-color:#919599;
+  border-width:1px;
+  height:30px;
 }
