@@ -9,15 +9,20 @@
 <body>
   <div id=container>
     <div id=header>
+      <div class=centered style='padding-top:22px'>
+        <span id=logo>Dockt</span>
+        <div id=headerRight>
+          <input type='text' name='search' id='search' size='40' value='search'>
+          <span style='display:block'>Logged in as Mason Glidden  |  Log out</span>
+        </div>
+      </div>
     </div>
     <div id=breadcrumbs>
-      <div class=centered>
+      <div class=centered style='margin-top:12px'>
       </div>
     </div>
     <div id=content class=centered>
       <%= yield %>
-    </div>
-    <div id=footer>
     </div>
   <div>
 </body>

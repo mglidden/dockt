@@ -45,12 +45,9 @@ bc.changeCard = function(newCard) {
 
 bc.removeBCs = function(newHighest) {
   var toAnimate = $('#'+bc.ID['BC'+(1+newHighest)]);
-  window.console.log('here ' + bc.card + ' ' + newHighest)
   toAnimate.animate({marginLeft:'+=800'}, 'fast', function() {
-    window.console.log('finished animation ' + bc.card + ' ' + newHighest);
     for (var i = bc.card; i > newHighest; i--) {
       bc.getBar().removeChild(document.getElementById(bc.ID['BC'+i]))
-      window.console.log('removing ' + i);
     }
     bc.card = newHighest;
   });

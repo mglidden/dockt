@@ -12,25 +12,27 @@ html, body {
 }
 
 #container {
+  background:#eeeeee;
   min-height:100%;
   overflow:hidden;
   position:relative;
 }
 
 #header {
-  background: blue;
-  height: 100px;
-  padding: 10px;
+  background:url('/assets/header_bg.png');
+  height: 74px;
 }
 
 #breadcrumbs {
-  background: red;
-  height: 20px;
+  background:url('/assets/navbar_bg.png');
+  height: 50px;
   overflow:hidden;
 }
 
 .breadcrumb {
+  color:#a6a6a6;
   display:inline;
+  font-size:18pt;
 }
 
 #content {
@@ -66,4 +68,22 @@ html, body {
   margin:auto;
   overflow:hidden;
   width:800px;
+}
+
+#logo {
+  color:#a6a6a6;
+  font-size:36pt;
+}
+
+#headerRight {
+  color:#a6a6a6;
+  float:right;
+  position:relative;
+  top:-6px;
+}
+
+#search {
+  border: 1px solid #999;
+  border-radius:12px;
+  -webkit-border-radius:1px;
 }
