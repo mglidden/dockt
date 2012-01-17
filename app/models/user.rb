@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
     @activated = true
     self.activated_at = Time.now.utc
     self.activation_code = nil
+    self.groups = ''
     save(:validate => false)
   end
 
@@ -66,11 +67,14 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
 
+  def can_access(group)
+    return self.groups.split(',').include?(group.id.to_s)
+  end
+
   protected
     
   def make_activation_code
       self.activation_code = self.class.make_token
   end
-
 
 end
