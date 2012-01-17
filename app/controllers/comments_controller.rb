@@ -20,6 +20,7 @@ class CommentsController < ApplicationController
 
   def index
     @group = Group.find(params[:group_id])
+    @groups = Group.all
     @documents = @group.documents
     @document = Document.find(params[:document_id])
     @comments = @document.comments

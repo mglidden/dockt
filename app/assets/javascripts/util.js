@@ -37,3 +37,7 @@ util.activeCard = function() {
 util.parseProperty = function(id, property) {
   return parseInt($('#'+id).css(property));
 }
+
+util.getGroupNum = function() {
+  return window.location.pathname.match(/\d+/)[0];
+}

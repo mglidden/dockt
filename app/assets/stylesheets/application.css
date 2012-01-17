@@ -117,8 +117,8 @@ th {
 tr {
   background-color:#c2c7cc;
   border-collapse:separate;
-  border-bottom-style:solid;
-  border-bottom-color:#919599;
+  border-top-style:solid;
+  border-top-color:#919599;
   border-width:1px;
   height:30px;
 }

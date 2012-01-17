@@ -72,7 +72,6 @@ bc.clicked = function(event) {
   if (target != bc.card) {
     window.history.pushState({center:target}, '', bc.constructModifiedUrl(target));
     slider.centerOn(target, true);
-    //bc.card = target;
   }
 };
 

@@ -18,6 +18,7 @@ class DocumentsController < ApplicationController
   end
 
   def index
+    @groups = Group.all
     @group = Group.find(params[:group_id])
     @documents = @group.documents
     

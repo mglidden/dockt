@@ -121,11 +121,20 @@ slider.popstate = function(event) {
 };
 
 slider.init = function() {
-  slider.requestGroups();
+  slider.addTableHover('#classes-table');
+  slider.addTableClick('#classes-table', slider.requestDocuments)
   if (window.location.pathname.indexOf('comments') != -1) {
+    slider.addTableHover('#comments-table');
+    slider.addTableClick('#comments-table', null);
+    slider.addTableHover('#docs-table');
+    slider.addTableClick('#docs-table', slider.requestComments)
     slider.centerOn(2, false);
+    slider.selectedGroup = util.getGroupNum();
   } else if (window.location.pathname.indexOf('documents') != -1) {
+    slider.addTableHover('#docs-table');
+    slider.addTableClick('#docs-table', slider.requestComments)
     slider.centerOn(1, false);
+    slider.selectedGroup = util.getGroupNum();
   }
   window.onpopstate = slider.popstate;
 };
