@@ -3,10 +3,11 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
     @groups = Group.all
+    viewable_groups = @groups.find_all{|group| current_user.can_access(group)}
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @groups }
+      format.json { render json: viewable_groups}
     end
   end
 
@@ -15,6 +16,10 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @documents = @group.documents
+
+    unless current_user.can_access(@group)
+      return
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,6 +31,10 @@ class GroupsController < ApplicationController
   # GET /groups/new.json
   def new
     @group = Group.new
+
+    unless current_user.can_access(@group)
+      return
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -59,6 +68,10 @@ class GroupsController < ApplicationController
   def update
     @group = Group.find(params[:id])
 
+    unless current_user.can_access(@group)
+      return
+    end
+
     respond_to do |format|
       if @group.update_attributes(params[:group])
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
@@ -75,6 +88,10 @@ class GroupsController < ApplicationController
   def destroy
     @group = Group.find(params[:id])
     @group.destroy
+
+    unless current_user.can_access(@group)
+      return
+    end
 
     respond_to do |format|
       format.html { redirect_to groups_url }
