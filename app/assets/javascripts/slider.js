@@ -41,28 +41,6 @@ slider.clearTable = function(table_name) {
   });
 };
 
-slider.populateTableFunction = function (table_name, getCols, request_fn) {
-  return function(data) {
-    slider.clearTable(table_name);
-    items = [];
-
-    $.each(data, function(index, item) {
-      var cols = getCols(item);
-      $(table_name).append('<tr><td class=idCol>' + 
-          getCols(item).join('</td><td>').replace('<td>', '<td class=leftCol>') +
-          '</td></tr>');
-    });
-    slider.addTableHover(table_name);
-    slider.addTableClick(table_name, request_fn)
-  }
-};
-
-slider.requestGroups = function() {
-  $.getJSON('/groups.json', slider.populateTableFunction('#classes-table', 
-      function(item) { return [item['id'], item['name'], item['updated_at']]; },
-      slider.requestDocuments));
-};
-
 slider.setupDocsTable = function() {
   slider.addTableHover('#docs-table');
   slider.addTableClick('#docs-table', slider.requestComments);
@@ -135,15 +113,12 @@ slider.init = function() {
   slider.addTableHover('#classes-table');
   slider.addTableClick('#classes-table', slider.requestDocuments)
   if (window.location.pathname.indexOf('comments') != -1) {
-    slider.addTableHover('#comments-table');
-    slider.addTableClick('#comments-table', null);
-    slider.addTableHover('#docs-table');
-    slider.addTableClick('#docs-table', slider.requestComments)
+    slider.setupCommentsTable();
+    slider.setupDocumentsTable();
     slider.centerOn(2, false);
     slider.selectedGroup = util.getGroupNum();
   } else if (window.location.pathname.indexOf('documents') != -1) {
-    slider.addTableHover('#docs-table');
-    slider.addTableClick('#docs-table', slider.requestComments)
+    slider.setupDocumentsTable();
     slider.centerOn(1, false);
     slider.selectedGroup = util.getGroupNum();
   }
