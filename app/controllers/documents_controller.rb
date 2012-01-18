@@ -28,14 +28,15 @@ class DocumentsController < ApplicationController
   def index
     @groups = Group.all
     @group = Group.find(params[:group_id])
-    unless current_user.can_access(@group)
-      return
+    if current_user == nil or !current_user.can_access(@group)
+      @documents = []
+    else
+      @documents = @group.documents
     end
-    @documents = @group.documents
     
     respond_to do |format|
       format.html
-      format.json { render json: @group.documents }
+      format.json { render json: @documents }
     end
   end
 end

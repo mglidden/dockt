@@ -5,7 +5,7 @@
       <th class=leftCol>Title</th>
       <th>URL</th>
     </tr>
-    <% if @documents and current_user.can_access(@group)%>
+    <% if @documents %>
       <% @documents.each do |doc| %>
         <tr>
           <td class=idCol><%= doc.id %></td>

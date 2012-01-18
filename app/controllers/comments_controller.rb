@@ -30,19 +30,28 @@ class CommentsController < ApplicationController
 
   def index
     @group = Group.find(params[:group_id])
-
-    unless current_user.can_access(@group)
-      return
-    end
-
     @groups = Group.all
     @documents = @group.documents
     @document = Document.find(params[:document_id])
-    @comments = @document.comments
+
+    puts @document.group_id
+    puts params[:document_id]
+    puts params[:group_id]
+    puts current_user.can_access_id(@document.group_id)
+    puts '\n\n\n\n\n'
+
+    if current_user == nil or !current_user.can_access_id(@document.group_id)
+      @groups = []
+      @documents = []
+      @comments = []
+      @document = nil
+    else
+      @comments = @document.comments
+    end
 
     respond_to do |format|
       format.html
-      format.json { render json: @document.comments }
+      format.json { render json: @comments}
     end
   end
 end

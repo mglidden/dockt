@@ -71,6 +71,10 @@ class User < ActiveRecord::Base
     return self.groups.split(',').include?(group.id.to_s)
   end
 
+  def can_access_id(group_id)
+    return self.groups.split(',').include?(group_id.to_s)
+  end
+
   protected
     
   def make_activation_code

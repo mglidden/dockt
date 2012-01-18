@@ -2,8 +2,13 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
-    viewable_groups = @groups.find_all{|group| current_user.can_access(group)}
+    if current_user != nil
+      @groups = Group.all
+      viewable_groups = @groups.find_all{|group| current_user.can_access(group)}
+    else
+      @groups = []
+      viewable_groups = []
+    end
 
     respond_to do |format|
       format.html # index.html.erb
