@@ -20,16 +20,14 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @group = Group.find(params[:id])
+    @groups = Group.all
     @documents = @group.documents
 
     unless current_user.can_access(@group)
       return
     end
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @group }
-    end
+    render :layout => false
   end
 
   # GET /groups/new

@@ -22,10 +22,7 @@ class CommentsController < ApplicationController
     @comments = Document.find(params[:document_id]).comments
     @comment = Comment.find(params[:id])
 
-    respond_to do |format|
-      format.html
-      format.json { render json: @comment }
-    end
+    render :layout => false
   end
 
   def index

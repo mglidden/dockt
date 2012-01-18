@@ -10,7 +10,8 @@ class DocumentsController < ApplicationController
     redirect_to group_path(@group)
   end
   
-  def show
+  def show 
+    @groups = Group.all
     @group = Group.find(params[:group_id])
     unless current_user.can_access(@group)
       return
@@ -19,10 +20,7 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
     @comments = @document.comments
 
-    respond_to do |format|
-      format.html
-      format.json { render json: @document }
-    end
+    render :layout => false
   end
 
   def index
