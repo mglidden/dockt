@@ -1,5 +1,11 @@
 <div id=slider>
-  <%= render 'groups/group_table' %>
-  <%= render 'documents/document_table' %>
-  <%= render 'comments/comment_table' %>
+  <div class=card id=groups>
+    <%= render 'groups/group_table' %>
+  </div>
+  <div class=card id=documents>
+    <%= render 'documents/document_table' %>
+  </div>
+  <div class=card id=comments>
+    <%= render 'comments/comment_table' %>
+  </div>
 </div>

@@ -63,22 +63,33 @@ slider.requestGroups = function() {
       slider.requestDocuments));
 };
 
+slider.setupDocsTable = function() {
+  slider.addTableHover('#docs-table');
+  slider.addTableClick('#docs-table', slider.requestComments);
+};
+
 slider.requestDocuments = function(groupId) {
-  var response_fn = slider.populateTableFunction('#docs-table', function(item) {
-    return [item['id'], item['title'], item['url']]; }, slider.requestComments);
-  $.getJSON('/groups/'+groupId+'/documents.json', response_fn);
+  $.ajax({url: '/groups/'+groupId,
+          success: function(data) { 
+            $('#documents').html(data);
+            slider.setupDocsTable();}});
   slider.selectedGroup = groupId;
   slider.currCenter = 1;
   slider.centerOn(slider.currCenter, true)
   window.history.pushState({center:slider.currCenter}, '', groupId + '/documents/');
 };
 
+slider.setupCommentsTable = function() {
+  slider.addTableHover('#comments-table');
+  slider.addTableClick('#docs-table', null);
+};
+
 slider.requestComments = function(docId) {
-  var response_fn = slider.populateTableFunction('#comments-table', function(item) {
-    return [item['id'], item['commenter'], item['body']]; },
-        function(commentId) { slider.selectedComment = commentId; });
-  $.getJSON('/groups/'+slider.selectedGroup+'/documents/'+docId+'/comments.json',
-      response_fn);
+  $.ajax({url: '/groups/'+slider.selectedGroup+'/documents/'+docId+'/',
+          success: function(data) { 
+            $('#comments').html(data);
+            slider.setupCommentsTable();}});
+
   slider.selectedDocument = docId;
   slider.currCenter = 2;
   slider.centerOn(slider.currCenter, true)

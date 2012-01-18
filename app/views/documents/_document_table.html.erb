@@ -1,19 +1,16 @@
-<div class=card id=documents>
-  <table id=docs-table class=data-table>
-    <tr>
-      <th class=idCol>ID</th>
-      <th class=leftCol>Title</th>
-      <th>URL</th>
-    </tr>
-    <% if @documents %>
-      <% @documents.each do |doc| %>
-        <tr>
-          <td class=idCol><%= doc.id %></td>
-          <td class=leftCol><%= doc.title%></td>
-          <td><%= doc.url %></td>
-        </tr>
-      <% end %>
+<table id=docs-table class=data-table>
+  <tr>
+    <th class=idCol>ID</th>
+    <th class=leftCol>Title</th>
+    <th>URL</th>
+  </tr>
+  <% if @documents %>
+    <% @documents.each do |doc| %>
+      <tr>
+        <td class=idCol><%= doc.id %></td>
+        <td class=leftCol><%= doc.title%></td>
+        <td><%= doc.url %></td>
+      </tr>
     <% end %>
-  </table>
-</div>
-
+  <% end %>
+</table>
