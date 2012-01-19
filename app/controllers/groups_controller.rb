@@ -58,7 +58,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
-        format.html { render action: 'show'}
+        format.html { render 'groups/_group_table_row.html.erb', :layout => false}
         format.json { render json: @group, status: :created, location: @group }
         current_user.add_access(@group)
       else

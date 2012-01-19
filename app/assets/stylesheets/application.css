@@ -121,7 +121,9 @@ tr {
   border-top-color:#919599;
   border-width:1px;
   height:30px;
+  overflow:hidden;
 }
+
 
 .table_row:hover {
   background: #777777;

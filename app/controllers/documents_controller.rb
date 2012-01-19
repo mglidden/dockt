@@ -7,11 +7,13 @@ class DocumentsController < ApplicationController
     end
 
     @document = @group.documents.create(params[:document])
-    redirect_to group_path(@group)
+    @doc = @document
+    respond_to do |format|
+      format.html { render 'documents/_document_table_row.html.erb', :layout => false}
+    end
   end
 
   def new
-    puts "here \n\n\n\n\n\n"
     @groups = Group.all
     @group = Group.find(params[:group_id])
     @document = Document.new

@@ -47,22 +47,36 @@ toolbar.addOverlay = function() {
   $('#overlay').animate({opacity:0.5}, toolbar.fadeTime/3, null);
 };
 
+toolbar.addTableRow = function(event, response) {
+  var element = $(response.responseText);
+  element.css('display', 'none');
+  if (slider.currCenter == 0) {
+    element.insertAfter($('#classes-table :first :first'));
+  } else if (slider.currCenter == 1) {
+    element.insertAfter($('#docs-table :first :first'));
+  }
+  element.fadeToggle();
+};
+
 toolbar.close = function() {
   $('#overlay').animate({opactiy:0.0}, toolbar.fadeTime/3, function() {
     $('#overlay').css('display', 'none')});
   $('#formContainer').animate({opacity:0.0}, toolbar.fadeTime, function() {
     $('#formContainer').css('display', 'none');
-    $('#newForm').remove();
   });
 };
 
 toolbar.open = function(data) {
+  $('#newForm').remove();
   toolbar.addOverlay();
   $('#formContainer').css('display', 'block');
   $('#formContainer').html(data);
   $('#formContainer').animate({opacity:1.0}, toolbar.fadeTime, null);
+  $('#newForm').bind("ajax:complete", toolbar.addTableRow);
 }
 
+toolbar.init = function() {
+}
 
 toolbar.add = function() {
   if (slider.currCenter == 0) {
