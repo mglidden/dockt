@@ -1,19 +1,16 @@
-<div class=card id=comments>
-  <table id=comments-table class=data-table>
-    <tr>
-      <th>ID</th>
-      <th>Commenter</th>
-      <th>Body</th>
-    </tr>
-    <% if @comments %>
-      <% @comments.each do |comment| %>
-        <tr>
-          <td><%= comment.id %></td>
-          <td><%= comment.commenter %></td>
-          <td><%= comment.body %></td>
-        </tr>
-      <% end %>
+<table id=comments-table class=data-table>
+  <tr>
+    <th class=idCol>ID</th>
+    <th class=leftCol>Commenter</th>
+    <th>Body</th>
+  </tr>
+  <% if @comments %>
+    <% @comments.each do |comment| %>
+      <tr class=table_row>
+        <td class=idCol><%= comment.id %></td>
+        <td class=leftCol><%= comment.commenter %></td>
+        <td><%= comment.body %></td>
+      </tr>
     <% end %>
-  </table>
-</div>
-
+  <% end %>
+</table>

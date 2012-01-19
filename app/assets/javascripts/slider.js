@@ -9,18 +9,6 @@ slider.CARD_WIDTH = 800;
 slider.ID = {};
 slider.ID.SLIDER = 'slider';
 
-slider.addTableHover = function(table_name) {
-  $.each($(table_name+' tr'), function(index, row) {
-    if (index != 0) {
-      $(row).hover(function() {
-        $(row).addClass('hovered');
-      }, function() {
-        $(row).removeClass('hovered');
-      });
-    }
-  });
-};
-
 slider.addTableClick = function(table_name, request_fn) {
   $.each($(table_name+' tr'), function(index, row) {
     if (index != 0) {
@@ -41,43 +29,31 @@ slider.clearTable = function(table_name) {
   });
 };
 
-slider.populateTableFunction = function (table_name, getCols, request_fn) {
-  return function(data) {
-    slider.clearTable(table_name);
-    items = [];
-
-    $.each(data, function(index, item) {
-      var cols = getCols(item);
-      $(table_name).append('<tr><td>' + getCols(item).join('</td><td>') +
-                             '</td></tr>');
-    });
-    slider.addTableHover(table_name);
-    slider.addTableClick(table_name, request_fn)
-  }
-};
-
-slider.requestGroups = function() {
-  $.getJSON('/groups.json', slider.populateTableFunction('#classes-table', 
-      function(item) { return [item['id'], item['name'], item['updated_at']]; },
-      slider.requestDocuments));
+slider.setupDocsTable = function() {
+  slider.addTableClick('#docs-table', slider.requestComments);
 };
 
 slider.requestDocuments = function(groupId) {
-  var response_fn = slider.populateTableFunction('#docs-table', function(item) {
-    return [item['id'], item['title'], item['url']]; }, slider.requestComments);
-  $.getJSON('/groups/'+groupId+'/documents.json', response_fn);
+  $.ajax({url: '/groups/'+groupId,
+          success: function(data) { 
+            $('#documents').html(data);
+            slider.setupDocsTable();}});
   slider.selectedGroup = groupId;
   slider.currCenter = 1;
   slider.centerOn(slider.currCenter, true)
   window.history.pushState({center:slider.currCenter}, '', groupId + '/documents/');
 };
 
+slider.setupCommentsTable = function() {
+  slider.addTableClick('#docs-table', null);
+};
+
 slider.requestComments = function(docId) {
-  var response_fn = slider.populateTableFunction('#comments-table', function(item) {
-    return [item['id'], item['commenter'], item['body']]; },
-        function(commentId) { slider.selectedComment = commentId; });
-  $.getJSON('/groups/'+slider.selectedGroup+'/documents/'+docId+'/comments.json',
-      response_fn);
+  $.ajax({url: '/groups/'+slider.selectedGroup+'/documents/'+docId+'/',
+          success: function(data) { 
+            $('#comments').html(data);
+            slider.setupCommentsTable();}});
+
   slider.selectedDocument = docId;
   slider.currCenter = 2;
   slider.centerOn(slider.currCenter, true)
@@ -103,6 +79,7 @@ slider.centerOn = function(card, animate) {
     slider.moveSlider(-slider.CARD_WIDTH*card);
   }
   bc.changeCard(card);
+  toolbar.setupButtons(card);
 };
 
 slider.popstate = function(event) {
@@ -120,11 +97,16 @@ slider.popstate = function(event) {
 };
 
 slider.init = function() {
-  slider.requestGroups();
+  slider.addTableClick('#classes-table', slider.requestDocuments)
   if (window.location.pathname.indexOf('comments') != -1) {
+    slider.setupCommentsTable();
+    slider.setupDocsTable();
     slider.centerOn(2, false);
+    slider.selectedGroup = util.getGroupNum();
   } else if (window.location.pathname.indexOf('documents') != -1) {
+    slider.setupDocsTable();
     slider.centerOn(1, false);
+    slider.selectedGroup = util.getGroupNum();
   }
   window.onpopstate = slider.popstate;
 };

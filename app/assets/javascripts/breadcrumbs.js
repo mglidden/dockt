@@ -9,18 +9,19 @@ bc.ID.BC2 = 'bc2';
 
 bc.CLASS = {};
 bc.CLASS.CRUMB = 'breadcrumb';
+bc.CLASS.CRUMB_CONT = 'bc_cont';
 
 bc.init = function() {
   bcBar = bc.getBar();
   if (util.urlHasGroups()) {
-    bcBar.appendChild(bc.createBC(bc.ID.BC0, 'classes > '));
+    bcBar.appendChild(bc.createBC(bc.ID.BC0, bc.determineName(0)));
   }
   if (util.urlHasDocuments()) {
-    bcBar.appendChild(bc.createBC(bc.ID.BC1, 'documents > '))
+    bcBar.appendChild(bc.createBC(bc.ID.BC1, bc.determineName(1)));
     bc.card = 1;
   }
   if (util.urlHasComments()) {
-    bcBar.appendChild(bc.createBC(bc.ID.BC2, 'comments'));
+    bcBar.appendChild(bc.createBC(bc.ID.BC2, bc.determineName(2)));
     bc.card = 2;
   }
 };
@@ -47,7 +48,7 @@ bc.removeBCs = function(newHighest) {
   var toAnimate = $('#'+bc.ID['BC'+(1+newHighest)]);
   toAnimate.animate({marginLeft:'+=800'}, 'fast', function() {
     for (var i = bc.card; i > newHighest; i--) {
-      bc.getBar().removeChild(document.getElementById(bc.ID['BC'+i]))
+      bc.getBar().removeChild(document.getElementById(bc.ID['BC'+i]).parentElement)
     }
     bc.card = newHighest;
   });
@@ -55,12 +56,15 @@ bc.removeBCs = function(newHighest) {
 
 
 bc.createBC = function(id, text) {
-  el = document.createElement('a');
-  el.innerText = text;
-  el.id = id;
-  el.className = bc.CLASS.CRUMB;
-  el.onclick = bc.clicked;
-  return el;
+  inner = document.createElement('span');
+  inner.innerHTML = text;
+  inner.id = id;
+  inner.className = bc.CLASS.CRUMB;
+  inner.onclick = bc.clicked;
+  bcCont = document.createElement('div');
+  bcCont.appendChild(inner);
+  bcCont.className = bc.CLASS.CRUMB_CONT;
+  return bcCont;
 };
 
 bc.clicked = function(event) {
@@ -68,7 +72,6 @@ bc.clicked = function(event) {
   if (target != bc.card) {
     window.history.pushState({center:target}, '', bc.constructModifiedUrl(target));
     slider.centerOn(target, true);
-    //bc.card = target;
   }
 };
 
@@ -92,12 +95,12 @@ bc.moveBCDist = function(id, pixels) {
 
 bc.determineName = function(cardNum) {
   if (cardNum == 0) {
-    return 'groups > ';
+    return 'groups&nbsp&nbsp&nbsp&nbsp';
   }
   if (cardNum == 1) {
-    return 'documents > ';
+    return '&nbspdocuments&nbsp&nbsp&nbsp&nbsp';
   }
   if (cardNum == 2) {
-    return 'comments';
+    return '&nbspcomments&nbsp&nbsp&nbsp&nbsp';
   }
 };

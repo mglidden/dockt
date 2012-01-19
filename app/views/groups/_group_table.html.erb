@@ -1,19 +1,18 @@
-<div class=card id=classes>
-  <table id=classes-table class=data-table>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Last Modified</th>
-    </tr>
-    <% if @groups %>
-      <% @groups.each do |group| %>
-        <tr>
-          <td><%= group.id %></td>
-          <td><%= group.name %></td>
+<table id=classes-table class=data-table>
+  <tr class='table-header'>
+    <th class=idCol>ID</th>
+    <th class=leftCol>Name</th>
+    <th>Last Modified</th>
+  </tr>
+  <% if @groups %>
+    <% @groups.each do |group| %>
+      <% if current_user.can_access(group) %>
+        <tr class=table_row>
+          <td class=idCol><%= group.id %></td>
+          <td class=leftCol><%= group.name %></td>
           <td><%= group.modified %></td>
         </tr>
       <% end %>
     <% end %>
-  </table>
-</div>
-
+  <% end %>
+</table>
