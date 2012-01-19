@@ -7,7 +7,7 @@
   <% if @groups %>
     <% @groups.each do |group| %>
       <% if current_user.can_access(group) %>
-        <tr>
+        <tr class=table_row>
           <td class=idCol><%= group.id %></td>
           <td class=leftCol><%= group.name %></td>
           <td><%= group.modified %></td>
