@@ -1,5 +1,5 @@
 toolbar = {}
-toolbar.animationTime = 75;
+toolbar.animationTime = 100;
 
 toolbar.hideMembers = function() {
   $('#members').fadeOut(toolbar.animationTime);
