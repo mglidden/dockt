@@ -56,13 +56,18 @@ toolbar.close = function() {
   });
 };
 
+toolbar.open = function(data) {
+  toolbar.addOverlay();
+  $('#formContainer').css('display', 'block');
+  $('#formContainer').html(data);
+  $('#formContainer').animate({opacity:1.0}, toolbar.fadeTime, null);
+}
+
+
 toolbar.add = function() {
   if (slider.currCenter == 0) {
-    $.ajax({url: '/groups/new', success: function(data) {
-      toolbar.addOverlay();
-      $('#formContainer').css('display', 'block');
-      $('#formContainer').html(data);
-      $('#formContainer').animate({opacity:1.0}, toolbar.fadeTime, null);
-    }});
+    $.ajax({url: '/groups/new', success: toolbar.open});
+  } else if (slider.currCenter == 1) {
+    $.ajax({url: 'new', success: toolbar.open});
   }
 };

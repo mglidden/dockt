@@ -9,6 +9,19 @@ class DocumentsController < ApplicationController
     @document = @group.documents.create(params[:document])
     redirect_to group_path(@group)
   end
+
+  def new
+    puts "here \n\n\n\n\n\n"
+    @groups = Group.all
+    @group = Group.find(params[:group_id])
+    @document = Document.new
+
+    unless current_user != nil
+      return
+    end
+
+    render :layout => false
+  end
   
   def show 
     @groups = Group.all

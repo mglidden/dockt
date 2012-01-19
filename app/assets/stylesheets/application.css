@@ -164,7 +164,7 @@ tr {
   border-top-color: #4d4d4d;
   background: #333333;
   color: #ccc;
-}
+  }
 
 #delete {
   background: url('/assets/trash.png') no-repeat center center, -webkit-linear-gradient(top, #c7c7c7, #808080);
@@ -186,7 +186,16 @@ tr {
   margin: auto;
   margin-top:150px;
   padding: 20px;
+  position:relative;
   width:600px;
+}
+
+#closeButton {
+  height:20px;
+  position:absolute;
+  right:20px;
+  top:20px;
+  width:20px;
 }
 
 #newForm {
