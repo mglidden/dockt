@@ -1,27 +1,28 @@
 toolbar = {}
+toolbar.animationTime = 75;
 
 toolbar.hideMembers = function() {
-  $('#members').css('display', 'none')
+  $('#members').fadeOut(toolbar.animationTime);
 };
 
 toolbar.showMembers = function() {
-  $('#members').css('display', 'inline')
+  $('#members').fadeIn(toolbar.animationTime);
 };
 
 toolbar.hideAdd = function() {
-  $('#add').css('display', 'none')
+  $('#add').fadeOut(toolbar.animationTime);
 };
 
 toolbar.showAdd = function() {
-  $('#add').css('display', 'inline')
+  $('#add').fadeIn(toolbar.animationTime);
 };
 
 toolbar.hideDelete = function() {
-  $('#delete').css('display', 'none')
+  $('#delete').fadeOut(toolbar.animationTime);
 };
 
 toolbar.showDelete = function() {
-  $('#delete').css('display', 'inline')
+  $('#delete').fadeIn(toolbar.animationTime);
 };
 
 toolbar.setupButtons = function(card) {
