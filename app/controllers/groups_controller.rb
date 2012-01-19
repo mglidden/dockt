@@ -35,14 +35,11 @@ class GroupsController < ApplicationController
   def new
     @group = Group.new
 
-    unless current_user.can_access(@group)
+    unless current_user != nil
       return
     end
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @group }
-    end
+    render :layout => false
   end
 
   # GET /groups/1/edit
@@ -53,12 +50,17 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
+    unless current_user != nil
+      return
+    end
+
     @group = Group.new(params[:group])
 
     respond_to do |format|
       if @group.save
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
+        format.html { render action: 'show'}
         format.json { render json: @group, status: :created, location: @group }
+        current_user.add_access(@group)
       else
         format.html { render action: "new" }
         format.json { render json: @group.errors, status: :unprocessable_entity }

@@ -159,11 +159,13 @@ tr {
   top:13px;
   vertical-align: middle;
 }
+
 .button:hover {
   border-top-color: #4d4d4d;
   background: #333333;
   color: #ccc;
 }
+
 #delete {
   background: url('/assets/trash.png') no-repeat center center, -webkit-linear-gradient(top, #c7c7c7, #808080);
 }
@@ -176,5 +178,33 @@ tr {
 
 #add {
   background: url('/assets/add.png') no-repeat center center, -webkit-linear-gradient(top, #c7c7c7, #808080);
+}
+
+.form {
+  background:#EEE;
+  -webkit-border-radius:12px;
+  margin: auto;
+  margin-top:150px;
+  padding: 20px;
+  width:600px;
+}
+
+#newForm {
+}
+
+#overlay {
+  background:black;
+  height:100%;
+  opacity:0.5;
+  position:absolute;
+  top:0;
+  width:100%;
+}
+
+#formContainer {
+  height:100%;
+  position:absolute;
+  top:0;
+  width:100%;
 }
 

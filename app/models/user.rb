@@ -75,6 +75,15 @@ class User < ActiveRecord::Base
     return self.groups.split(',').include?(group_id.to_s)
   end
 
+  def add_access(group)
+    self.add_access_id(group.id)
+  end
+
+  def add_access_id(group_id)
+    self.groups = self.groups + ',' + group_id.to_s
+    save :validate => false
+  end
+
   protected
     
   def make_activation_code

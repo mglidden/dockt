@@ -1,5 +1,6 @@
 toolbar = {}
 toolbar.animationTime = 100;
+toolbar.fadeTime = 300;
 
 toolbar.hideMembers = function() {
   $('#members').fadeOut(toolbar.animationTime);
@@ -38,5 +39,30 @@ toolbar.setupButtons = function(card) {
     toolbar.hideMembers();
     toolbar.hideAdd();
     toolbar.hideDelete();
+  }
+};
+
+toolbar.addOverlay = function() {
+  $('#overlay').css('display', 'block');
+  $('#overlay').animate({opacity:0.5}, toolbar.fadeTime/3, null);
+};
+
+toolbar.close = function() {
+  $('#overlay').animate({opactiy:0.0}, toolbar.fadeTime/3, function() {
+    $('#overlay').css('display', 'none')});
+  $('#formContainer').animate({opacity:0.0}, toolbar.fadeTime, function() {
+    $('#formContainer').css('display', 'none');
+    $('#newForm').remove();
+  });
+};
+
+toolbar.add = function() {
+  if (slider.currCenter == 0) {
+    $.ajax({url: '/groups/new', success: function(data) {
+      toolbar.addOverlay();
+      $('#formContainer').css('display', 'block');
+      $('#formContainer').html(data);
+      $('#formContainer').animate({opacity:1.0}, toolbar.fadeTime, null);
+    }});
   }
 };
