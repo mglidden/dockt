@@ -87,3 +87,10 @@ toolbar.add = function() {
     $.ajax({url: 'new', success: toolbar.open});
   }
 };
+
+toolbar.delete = function() {
+  if (slider.currCenter == 0) {
+    $.ajax({url: '/groups/delete', success:toolbar.open});
+  } else if (slider.currCenter == 1) {
+  }
+}

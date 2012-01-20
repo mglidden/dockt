@@ -105,4 +105,16 @@ class GroupsController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  def delete
+    if current_user != nil
+      @groups = Group.find(:all, :order => 'created_at').reverse()
+      @visible_groups = @groups.find_all{|group| current_user.can_access(group)}
+    else
+      @groups = []
+      @visible_groups = []
+    end
+    render 'groups/delete', :layout => false
+  end
+
 end

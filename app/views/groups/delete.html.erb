@@ -1,0 +1,9 @@
+<div id=deleteForm class=form>
+  <%= form_for @groups, :url => {:action => 'destroy'}, :remote => true do |f| %>
+    <%= select_tag(:id, options_for_select(@visible_groups.map {|group| [group.name, group.id]})) %>
+    <div class ='actions'>
+      <input name='commit' type='submit' value='Delete Group'>
+    </div>
+  <% end %>
+  <img src='/assets/close.png' id=closeButton onclick='toolbar.close()'></img>
+</div>

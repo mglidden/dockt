@@ -13,6 +13,9 @@ Docs::Application.routes.draw do
 
   match '/activate/:activation_code' => 'users#activate', :as => :activate, :activation_code => nil
 
+  match '/groups/delete' => 'groups#delete'
+  match '/groups/destroy' => 'groups#destroy'
+
   resources :groups do
     resources :documents do
       resources :comments
