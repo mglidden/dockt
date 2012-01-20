@@ -12,14 +12,19 @@ slider.ID.SLIDER = 'slider';
 slider.addTableClick = function(table_name, request_fn) {
   $.each($(table_name+' tr'), function(index, row) {
     if (index != 0) {
-      $(row).click(function() {
-        if (request_fn) {
-          request_fn($(this).children()[0].innerText);
-        }
-      });
+      slider.addTableClickRow(row, request_fn);
     }
   });
 };
+
+slider.addTableClickRow = function(row, request_fn) {
+  $(row).click(function() {
+    if (request_fn) {
+      request_fn($(this).children()[0].innerText);
+    }
+  });
+}
+
 
 slider.clearTable = function(table_name) {
   $.each($(table_name + ' tr'), function(index, row) {
@@ -97,8 +102,12 @@ slider.popstate = function(event) {
   }
 };
 
-slider.init = function() {
+slider.setupGroupsTable = function() {
   slider.addTableClick('#classes-table', slider.requestDocuments)
+}
+
+slider.init = function() {
+  slider.setupGroupsTable();
   if (window.location.pathname.indexOf('comments') != -1) {
     slider.setupCommentsTable();
     slider.setupDocsTable();

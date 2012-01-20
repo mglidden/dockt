@@ -52,8 +52,10 @@ toolbar.addTableRow = function(event, response) {
   element.css('display', 'none');
   if (slider.currCenter == 0) {
     element.insertAfter($('#classes-table :first :first'));
+    slider.addTableClickRow(element, slider.requestDocuments);
   } else if (slider.currCenter == 1) {
     element.insertAfter($('#docs-table :first :first'));
+    slider.addTableClickRow(element, slider.requestComments);
   }
   element.fadeToggle();
 };

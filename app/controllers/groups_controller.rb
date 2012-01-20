@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
     if current_user != nil
-      @groups = Group.all
+      @groups = Group.find(:all, :order => 'created_at').reverse()
       viewable_groups = @groups.find_all{|group| current_user.can_access(group)}
     else
       @groups = []
@@ -61,6 +61,8 @@ class GroupsController < ApplicationController
         format.html { render 'groups/_group_table_row.html.erb', :layout => false}
         format.json { render json: @group, status: :created, location: @group }
         current_user.add_access(@group)
+        puts current_user.can_access(@group)
+        puts "\n\n\n\n"
       else
         format.html { render action: "new" }
         format.json { render json: @group.errors, status: :unprocessable_entity }
