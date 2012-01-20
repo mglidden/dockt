@@ -46,7 +46,7 @@ slider.requestDocuments = function(groupId) {
   slider.selectedGroup = groupId;
   slider.currCenter = 1;
   slider.centerOn(slider.currCenter, true)
-  window.history.pushState({center:slider.currCenter}, '', groupId + '/documents/');
+  window.history.pushState({center:slider.currCenter}, '', '/groups/' + groupId + '/documents/');
 };
 
 slider.setupCommentsTable = function() {

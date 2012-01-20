@@ -2,7 +2,7 @@
   <%= form_for [@group, @group.documents.build], :url => {:action => 'destroy'}, :remote => true do |f| %>
     <%= select_tag(:id, options_for_select(@documents.map {|doc| [doc.title, doc.id]})) %>
     <div class ='actions'>
-      <input name='commit' type='submit' value='Delete Document'>
+      <input name='commit' type='submit' value='Delete Document' onclick='toolbar.close()'>
     </div>
   <% end %>
   <img src='/assets/close.png' id=closeButton onclick='toolbar.close()'></img>

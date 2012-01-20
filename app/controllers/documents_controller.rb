@@ -58,7 +58,7 @@ class DocumentsController < ApplicationController
     @document.destroy
 
     respond_to do |format|
-      format.html {redirect_to groups_url}
+      format.html { render :inline => "#doc" + @document.id.to_s }
       format.json {head :ok}
     end
   end

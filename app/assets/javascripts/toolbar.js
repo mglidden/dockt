@@ -1,6 +1,7 @@
 toolbar = {}
 toolbar.animationTime = 100;
 toolbar.fadeTime = 300;
+toolbar.lastAction = ''
 
 toolbar.hideMembers = function() {
   $('#members').fadeOut(toolbar.animationTime);
@@ -60,6 +61,10 @@ toolbar.addTableRow = function(event, response) {
   element.fadeToggle();
 };
 
+toolbar.removeTableRow = function(event, response) {
+  $(response.responseText).fadeToggle();
+}
+
 toolbar.close = function() {
   $('#overlay').animate({opactiy:0.0}, toolbar.fadeTime/3, function() {
     $('#overlay').css('display', 'none')});
@@ -74,7 +79,11 @@ toolbar.open = function(data) {
   $('#formContainer').css('display', 'block');
   $('#formContainer').html(data);
   $('#formContainer').animate({opacity:1.0}, toolbar.fadeTime, null);
-  $('#newForm').bind("ajax:complete", toolbar.addTableRow);
+  if (toolbar.lastAction == 'add') {
+    $('#newForm').bind('ajax:complete', toolbar.addTableRow);
+  } else if (toolbar.lastAction == 'delete') {
+    $('#deleteForm').bind('ajax:complete', toolbar.removeTableRow);
+  }
 }
 
 toolbar.init = function() {
@@ -86,6 +95,7 @@ toolbar.add = function() {
   } else if (slider.currCenter == 1) {
     $.ajax({url: 'new', success: toolbar.open});
   }
+  toolbar.lastAction = 'add';
 };
 
 toolbar.delete = function() {
@@ -94,4 +104,5 @@ toolbar.delete = function() {
   } else if (slider.currCenter == 1) {
     $.ajax({url: 'delete', success:toolbar.open});
   }
+  toolbar.lastAction = 'delete';
 }
