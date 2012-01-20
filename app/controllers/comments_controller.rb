@@ -27,15 +27,9 @@ class CommentsController < ApplicationController
 
   def index
     @group = Group.find(params[:group_id])
-    @groups = Group.all
+    @groups = Group.find(:all, :order => 'created_at').reverse()
     @documents = @group.documents
     @document = Document.find(params[:document_id])
-
-    puts @document.group_id
-    puts params[:document_id]
-    puts params[:group_id]
-    puts current_user.can_access_id(@document.group_id)
-    puts '\n\n\n\n\n'
 
     if current_user == nil or !current_user.can_access_id(@document.group_id)
       @groups = []
@@ -44,6 +38,7 @@ class CommentsController < ApplicationController
       @document = nil
     else
       @comments = @document.comments
+      @groups = @groups.find_all{|g| current_user.can_access(g)}
     end
 
     respond_to do |format|

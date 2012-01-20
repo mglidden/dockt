@@ -39,12 +39,14 @@ class DocumentsController < ApplicationController
   end
 
   def index
-    @groups = Group.all
+    @groups = Group.find(:all, :order => 'created_at').reverse()
     @group = Group.find(params[:group_id])
     if current_user == nil or !current_user.can_access(@group)
       @documents = []
+      @groups = []
     else
       @documents = @group.documents
+      @groups = @groups.find_all{|g| current_user.can_access(g)}
     end
     
     respond_to do |format|
