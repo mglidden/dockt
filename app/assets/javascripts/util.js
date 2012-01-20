@@ -43,5 +43,5 @@ util.getGroupNum = function() {
 }
 
 util.getDocNum = function() {
-  return window.location.pathname.match(/\d+/)[1];
+  return window.location.pathname.match(/\d+/g)[1];
 }

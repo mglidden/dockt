@@ -45,8 +45,8 @@ slider.requestDocuments = function(groupId) {
             slider.setupDocsTable();}});
   slider.selectedGroup = groupId;
   slider.currCenter = 1;
-  slider.centerOn(slider.currCenter, true)
   window.history.pushState({center:slider.currCenter}, '', '/groups/' + groupId + '/documents/');
+  slider.centerOn(slider.currCenter, true)
 };
 
 slider.setupCommentsTable = function() {
@@ -61,8 +61,8 @@ slider.requestComments = function(docId) {
 
   slider.selectedDocument = docId;
   slider.currCenter = 2;
-  slider.centerOn(slider.currCenter, true)
   window.history.pushState({center:slider.currCenter}, '', docId + '/comments/');
+  slider.centerOn(slider.currCenter, true)
 };
 
 slider.moveSlider = function(pixels) {
