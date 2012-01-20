@@ -92,5 +92,6 @@ toolbar.delete = function() {
   if (slider.currCenter == 0) {
     $.ajax({url: '/groups/delete', success:toolbar.open});
   } else if (slider.currCenter == 1) {
+    $.ajax({url: 'delete', success:toolbar.open});
   }
 }

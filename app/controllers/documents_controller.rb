@@ -52,4 +52,20 @@ class DocumentsController < ApplicationController
       format.json { render json: @documents }
     end
   end
+
+  def destroy
+    @document = Document.find(params[:id])
+    @document.destroy
+
+    respond_to do |format|
+      format.html {redirect_to groups_url}
+      format.json {head :ok}
+    end
+  end
+
+  def delete
+    @group = Group.find(params[:group_id])
+    @documents = @group.documents
+    render 'documents/delete', :layout => false
+  end
 end
