@@ -1,4 +1,4 @@
-<%= form_for([@group, @group.documents.build]) do |f| %>
+<%= form_for([@group, @group.documents.build], :remote=>true) do |f| %>
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
@@ -7,7 +7,7 @@
     <%= f.label :url %><br/>
     <%= f.text_area :url%>
   </div>
-  <div class="actions">
+  <div class="actions" onclick=toolbar.close()>
     <%= f.submit %>
   </div>
 <% end %>

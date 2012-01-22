@@ -12,14 +12,19 @@ slider.ID.SLIDER = 'slider';
 slider.addTableClick = function(table_name, request_fn) {
   $.each($(table_name+' tr'), function(index, row) {
     if (index != 0) {
-      $(row).click(function() {
-        if (request_fn) {
-          request_fn($(this).children()[0].innerText);
-        }
-      });
+      slider.addTableClickRow(row, request_fn);
     }
   });
 };
+
+slider.addTableClickRow = function(row, request_fn) {
+  $(row).click(function() {
+    if (request_fn) {
+      request_fn($(this).children()[0].innerText);
+    }
+  });
+}
+
 
 slider.clearTable = function(table_name) {
   $.each($(table_name + ' tr'), function(index, row) {
@@ -40,8 +45,8 @@ slider.requestDocuments = function(groupId) {
             slider.setupDocsTable();}});
   slider.selectedGroup = groupId;
   slider.currCenter = 1;
+  window.history.pushState({center:slider.currCenter}, '', '/groups/' + groupId + '/documents/');
   slider.centerOn(slider.currCenter, true)
-  window.history.pushState({center:slider.currCenter}, '', groupId + '/documents/');
 };
 
 slider.setupCommentsTable = function() {
@@ -56,8 +61,8 @@ slider.requestComments = function(docId) {
 
   slider.selectedDocument = docId;
   slider.currCenter = 2;
-  slider.centerOn(slider.currCenter, true)
   window.history.pushState({center:slider.currCenter}, '', docId + '/comments/');
+  slider.centerOn(slider.currCenter, true)
 };
 
 slider.moveSlider = function(pixels) {
@@ -78,6 +83,7 @@ slider.centerOn = function(card, animate) {
   } else {
     slider.moveSlider(-slider.CARD_WIDTH*card);
   }
+  slider.currCenter = card;
   bc.changeCard(card);
   toolbar.setupButtons(card);
 };
@@ -96,8 +102,12 @@ slider.popstate = function(event) {
   }
 };
 
-slider.init = function() {
+slider.setupGroupsTable = function() {
   slider.addTableClick('#classes-table', slider.requestDocuments)
+}
+
+slider.init = function() {
+  slider.setupGroupsTable();
   if (window.location.pathname.indexOf('comments') != -1) {
     slider.setupCommentsTable();
     slider.setupDocsTable();

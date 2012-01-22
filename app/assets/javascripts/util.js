@@ -41,3 +41,7 @@ util.parseProperty = function(id, property) {
 util.getGroupNum = function() {
   return window.location.pathname.match(/\d+/)[0];
 }
+
+util.getDocNum = function() {
+  return window.location.pathname.match(/\d+/g)[1];
+}
