@@ -178,3 +178,29 @@ tr {
   background: url('/assets/add.png') no-repeat center center, -webkit-linear-gradient(top, #c7c7c7, #808080);
 }
 
+#roundedbox {
+  padding-top: 1px;
+  background: gray;
+  height:300px;
+  width:100%;
+  -webkit-border-radius: 12px;
+}
+
+#roundedboxcontent {
+  padding-left: 12px;
+}
+
+#contentbox {
+  background: blue;
+  width: 256px;
+  height: 150px;
+  display: inline-block;
+  -webkit-border-radius: 12px;
+}
+
+#contentmargin {
+  background: red;
+  width: 16px;
+  height: 150px;
+  display: inline-block;
+}
