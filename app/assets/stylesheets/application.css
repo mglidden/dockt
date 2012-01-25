@@ -219,3 +219,35 @@ tr {
   width:100%;
 }
 
+.doc {
+  height:600px;
+  overflow-x:hidden;
+  overflow-y:scroll;
+  width:110%;
+}
+
+#doc-view {
+  overflow: hidden;
+}
+
+#scroll-cap {
+  position:absolute;
+}
+
+.pdf-box {
+}
+
+#cap-box {
+  height:13000px;
+  width:100%;
+}
+
+#pdfDoc {
+  height:26000px;
+  width:200%;
+}
+
+#doc-cont {
+  -webkit-transform:scale(0.5);
+}
+

@@ -1,3 +1,16 @@
+<div id=doc-cont>
+  <div id='scroll-cap' class='doc'>
+    <div id='cap-box' class='pdf-box'></div>
+  </div>
+  <div id='doc-view' class='doc'>
+    <% if @document %>
+      <object width:'100%' height='100%' name='plugin' id='pdfDoc' class='pdf-box' data=<%= @document.url%> type='application/pdf'></object>
+    <% end %>
+  </div>
+</div>
+   
+
+
 <table id=comments-table class=data-table>
   <tr>
     <th class=idCol>ID</th>
@@ -14,3 +27,4 @@
     <% end %>
   <% end %>
 </table>
+

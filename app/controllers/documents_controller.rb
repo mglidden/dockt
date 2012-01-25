@@ -70,4 +70,9 @@ class DocumentsController < ApplicationController
     @documents = @group.documents
     render 'documents/delete', :layout => false
   end
+
+  def pdf
+    @document = Document.find(params[:document_id])
+    render 'documents/pdf', :layout => false
+  end
 end

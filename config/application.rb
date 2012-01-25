@@ -47,6 +47,7 @@ module Docs
 
     config.autoload_paths << "#{Rails.root}/lib"
 
-    config.active_record.observers = :user_observer
+    config.active_record.observers = :user_observer, :document_observer
+
   end
 end
