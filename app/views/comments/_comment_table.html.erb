@@ -1,8 +1,10 @@
-<% if @pages %>
-  <% @pages.each do |page| %>
-    <img src=<%= page %>></img>
+<div id=docPages style='width:500px; height:800px; overflow:scroll;'>
+  <% if @pages %>
+    <% @pages.each do |page| %>
+      <img src=<%= page %> class='doc-page'></img>
+    <% end %>
   <% end %>
-<% end %>
+</div>
 
 
 <table id=comments-table class=data-table>

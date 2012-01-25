@@ -41,7 +41,11 @@ class CommentsController < ApplicationController
       @comments = @document.comments
       @groups = @groups.find_all{|g| current_user.can_access(g)}
       pages_cmd = IO.popen('ls public/docs/ | grep ' + params[:document_id] + '-')
-      @pages = pages_cmd.readlines.collect! { |file| '/docs/' + file[0..-2] }
+      @pages = pages_cmd.readlines.collect { |file| '/docs/' + file[0..-2] }
+      puts @pages
+      @pages.sort_by! { |a,b|
+        a.split('-')[1].to_i 
+      }
     end
 
     respond_to do |format|
