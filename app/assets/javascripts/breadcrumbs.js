@@ -79,7 +79,7 @@ bc.constructModifiedUrl = function(card) {
   if (card == 2) {
     return window.location.pathname;
   } else if (card == 1) {
-    return window.location.pathname.match(/\/groups\/.d*\/documents\//);
+    return window.location.pathname.match(/\/groups\/\d*\/documents\//);
   } else {
     return '/groups/';
   }
