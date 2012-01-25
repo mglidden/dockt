@@ -30,6 +30,7 @@ class CommentsController < ApplicationController
     @groups = Group.find(:all, :order => 'created_at').reverse()
     @documents = @group.documents
     @document = Document.find(params[:document_id])
+    @pages = []
 
     if current_user == nil or !current_user.can_access_id(@document.group_id)
       @groups = []
@@ -39,6 +40,8 @@ class CommentsController < ApplicationController
     else
       @comments = @document.comments
       @groups = @groups.find_all{|g| current_user.can_access(g)}
+      pages_cmd = IO.popen('ls public/docs/ | grep ' + params[:document_id] + '-')
+      @pages = pages_cmd.readlines.collect! { |file| '/docs/' + file[0..-2] }
     end
 
     respond_to do |format|
