@@ -1,26 +1,21 @@
-<div id=docPages style='width:500px; height:800px; overflow:scroll;'>
-  <% if @pages %>
-    <% @pages.each do |page| %>
-      <img src=<%= page %> class='doc-page'></img>
+<div id=comments-view>
+  <div id=doc-pages>
+    <% if @pages %>
+      <% @pages.each do |url, pagenum| %>
+        <img src=<%= url %> class='doc-page' id=<%= pagenum %>></img>
+        <br />
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
+  <div id=comments-bar>
+    <span id=comments-label>Comments</span>
+    <table id=comments-table>
+      <% if @comments %>
+        <% @comments.each do |comment| %>
+          <% @comment = comment %>
+          <%= render 'comments/comment_table_row' %>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
 </div>
-
-
-<table id=comments-table class=data-table>
-  <tr>
-    <th class=idCol>ID</th>
-    <th class=leftCol>Commenter</th>
-    <th>Body</th>
-  </tr>
-  <% if @comments %>
-    <% @comments.each do |comment| %>
-      <tr class=table_row>
-        <td class=idCol><%= comment.id %></td>
-        <td class=leftCol><%= comment.commenter %></td>
-        <td><%= comment.body %></td>
-      </tr>
-    <% end %>
-  <% end %>
-</table>
-

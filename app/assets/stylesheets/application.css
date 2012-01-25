@@ -30,6 +30,11 @@ html, body {
   overflow:hidden;
 }
 
+#comments-label {
+  color:#a6a6a6;
+  font-size:16pt;
+}
+
 .breadcrumb {
   color:#a6a6a6;
   display:inline-block;
@@ -60,6 +65,11 @@ html, body {
   border-collapse: collapse;
   border-spacing: 0;
   width:100%;
+}
+
+#comments-table {
+  left:70%;
+  top:0;
 }
 
 .card {
@@ -114,7 +124,7 @@ th {
 #table-header {
 }
 
-tr {
+.table_row {
   background-color:#c2c7cc;
   border-collapse:separate;
   border-top-style:solid;
@@ -220,12 +230,34 @@ tr {
 }
 
 .doc-page {
+  background:white;
   display:block;
   width:100%;
 }
 
 #doc-pages {
-  height:800px; 
-  overflow:scroll;
-  width:500px;
+  background:#306199;
+  -webkit-box-shadow: 2px 2px 5px black;
+  float:left;
+  height:750px; 
+  overflow-x:hidden;
+  overflow-y:scroll;
+  padding:2%;
+  padding-bottom:0%;
+  width:66%;
+}
+
+#comments-bar {
+  background:#306199;
+  -webkit-border-bottom-right-radius: 9px;
+  -webkit-border-top-right-radius: 9px;
+  -webkit-box-shadow: 2px 2px 5px black;
+  float:left;
+  height:730px;
+  margin-bottom:10px;
+  margin-top:10px;
+  overflow-x:hidden;
+  overflow-y:scroll;
+  padding:1%;
+  width:27%;
 }

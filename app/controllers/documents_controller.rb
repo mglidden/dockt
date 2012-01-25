@@ -28,12 +28,18 @@ class DocumentsController < ApplicationController
   def show 
     @groups = Group.all
     @group = Group.find(params[:group_id])
+    @pages =[]
     unless current_user.can_access(@group)
       return
     end
     @documents = @group.documents
     @document = Document.find(params[:id])
     @comments = @document.comments
+    pages_cmd = IO.popen('ls public/docs/ | grep ' + params[:id] + '-')
+    @pages = pages_cmd.readlines.collect { |file| ['/docs/' + file[0..-2], file.split('-')[1].to_i] }
+    @pages.sort_by! { |url, filenum|
+      filenum
+    }
 
     render :layout => false
   end

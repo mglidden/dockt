@@ -7,8 +7,24 @@ class CommentsController < ApplicationController
     end
 
     @document = Document.find(params[:document_id])
+    params[:comment][:commenter] = current_user.login
     @comment = @document.comments.create(params[:comment])
-    redirect_to group_document_path(@group, @document)
+    respond_to do |format|
+      format.html { render 'comments/_comment_table_row.html.erb', :layout => false}
+    end
+  end
+
+  def new
+    @groups = Group.all
+    @group = Group.find(params[:group_id])
+    @document = Document.find(params[:document_id])
+    @comment = Comment.new
+
+    unless current_user.can_access(@group)
+      return
+    end
+
+    render :layout => false
   end
 
   def show
@@ -41,10 +57,9 @@ class CommentsController < ApplicationController
       @comments = @document.comments
       @groups = @groups.find_all{|g| current_user.can_access(g)}
       pages_cmd = IO.popen('ls public/docs/ | grep ' + params[:document_id] + '-')
-      @pages = pages_cmd.readlines.collect { |file| '/docs/' + file[0..-2] }
-      puts @pages
-      @pages.sort_by! { |a,b|
-        a.split('-')[1].to_i 
+      @pages = pages_cmd.readlines.collect { |file| ['/docs/' + file[0..-2], file.split('-')[1].to_i] }
+      @pages.sort_by! { |url, filenum|
+        filenum
       }
     end
 

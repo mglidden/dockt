@@ -1,13 +1,15 @@
-<%= form_for([@group, @document, @document.comments.build]) do |f| %> 
+<%= form_for([@group, @document, @document.comments.build], :remote=>true) do |f| %> 
   <div class="field">
-    <%= f.label :commenter %><br />
-    <%= f.text_field :commenter %>
-  </div>
-  <div class="field">
-    <%= f.label :body %><br/>
+    <%= f.label :body, "Comment"%><br/>
     <%= f.text_area :body %>
   </div>
-  <div class="actions">
+  <div class='field' id=comment-page style='display:none'>
+    <%= f.text_field :page %>
+  </div>
+  <div class='field' id=comment-offset style='display:none'>
+    <%= f.text_field :offset%>
+  </div>
+  <div class="actions" onclick=toolbar.close()>
     <%= f.submit %>
   </div>
 <% end %>
