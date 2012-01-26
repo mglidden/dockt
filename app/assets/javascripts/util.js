@@ -21,16 +21,16 @@ util.showingDocuments = function() {
 }
 
 util.showingGroups = function() {
-  return !util.showingDocumints() && util.urlHasGruop();
+  return !util.showingDocuments() && util.urlHasGroups();
 }
 
 util.activeCard = function() {
-  if (util.showingGroups()) {
-    return 0;
+  if (util.showingComments()) {
+    return 2;
   } else if (util.showingDocuments()) {
     return 1;
-  } else if (util.showingComments()) {
-    return 2;
+  } else if (util.showingGroups()) {
+    return 0;
   }
 }
 

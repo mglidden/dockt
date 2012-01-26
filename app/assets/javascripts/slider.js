@@ -102,11 +102,7 @@ slider.popstate = function(event) {
     slider.firstPop = false;
     return;
   }
-  if (event['state'] && event['state']['center']) {
-    slider.centerOn(event['state']['center'], true);
-  } else {
-    slider.centerOn(0, true);
-  }
+  slider.centerOn(util.activeCard(), true);
 };
 
 slider.setupGroupsTable = function() {
