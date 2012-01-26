@@ -59,6 +59,7 @@ toolbar.addTableRow = function(event, response) {
     slider.addTableClickRow(element, slider.requestComments);
   } else {
     element.insertBefore($('#comments-table :first :first'));
+    slider.addTableClickRow(element, slider.moveDoc);
   }
   element.fadeToggle();
 };
