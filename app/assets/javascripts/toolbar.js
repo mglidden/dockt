@@ -118,5 +118,5 @@ toolbar.delete = function() {
 }
 
 toolbar.members = function() {
-  $.ajax({url: 'members', success: toolbar.open});
+  $.ajax({url: '/groups/members', success: toolbar.open});
 }
