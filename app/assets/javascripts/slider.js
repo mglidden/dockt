@@ -11,7 +11,7 @@ slider.ID.SLIDER = 'slider';
 
 slider.addTableClick = function(table_name, request_fn) {
   $.each($(table_name+' tr'), function(index, row) {
-    if (index != 0 && table_name != '#comments-table') {
+    if (index != 0 || table_name == '#comments-table') {
       slider.addTableClickRow(row, request_fn);
     }
   });
@@ -57,12 +57,6 @@ slider.moveDoc = function(commentId) {
   var comment = document.getElementById('comment'+commentId);
   var pagenum = comment.children[2].innerText;
   var offset = comment.children[3].innerText;
-  window.console.log(comment);
-  window.console.log(pagenum);
-  window.console.log(offset);
-  window.console.log(document.getElementById(pagenum));
-  window.console.log(document.getElementById(pagenum).offsetTop);
-  window.console.log(document.getElementById(pagenum).offsetTop + parseInt(offset));
   document.getElementById('doc-pages').scrollTop = document.getElementById(pagenum).offsetTop+parseInt(offset);
 }
 
