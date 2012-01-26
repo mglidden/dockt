@@ -24,6 +24,8 @@ class CommentsController < ApplicationController
       return
     end
 
+    @group.touch
+    @document.touch
     render :layout => false
   end
 

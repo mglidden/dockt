@@ -22,6 +22,8 @@ class DocumentsController < ApplicationController
       return
     end
 
+    @group.touch
+
     render :layout => false
   end
   
