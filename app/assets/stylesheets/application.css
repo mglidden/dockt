@@ -70,6 +70,7 @@ html, body {
 #comments-table {
   left:70%;
   top:0;
+  width:100%;
 }
 
 .card {
@@ -220,6 +221,7 @@ th {
   position:absolute;
   top:0;
   width:100%;
+  z-index:4;
 }
 
 #formContainer {
@@ -227,6 +229,7 @@ th {
   position:absolute;
   top:0;
   width:100%;
+  z-index:4;
 }
 
 .doc-page {
@@ -274,4 +277,19 @@ th {
 .commentList:hover {
   background: #777777;
   color:black;
+}
+
+.nickname {
+  color:#a6a6a6;
+}
+
+#user-bar-greeting {
+  color:#a6a6a6;
+  display:inline;
+}
+
+#user-bar-action {
+  color:#a6a6a6;
+  display:inline;
+  float:right;
 }
