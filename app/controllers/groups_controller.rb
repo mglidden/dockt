@@ -118,4 +118,26 @@ class GroupsController < ApplicationController
     render 'groups/delete', :layout => false
   end
 
+  def members
+    if current_user != nil
+      @groups = Group.find(:all, :order => 'created_at').reverse()
+      @visible_groups = @groups.find_all{|group| current_user.can_access(group)}
+      @users = User.all
+    else
+      @groups = []
+      @visible_groups = []
+      @users = []
+    end
+
+    render 'groups/members', :layout => false
+  end
+
+  def add_member
+    User.find(params[:user_id]).add_access_id(params[:id]);
+
+    respond_to do |format|
+      format.json { head :ok }
+    end
+  end
+
 end

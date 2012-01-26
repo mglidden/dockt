@@ -1,0 +1,10 @@
+<div id=membersForm class=form>
+  <%= form_for @groups, :url => {:action => 'add_member'}, :remote => true do |f| %>
+    <%= select_tag(:id, options_for_select(@visible_groups.map {|group| [group.name, group.id]})) %>
+    <%= select_tag(:user_id, options_for_select(@users.map {|user| [user.login, user.id]})) %>
+    <div class ='actions'>
+      <input name='commit' type='submit' value='Add Member' onclick='toolbar.close()'>
+    </div>
+  <% end %>
+  <img src='/assets/close.png' id=closeButton onclick='toolbar.close()'></img>
+</div>
