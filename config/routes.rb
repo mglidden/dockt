@@ -22,6 +22,8 @@ Docs::Application.routes.draw do
   match '/groups/:group_id/documents/destroy' => 'documents#destroy'
   match '/groups/:group_id/documents/:document_id/pdf' => 'documents#pdf'
 
+  get 'users/autocomplete_users_login'
+
   resources :groups do
     resources :documents do
       resources :comments

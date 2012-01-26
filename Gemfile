@@ -37,3 +37,6 @@ end
 
 gem 'execjs'
 gem 'therubyracer'
+
+gem 'rails3-jquery-autocomplete'
+gem 'nifty-generators'
