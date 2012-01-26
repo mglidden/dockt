@@ -7,6 +7,7 @@ class DocumentsController < ApplicationController
     end
 
     @document = @group.documents.create(params[:document])
+    @group.touch
     @doc = @document
     respond_to do |format|
       format.html { render 'documents/_document_table_row.html.erb', :layout => false}
@@ -21,8 +22,6 @@ class DocumentsController < ApplicationController
     unless current_user != nil
       return
     end
-
-    @group.touch
 
     render :layout => false
   end
