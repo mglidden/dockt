@@ -2,7 +2,10 @@ class CommentsController < ApplicationController
   def create
     @group = Group.find(params[:group_id])
 
-    unless current_user.can_access(@group)
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@grouP)
       return
     end
 
@@ -17,13 +20,16 @@ class CommentsController < ApplicationController
   def new
     @groups = Group.all
     @group = Group.find(params[:group_id])
-    @document = Document.find(params[:document_id])
-    @comment = Comment.new
 
-    unless current_user.can_access(@group)
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@grouP)
       return
     end
 
+    @document = Document.find(params[:document_id])
+    @comment = Comment.new
     @group.touch
     @document.touch
     @document.set_editor(current_user)
@@ -32,23 +38,18 @@ class CommentsController < ApplicationController
 
   def show
     self.index
-    return
-
-    @group = Group.find(params[:group_id])
-
-    unless current_user.can_access(@group)
-      return
-    end
-
-    @documents = @group.documents.sort_by {|doc| doc.updated_at}.reverse
-    @comments = Document.find(params[:document_id]).comments
-    @comment = Comment.find(params[:id])
-
-    render :layout => false
   end
 
   def index
     @group = Group.find(params[:group_id])
+
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@grouP)
+      return
+    end
+
     @groups = Group.find(:all, :order => 'updated_at').reverse()
     @documents = @group.documents.sort_by {|doc| doc.updated_at}.reverse
     @document = Document.find(params[:document_id])

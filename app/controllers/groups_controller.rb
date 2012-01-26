@@ -8,6 +8,8 @@ class GroupsController < ApplicationController
     else
       @groups = []
       viewable_groups = []
+      redirect_to :controller => :sessions, :action => :new
+      return
     end
 
     respond_to do |format|
@@ -23,7 +25,10 @@ class GroupsController < ApplicationController
     @groups = Group.all
     @documents = @group.documents.sort_by {|doc| doc.updated_at }.reverse()
 
-    unless current_user.can_access(@group)
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@group)
       return
     end
 
@@ -35,7 +40,8 @@ class GroupsController < ApplicationController
   def new
     @group = Group.new
 
-    unless current_user != nil
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
       return
     end
 
@@ -50,7 +56,8 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
-    unless current_user != nil
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
       return
     end
 
@@ -74,7 +81,10 @@ class GroupsController < ApplicationController
   def update
     @group = Group.find(params[:id])
 
-    unless current_user.can_access(@group)
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@group)
       return
     end
 
@@ -94,7 +104,10 @@ class GroupsController < ApplicationController
   def destroy
     @group = Group.find(params[:id])
 
-    unless current_user.can_access(@group)
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@group)
       return
     end
 
@@ -107,31 +120,40 @@ class GroupsController < ApplicationController
   end
 
   def delete
-    if current_user != nil
-      @groups = Group.find(:all, :order => 'updated_at').reverse()
-      @visible_groups = @groups.find_all{|group| current_user.can_access(group)}
-    else
-      @groups = []
-      @visible_groups = []
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@group)
+      return
     end
+
+    @groups = Group.find(:all, :order => 'updated_at').reverse()
+    @visible_groups = @groups.find_all{|group| current_user.can_access(group)}
     render 'groups/delete', :layout => false
   end
 
   def members
-    if current_user != nil
-      @groups = Group.find(:all, :order => 'updated_at').reverse()
-      @visible_groups = @groups.find_all{|group| current_user.can_access(group)}
-      @users = User.all
-    else
-      @groups = []
-      @visible_groups = []
-      @users = []
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@group)
+      return
     end
 
+    @groups = Group.find(:all, :order => 'updated_at').reverse()
+    @visible_groups = @groups.find_all{|group| current_user.can_access(group)}
+    @users = User.all
     render 'groups/members', :layout => false
   end
 
   def add_member
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@group)
+      return
+    end
+
     User.find_by_login(params[:login]).add_access_id(params[:id])
     @group = Group.find(params[:id])
 
