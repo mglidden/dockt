@@ -116,3 +116,7 @@ toolbar.delete = function() {
   }
   toolbar.lastAction = 'delete';
 }
+
+toolbar.members = function() {
+  $.ajax({url: 'members', success: toolbar.open});
+}
