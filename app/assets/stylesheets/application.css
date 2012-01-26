@@ -244,7 +244,9 @@ th {
   overflow-y:scroll;
   padding:2%;
   padding-bottom:0%;
+  position:relative;
   width:66%;
+  z-index:2;
 }
 
 #comments-bar {
@@ -259,10 +261,17 @@ th {
   overflow-x:hidden;
   overflow-y:scroll;
   padding:1%;
+  position:relative;
   width:27%;
+  z-index:1;
 }
 
 .commentList {
   color:#a6a6a6;
   font-size:14pt;
+}
+
+.commentList:hover {
+  background: #777777;
+  color:black;
 }
