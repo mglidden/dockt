@@ -45,3 +45,11 @@ util.getGroupNum = function() {
 util.getDocNum = function() {
   return window.location.pathname.match(/\d+/g)[1];
 }
+
+util.getCommentNum = function() {
+  var nums = window.location.pathname.match(/\d+/g);
+  if (nums.length >= 3) {
+    return nums[2];
+  }
+  return null;
+}

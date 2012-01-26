@@ -31,13 +31,16 @@ class CommentsController < ApplicationController
   end
 
   def show
+    self.index
+    return
+
     @group = Group.find(params[:group_id])
 
     unless current_user.can_access(@group)
       return
     end
 
-    @documents = @group.documents.sort_by {|doc| doc.updated_ad}.reverse
+    @documents = @group.documents.sort_by {|doc| doc.updated_at}.reverse
     @comments = Document.find(params[:document_id]).comments
     @comment = Comment.find(params[:id])
 

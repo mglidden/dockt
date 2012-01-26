@@ -25,7 +25,6 @@ slider.addTableClickRow = function(row, request_fn) {
   });
 }
 
-
 slider.clearTable = function(table_name) {
   $.each($(table_name + ' tr'), function(index, row) {
     if (index != 0) {
@@ -50,6 +49,7 @@ slider.requestDocuments = function(groupId) {
 };
 
 slider.setupCommentsTable = function() {
+  //setTimeout('slider.addTableClick(\'#comments-table\', slider.moveDoc)', 3000);
   slider.addTableClick('#comments-table', slider.moveDoc);
 };
 
@@ -58,6 +58,7 @@ slider.moveDoc = function(commentId) {
   var pagenum = comment.children[2].innerText;
   var offset = comment.children[3].innerText;
   document.getElementById('doc-pages').scrollTop = document.getElementById(pagenum).offsetTop+parseInt(offset);
+  window.history.replaceState({center:slider.currCenter}, '', commentId);
 }
 
 slider.requestComments = function(docId) {
@@ -116,6 +117,9 @@ slider.init = function() {
     slider.setupDocsTable();
     slider.centerOn(2, false);
     slider.selectedGroup = util.getGroupNum();
+    if (util.getCommentNum() != null) {
+      setTimeout('slider.moveDoc('+util.getCommentNum()+')', 300);
+    }
   } else if (window.location.pathname.indexOf('documents') != -1) {
     slider.setupDocsTable();
     slider.centerOn(1, false);
