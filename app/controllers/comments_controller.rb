@@ -36,7 +36,7 @@ class CommentsController < ApplicationController
       return
     end
 
-    @documents = @group.documents
+    @documents = @group.documents.sort_by {|doc| doc.updated_ad}.reverse
     @comments = Document.find(params[:document_id]).comments
     @comment = Comment.find(params[:id])
 
@@ -45,8 +45,8 @@ class CommentsController < ApplicationController
 
   def index
     @group = Group.find(params[:group_id])
-    @groups = Group.find(:all, :order => 'created_at').reverse()
-    @documents = @group.documents
+    @groups = Group.find(:all, :order => 'updated_at').reverse()
+    @documents = @group.documents.sort_by {|doc| doc.updated_at}.reverse
     @document = Document.find(params[:document_id])
     @pages = []
 

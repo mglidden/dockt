@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
     if current_user != nil
-      @groups = Group.find(:all, :order => 'created_at').reverse()
+      @groups = Group.find(:all, :order => 'updated_at').reverse()
       viewable_groups = @groups.find_all{|group| current_user.can_access(group)}
     else
       @groups = []
@@ -21,7 +21,7 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @groups = Group.all
-    @documents = @group.documents
+    @documents = @group.documents.sort_by {|doc| doc.updated_at }.reverse()
 
     unless current_user.can_access(@group)
       return
@@ -107,7 +107,7 @@ class GroupsController < ApplicationController
 
   def delete
     if current_user != nil
-      @groups = Group.find(:all, :order => 'created_at').reverse()
+      @groups = Group.find(:all, :order => 'updated_at').reverse()
       @visible_groups = @groups.find_all{|group| current_user.can_access(group)}
     else
       @groups = []
@@ -118,7 +118,7 @@ class GroupsController < ApplicationController
 
   def members
     if current_user != nil
-      @groups = Group.find(:all, :order => 'created_at').reverse()
+      @groups = Group.find(:all, :order => 'updated_at').reverse()
       @visible_groups = @groups.find_all{|group| current_user.can_access(group)}
       @users = User.all
     else

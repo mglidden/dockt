@@ -27,14 +27,14 @@ class DocumentsController < ApplicationController
   end
   
   def show 
-    @groups = Group.all
+    @groups = Group.find(:all, :order => 'updated_at').reverse()
     @group = Group.find(params[:group_id])
     @pages =[]
     unless current_user.can_access(@group)
       return
     end
     @documents = @group.documents
-    @document = Document.find(params[:id])
+    @document = Document.find(params[:id]).sort_by {|doc| doc.updated_at}.reverse()
     @comments = @document.comments
     pages_cmd = IO.popen('ls public/docs/ | grep ' + params[:id] + '-')
     @pages = pages_cmd.readlines.collect { |file| ['/docs/' + file[0..-2], file.split('-')[1].to_i] }
@@ -46,13 +46,13 @@ class DocumentsController < ApplicationController
   end
 
   def index
-    @groups = Group.find(:all, :order => 'created_at').reverse()
+    @groups = Group.find(:all, :order => 'updated_at').reverse()
     @group = Group.find(params[:group_id])
     if current_user == nil or !current_user.can_access(@group)
       @documents = []
       @groups = []
     else
-      @documents = @group.documents
+      @documents = @group.documents.sort_by {|doc| doc.updated_at}.reverse()
       @groups = @groups.find_all{|g| current_user.can_access(g)}
     end
     
@@ -74,7 +74,7 @@ class DocumentsController < ApplicationController
 
   def delete
     @group = Group.find(params[:group_id])
-    @documents = @group.documents
+    @documents = @group.documents.sort_by {|doc| doc.updated_at }.reverse()
     render 'documents/delete', :layout => false
   end
 
