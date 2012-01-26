@@ -80,7 +80,11 @@ class User < ActiveRecord::Base
   end
 
   def add_access_id(group_id)
-    self.groups = self.groups + ',' + group_id.to_s
+    if self.groups == nil
+      self.groups = group_id.to_s
+    else
+      self.groups = self.groups + ',' + group_id.to_s
+    end
     save :validate => false
   end
 

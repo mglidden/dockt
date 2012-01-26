@@ -132,7 +132,7 @@ class GroupsController < ApplicationController
   end
 
   def add_member
-    User.find(params[:user_id]).add_access_id(params[:id]);
+    User.find_by_login(params[:login]).add_access_id(params[:id])
     @group = Group.find(params[:id])
 
     respond_to do |format|
