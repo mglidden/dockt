@@ -20,3 +20,6 @@
 <% else %>
   <%= (time_diff/604800).round %> weeks ago
 <% end %>
+<% if editor != nil %>
+  by <%= editor %>
+<% end %>

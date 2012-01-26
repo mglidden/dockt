@@ -26,6 +26,7 @@ class CommentsController < ApplicationController
 
     @group.touch
     @document.touch
+    @document.set_editor(current_user)
     render :layout => false
   end
 

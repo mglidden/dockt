@@ -1,5 +1,5 @@
 <tr class=table_row id=doc<%= @doc.id %>>
   <td class=idCol><%= @doc.id %></td>
   <td class=leftCol><%= @doc.title%></td>
-  <td><%= render 'layouts/time', :time => @doc.updated_at %></td>
+  <td><%= render 'layouts/time', :time => @doc.updated_at, :editor => @doc.editor %></td>
 </tr>

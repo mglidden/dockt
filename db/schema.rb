@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120125214825) do
+ActiveRecord::Schema.define(:version => 20120126040229) do
 
   create_table "comments", :force => true do |t|
     t.string   "commenter"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20120125214825) do
     t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "editor"
   end
 
   add_index "documents", ["group_id"], :name => "index_documents_on_group_id"
@@ -40,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20120125214825) do
     t.string   "modified"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "editor"
   end
 
   create_table "users", :force => true do |t|

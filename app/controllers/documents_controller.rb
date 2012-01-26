@@ -9,6 +9,7 @@ class DocumentsController < ApplicationController
     @document = @group.documents.create(params[:document])
     @group.touch
     @doc = @document
+    @document.set_editor(current_user)
     respond_to do |format|
       format.html { render 'documents/_document_table_row.html.erb', :layout => false}
     end

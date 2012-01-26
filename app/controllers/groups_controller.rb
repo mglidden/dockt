@@ -61,6 +61,7 @@ class GroupsController < ApplicationController
         format.html { render 'groups/_group_table_row.html.erb', :layout => false}
         format.json { render json: @group, status: :created, location: @group }
         current_user.add_access(@group)
+        @group.set_editor(current_user)
       else
         format.html { render action: "new" }
         format.json { render json: @group.errors, status: :unprocessable_entity }
@@ -133,8 +134,6 @@ class GroupsController < ApplicationController
   def add_member
     User.find(params[:user_id]).add_access_id(params[:id]);
     @group = Group.find(params[:id])
-    puts (Time.zone.now - @group.updated_at)
-    @group.touch
 
     respond_to do |format|
       format.json { head :ok }
