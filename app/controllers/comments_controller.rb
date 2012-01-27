@@ -61,7 +61,7 @@ class CommentsController < ApplicationController
       @comments = []
       @document = nil
     else
-      @comments = @document.comments
+      @comments = @document.comments.sort_by {|comment| comment.updated_at}.reverse();
       @groups = @groups.find_all{|g| current_user.can_access(g)}
       pages_cmd = IO.popen('ls public/docs/ | grep ' + params[:document_id] + '-')
       @pages = pages_cmd.readlines.collect { |file| ['/docs/' + file[0..-2], file.split('-')[1].to_i] }
