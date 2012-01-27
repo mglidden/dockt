@@ -71,8 +71,10 @@ html, body {
 
 #comments-table {
   left:70%;
+  table-layout:fixed;
   top:0;
   width:100%;
+  word-wrap:break-word;
 }
 
 .card {
