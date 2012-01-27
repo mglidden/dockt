@@ -86,7 +86,7 @@ class DocumentsController < ApplicationController
       return
     end
 
-    @document = Document.find(params[:id])
+    @document = Document.find(params[:document][:id])
     @document.destroy
 
     respond_to do |format|

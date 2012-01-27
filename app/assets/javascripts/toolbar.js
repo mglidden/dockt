@@ -1,7 +1,8 @@
 toolbar = {}
 toolbar.animationTime = 100;
 toolbar.fadeTime = 300;
-toolbar.lastAction = ''
+toolbar.lastAction = '';
+toolbar.lastId = null;
 
 toolbar.hideMembers = function() {
   $('#members').fadeOut(toolbar.animationTime);
@@ -90,7 +91,9 @@ toolbar.open = function(data, pagenum, offset) {
     }
   } else if (toolbar.lastAction == 'delete') {
     $('#deleteForm').bind('ajax:complete', toolbar.removeTableRow);
+    $('#delete-id').children(0).val(parseInt(toolbar.lastId));
   }
+  return false;
 }
 
 toolbar.init = function() {
@@ -105,7 +108,6 @@ toolbar.add = function(event) {
   } else {
     $.ajax({url: 'new', success: function(data) {toolbar.open(data, event.target.id, event.offsetY)}});
   }
-  toolbar.lastAction = 'add';
 };
 
 toolbar.delete = function() {
@@ -114,9 +116,13 @@ toolbar.delete = function() {
   } else if (slider.currCenter == 1) {
     $.ajax({url: 'delete', success:toolbar.open});
   }
+  toolbar.lastId = window.event.target.parentElement.parentElement.children[0].innerText;
   toolbar.lastAction = 'delete';
+  window.event.stopPropagation();
 }
 
 toolbar.members = function() {
   $.ajax({url: '/groups/members', success: toolbar.open});
+  toolbar.lastAction = 'add';
+  window.event.stopPropagation();
 }

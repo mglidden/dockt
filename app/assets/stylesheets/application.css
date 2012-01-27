@@ -191,7 +191,7 @@ th {
   border-top-color: #4d4d4d;
   background: #333333;
   color: #ccc;
-  }
+}
 
 #delete {
   background: url('/assets/trash.png') no-repeat center center, -webkit-linear-gradient(top, #c7c7c7, #808080);
@@ -235,6 +235,19 @@ th {
   right:20px;
   top:20px;
   width:20px;
+}
+
+.inline-button {
+  background-size:14px 14px;
+  float:right;
+  height:18px;
+  margin-right:3px;
+  width:14px;
+}
+
+#inline-delete {
+  background: url('/assets/trash.png') no-repeat center center;
+  background-size:10px 14px;
 }
 
 #newForm {
@@ -319,4 +332,8 @@ th {
   color:#a6a6a6;
   display:inline;
   float:right;
+}
+
+#delete-id {
+  display:none;
 }

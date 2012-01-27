@@ -102,7 +102,7 @@ class GroupsController < ApplicationController
   # DELETE /groups/1
   # DELETE /groups/1.json
   def destroy
-    @group = Group.find(params[:id])
+    @group = Group.find(params[:group][:id])
 
     if current_user == nil
       redirect_to :controller => :sessions, :action => :new
