@@ -10,12 +10,15 @@
   <div id=comments-bar>
     <span id=comments-label>Comments</span>
     <table id=comments-table>
-      <% if @comments %>
-        <% @comments.each do |comment| %>
-          <% @comment = comment %>
-          <%= render 'comments/comment_table_row' %>
+      <tbody>
+        <tr style=display:none></tr>
+        <% if @comments %>
+          <% @comments.each do |comment| %>
+            <% @comment = comment %>
+            <%= render 'comments/comment_table_row' %>
+          <% end %>
         <% end %>
-      <% end %>
+      </tbody>
     </table>
   </div>
 </div>
