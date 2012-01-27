@@ -46,7 +46,7 @@ class DocumentsController < ApplicationController
 
     @documents = @group.documents.sort_by {|doc| doc.updated_at}.reverse()
     @document = Document.find(params[:id])
-    @comments = @document.comments
+    @comments = @document.comments.sort_by {|comment| comment.updated_at }.reverse()
     pages_cmd = IO.popen('ls public/docs/ | grep ' + params[:id] + '-')
     @pages = pages_cmd.readlines.collect { |file| ['/docs/' + file[0..-2], file.split('-')[1].to_i] }
     @pages.sort_by! { |url, filenum|
