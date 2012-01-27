@@ -110,13 +110,15 @@ html, body {
 }
 
 #search {
+  background: url('/assets/search.png') no-repeat 4px 50%, white;
+  background-size:11px 11px;
   border: 1px solid #999;
   border-radius:12px;
   -webkit-border-radius:12px;
   margin-right:0;
   padding-bottom:1px;
-  padding-left:2%;
-  width:97%;
+  padding-left:7%;
+  width:92%;
 }
 
 th {
