@@ -92,6 +92,8 @@ toolbar.open = function(data, pagenum, offset) {
   } else if (toolbar.lastAction == 'delete') {
     $('#deleteForm').bind('ajax:complete', toolbar.removeTableRow);
     $('#delete-id').children(0).val(parseInt(toolbar.lastId));
+  } else if (toolbar.lastAction == 'members') {
+    $('#members-id').children(0).val(parseInt(toolbar.lastId));
   }
   return false;
 }
@@ -123,6 +125,7 @@ toolbar.delete = function() {
 
 toolbar.members = function() {
   $.ajax({url: '/groups/members', success: toolbar.open});
-  toolbar.lastAction = 'add';
+  toolbar.lastId = window.event.target.parentElement.parentElement.children[0].innerText;
+  toolbar.lastAction = 'members';
   window.event.stopPropagation();
 }

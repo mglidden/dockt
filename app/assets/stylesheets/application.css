@@ -238,7 +238,6 @@ th {
 }
 
 .inline-button {
-  background-size:14px 14px;
   float:right;
   height:18px;
   margin-right:3px;
@@ -248,6 +247,12 @@ th {
 #inline-delete {
   background: url('/assets/trash.png') no-repeat center center;
   background-size:10px 14px;
+}
+
+#inline-members {
+  background: url('/assets/members.png') no-repeat center center;
+  background-size:22px 14px;
+  width:22px;
 }
 
 #newForm {
@@ -335,5 +340,9 @@ th {
 }
 
 #delete-id {
+  display:none;
+}
+
+#members-id {
   display:none;
 }

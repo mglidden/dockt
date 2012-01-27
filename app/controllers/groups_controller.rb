@@ -143,16 +143,15 @@ class GroupsController < ApplicationController
   end
 
   def add_member
-    @group = Group.find(params[:id])
 
     if current_user == nil
       redirect_to :controller => :sessions, :action => :new
       return
-    elsif !current_user.can_access(@group)
+    elsif !current_user.can_access_id(params[:group][:id])
       return
     end
 
-    User.find_by_login(params[:login]).add_access_id(params[:id])
+    User.find_by_login(params[:login]).add_access_id(params[:group][:id])
 
     respond_to do |format|
       format.json { head :ok }

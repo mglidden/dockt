@@ -1,6 +1,8 @@
 <div id=membersForm class=form>
   <%= form_for @groups, :url => {:action => 'add_member'}, :remote => true do |f| %>
-    <%= select_tag(:id, options_for_select(@visible_groups.map {|group| [group.name, group.id]})) %>
+    <div id=members-id>
+      <%= f.text_field :id %>
+    </div>
     <%= text_field_tag 'login', '', :autocomplete => users_autocomplete_users_login_path %>
     <div class ='actions'>
       <input name='commit' type='submit' value='Add Member' onclick='toolbar.close()'>
