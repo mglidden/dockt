@@ -75,10 +75,11 @@ slider.requestComments = function(docId) {
 
 slider.moveSlider = function(pixels) {
   $('#slider').css('left', parseInt($('#slider').css('left')) + pixels + 'px');
+  slider.hideOtherCards();
 };
 
 slider.animateSliderDist = function(pixels) {
-  $('#slider').animate({left:'+='+pixels}, 'fast', null);
+  $('#slider').animate({left:'+='+pixels}, 'fast', slider.hideOtherCards);
 };
 
 slider.animateSliderTo = function(pixels) {
@@ -94,6 +95,18 @@ slider.centerOn = function(card, animate) {
   slider.currCenter = card;
   bc.changeCard(card);
   toolbar.setupButtons(card);
+};
+
+slider.hideOtherCards = function() {
+  if (slider.currCenter < 2) {
+    // hide document
+    $('#doc-pages').html('');
+    $('#comments-bar').html('');
+  }
+  if (slider.currCenter < 1) {
+    // hide document table
+    $('#docs-table :first').html($('#docs-table :first :first').html())
+  }
 };
 
 slider.popstate = function(event) {
