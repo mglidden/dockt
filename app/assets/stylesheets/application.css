@@ -43,7 +43,7 @@ html, body {
 }
 
 .bc_cont {
-  background:url('/assets/navbar_triangle.png') no-repeat right;
+  background:url('/assets/oval.png') no-repeat right;
   display:inline-block;
   height:100%;
 }

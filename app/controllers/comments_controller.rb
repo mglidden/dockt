@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     if current_user == nil
       redirect_to :controller => :sessions, :action => :new
       return
-    elsif !current_user.can_access(@grouP)
+    elsif !current_user.can_access(@group)
       return
     end
 
@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
     if current_user == nil
       redirect_to :controller => :sessions, :action => :new
       return
-    elsif !current_user.can_access(@grouP)
+    elsif !current_user.can_access(@group)
       return
     end
 
@@ -46,7 +46,7 @@ class CommentsController < ApplicationController
     if current_user == nil
       redirect_to :controller => :sessions, :action => :new
       return
-    elsif !current_user.can_access(@grouP)
+    elsif !current_user.can_access(@group)
       return
     end
 

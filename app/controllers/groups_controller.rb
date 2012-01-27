@@ -123,8 +123,6 @@ class GroupsController < ApplicationController
     if current_user == nil
       redirect_to :controller => :sessions, :action => :new
       return
-    elsif !current_user.can_access(@group)
-      return
     end
 
     @groups = Group.find(:all, :order => 'updated_at').reverse()
