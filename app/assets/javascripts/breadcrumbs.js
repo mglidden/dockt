@@ -95,14 +95,14 @@ bc.moveBCDist = function(id, pixels) {
 
 bc.determineName = function(cardNum) {
   if (cardNum == 0) {
-    return 'Groups&nbsp&nbsp&nbsp&nbsp';
+    return 'Groups&nbsp';
   }
   if (cardNum == 1) {
-    return $('#group'+util.getGroupNum()).children('.leftCol').text() +
-      '&nbsp&nbsp&nbsp&nbsp';
+    return '&nbsp' + $('#group'+util.getGroupNum()).children('.leftCol').text() +
+      '&nbsp';
   }
   if (cardNum == 2) {
-    return $('#doc'+util.getDocNum()).children('.leftCol').text() +
-      '&nbsp&nbsp&nbsp&nbsp';
+    return '&nbsp' + $('#doc'+util.getDocNum()).children('.leftCol').text() +
+      '&nbsp';
   }
 };

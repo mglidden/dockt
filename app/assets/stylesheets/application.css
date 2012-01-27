@@ -43,7 +43,9 @@ html, body {
 }
 
 .bc_cont {
-  background:url('/assets/oval.png') no-repeat right;
+  -webkit-border-bottom-right-radius:16px 25px;
+  -webkit-border-top-right-radius:16px 25px;
+  -webkit-box-shadow:2px 0px 2px black;
   display:inline-block;
   height:100%;
 }
@@ -110,11 +112,11 @@ html, body {
 #search {
   border: 1px solid #999;
   border-radius:12px;
+  -webkit-border-radius:12px;
   color:#a6a6a6;
   margin-right:0;
   padding-bottom:1px;
   padding-left:2%;
-  -webkit-border-radius:12px;
   width:97%;
 }
 
