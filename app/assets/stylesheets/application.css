@@ -250,6 +250,7 @@ th {
   -webkit-box-shadow: 2px 2px 5px black;
   float:left;
   height:750px; 
+  margin-left:1%;
   overflow-x:hidden;
   overflow-y:scroll;
   padding:2%;
