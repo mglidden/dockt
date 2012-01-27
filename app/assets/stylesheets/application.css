@@ -197,14 +197,26 @@ th {
   background: url('/assets/trash.png') no-repeat center center, -webkit-linear-gradient(top, #c7c7c7, #808080);
 }
 
+#delete:hover {
+  background: url('/assets/trash.png') no-repeat center center, #333333;
+}
+
 #members {
   background: url('/assets/members.png') no-repeat center center, -webkit-linear-gradient(top, #c7c7c7, #808080);
   padding-left:20px;
   padding-right:20px;
 }
 
+#members:hover {
+  background: url('/assets/members.png') no-repeat center center, #333333;
+}
+
 #add {
   background: url('/assets/add.png') no-repeat center center, -webkit-linear-gradient(top, #c7c7c7, #808080);
+}
+
+#add:hover {
+  background: url('/assets/add.png') no-repeat center center, #333333;
 }
 
 .form {
