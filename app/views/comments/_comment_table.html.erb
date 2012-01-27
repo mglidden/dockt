@@ -2,7 +2,7 @@
   <div id=doc-pages>
     <% if @pages %>
       <% @pages.each do |url, pagenum| %>
-        <img src=<%= url %> class='doc-page' id=<%= pagenum %>></img>
+        <img src=<%= url %> class='doc-page' id=<%= pagenum %> onclick=toolbar.add(event)></img>
         <br />
       <% end %>
     <% end %>
