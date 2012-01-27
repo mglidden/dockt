@@ -77,6 +77,10 @@ html, body {
   word-wrap:break-word;
 }
 
+.comments-li {
+  width:200px;
+}
+
 .card {
   display:inline;
   float:left;
