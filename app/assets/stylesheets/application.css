@@ -96,6 +96,7 @@ html, body {
 #logo {
   color:#a6a6a6;
   font-size:36pt;
+  margin-left:-5px;
 }
 
 #headerRight {
