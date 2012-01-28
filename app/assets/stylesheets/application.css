@@ -104,12 +104,18 @@ html, body {
 }
 
 #logo {
+  background: 'transparent';
   color:#a6a6a6;
   font-family: 'Aclonica', sans-serif;
   font-size:36pt;
   margin-left:-5px;
+  text-decoration:none;
   top:30px;
   position:relative;
+}
+
+#logo:hover {
+  background: transparent;
 }
 
 #headerRight {
@@ -153,11 +159,9 @@ th {
   overflow:hidden;
 }
 
-
 .table_row:hover {
   background: #777777;
 }
-
 
 .idCol {
   display:none;
