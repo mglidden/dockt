@@ -161,8 +161,10 @@ class GroupsController < ApplicationController
       user.add_access_id(params[:group][:id])
 
       @group = Group.find(params[:group][:id])
+      @group.touch
+      @display_user = user
       data = {:html => (render :partial => 'groups/group_table_row')}
-      Pusher['private-updates-'+user.id.to_s].trigger('private-updates-'+user.id.to_s, data)
+      user.send_message(data)
     end
 
     respond_to do |format|

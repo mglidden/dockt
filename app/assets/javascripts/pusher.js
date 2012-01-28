@@ -12,5 +12,4 @@ p.init = function() {
 
 p.gotMessage = function(update) {
   toolbar.addTableRowHelper('classes', update.html[0]);
-  window.console.log(update);
 };

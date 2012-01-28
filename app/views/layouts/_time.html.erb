@@ -21,7 +21,7 @@
   <%= (time_diff/604800).round %> weeks ago
 <% end %>
 <% if editor != nil %>
-  <% if editor == current_user.login %>
+  <% if @display_user == nil && editor == current_user.login %>
     by you
   <% else %>
     by <%= editor %>
