@@ -75,7 +75,6 @@ slider.requestComments = function(docId) {
 
 slider.moveSlider = function(pixels) {
   $('#slider').css('left', parseInt($('#slider').css('left')) + pixels + 'px');
-  slider.hideOtherCards();
 };
 
 slider.animateSliderDist = function(pixels) {

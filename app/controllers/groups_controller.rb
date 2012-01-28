@@ -119,7 +119,7 @@ class GroupsController < ApplicationController
 
     data = {:namespace => 'toolbar', :method => 'removeTableRowHelper',
             :parm1 => '#group' + @group.id.to_s}
-    users_with_access(@group).each do |user|
+    @group.users_with_access.each do |user|
       if user != current_user
         user.send_message(data)
       end
@@ -165,6 +165,10 @@ class GroupsController < ApplicationController
     end
 
     user = User.find_by_login(params[:login])
+    if !user
+      render :inline => "error"
+      return
+    end
     if !user.can_access_id(params[:group][:id])
       user.add_access_id(params[:group][:id])
 
@@ -181,9 +185,4 @@ class GroupsController < ApplicationController
       format.json { head :ok }
     end
   end
-
-  def users_with_access(group)
-    return User.all.find_all{|u| u.can_access_id(group.id)}
-  end
-
 end

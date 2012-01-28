@@ -13,8 +13,22 @@ class DocumentsController < ApplicationController
     @group.touch
     @doc = @document
     @document.set_editor(current_user)
+    @group = Group.find(@document.group_id);
+    @users = @group.users_with_access
+    file = 'public/docs/' + @document.id.to_s + '_original.pdf'
+
+    Thread.new() {
+      system('wget ' + @document.url + ' -O ' + file + '; convert ' + file + ' public/docs/' + @document.id.to_s + '.png')      
+      @users.each {|u| 
+        @display_user = u
+        data = {:namespace => 'toolbar', :method => 'addDocRowIfVisible',
+                :parm1 => @document.group_id,
+                :parm2 => render_to_string(:partial => 'documents/document_table_row')}
+        u.send_message(data)}
+    }
+
     respond_to do |format|
-      format.html { render 'documents/_document_table_row.html.erb', :layout => false}
+      format.html { render :inline => '' }
     end
   end
 

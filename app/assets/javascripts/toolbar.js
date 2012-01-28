@@ -27,6 +27,12 @@ toolbar.addOverlay = function() {
   $('#overlay').animate({opacity:0.5}, toolbar.fadeTime/3, null);
 };
 
+toolbar.addDocRowIfVisible = function(groupId, row) {
+  if (slider.selectedGroup == groupId) {
+    toolbar.addTableRowHelper('docs', row);
+  }
+};
+
 toolbar.addTableRow = function(event, response) {
   var table;
   if (slider.currCenter == 0) {
@@ -40,7 +46,7 @@ toolbar.addTableRow = function(event, response) {
 };
   
 toolbar.addTableRowHelper = function(table, text) {
-  if (text.length = 1) {
+  if (text.length == 1) {
     text = text[0];
   }
   var element = $(text);
