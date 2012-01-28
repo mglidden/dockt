@@ -101,6 +101,15 @@ class DocumentsController < ApplicationController
     end
 
     @document = Document.find(params[:document][:id])
+
+    data = {:namespace => 'toolbar', :method => 'removeTableRowHelper',
+            :parm1 => '#doc' + @document.id.to_s}
+    @group.users_with_access.each do |user|
+      if user != current_user
+        user.send_message(data)
+      end
+    end
+
     @document.destroy
 
     respond_to do |format|
