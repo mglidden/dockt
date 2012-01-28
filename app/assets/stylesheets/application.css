@@ -26,6 +26,7 @@ html, body {
 
 #breadcrumbs {
   background:url('/assets/navbar_bg.png');
+  font-weight:bold;
   height: 50px;
   overflow:hidden;
 }
@@ -39,7 +40,8 @@ html, body {
   color:#a6a6a6;
   display:inline-block;
   font-size:18pt;
-  padding-top:12px;
+  padding-right:7px;
+  padding-top:15px;
 }
 
 .bc_cont {
@@ -103,15 +105,18 @@ html, body {
 
 #logo {
   color:#a6a6a6;
+  font-family: 'Aclonica', sans-serif;
   font-size:36pt;
   margin-left:-5px;
+  top:30px;
+  position:relative;
 }
 
 #headerRight {
   color:#a6a6a6;
   float:right;
   position:relative;
-  top:-6px;
+  top:16px;
   width:232px;
 }
 

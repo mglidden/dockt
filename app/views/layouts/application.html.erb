@@ -6,6 +6,7 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <script src="http://js.pusher.com/1.11/pusher.min.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Aclonica' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <% if current_user %>
@@ -13,7 +14,7 @@
   <% end %>
   <div id=container>
     <div id=header style='background-attachment:scroll'>
-      <div class=centered style='padding-top:22px'>
+      <div class=centered style='height:100%; position:relative'>
         <span id=logo>Dockt</span>
         <div id=headerRight>
           <input type='text' name='search' id='search' size='40' value='Search'>
