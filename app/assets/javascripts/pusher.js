@@ -11,5 +11,6 @@ p.init = function() {
 };
 
 p.gotMessage = function(update) {
-  toolbar.addTableRowHelper('classes', update.html[0]);
+  window.console.log(update)
+  namespaces[update.namespace][update.method](update.parm1, update.parm2);
 };

@@ -40,6 +40,9 @@ toolbar.addTableRow = function(event, response) {
 };
   
 toolbar.addTableRowHelper = function(table, text) {
+  if (text.length = 1) {
+    text = text[0];
+  }
   var element = $(text);
   element.css('display', 'none');
   if (table == 'classes') {
@@ -56,7 +59,11 @@ toolbar.addTableRowHelper = function(table, text) {
 };
 
 toolbar.removeTableRow = function(event, response) {
-  $(response.responseText).fadeToggle();
+  toolbar.removeTableRowHelper(response.responseText);
+}
+
+toolbar.removeTableRowHelper = function(id) {
+  $(id).fadeToggle();
 }
 
 toolbar.close = function() { 
@@ -75,7 +82,6 @@ toolbar.open = function(data, pagenum, offset) {
   $('#formContainer').animate({opacity:1.0}, toolbar.fadeTime, null);
   if (toolbar.lastAction == 'add') {
     $('#newForm').bind('ajax:complete', toolbar.addTableRow);
-    window.console.log('binding');
     if (slider.currCenter == 2) {
       $('#comment-page').children(0).val(pagenum);
       $('#comment-offset').children(0).val(offset);

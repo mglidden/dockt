@@ -1,7 +1,7 @@
 <div id=deleteForm class=form>
   <%= form_for @groups, :url => {:action => 'destroy'}, :remote => true do |f| %>
     <div id=delete-id>
-      <%= f.label :id %>
+      <%= f.text_field :id %>
     </div>
     <div class ='actions'>
       <input name='commit' type='submit' value='Delete Group' onclick='toolbar.close()'>
