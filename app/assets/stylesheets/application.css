@@ -312,6 +312,32 @@ th {
   z-index:2;
 }
 
+.doc-gradient {
+  height:6px;
+  margin-left:8px;
+  position:absolute;
+  width:560px;
+  z-index:3;
+}
+
+#top-gradient {
+  -webkit-box-shadow: 0 4px 4px #306199 inset;
+}
+
+#bottom-gradient {
+  -webkit-box-shadow: 0 -4px 4px #306199 inset;
+  top:761px;
+}
+
+#doc-gradients {
+  background:black;
+  display:inline;
+  float:left;
+  height:766px;
+  position:absolute;
+  width:560px;
+}
+
 #comments-bar {
   background:#306199;
   -webkit-border-bottom-right-radius: 9px;
