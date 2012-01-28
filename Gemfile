@@ -40,3 +40,4 @@ gem 'therubyracer'
 
 gem 'rails3-jquery-autocomplete'
 gem 'nifty-generators'
+gem 'pusher'

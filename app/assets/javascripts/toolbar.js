@@ -28,15 +28,27 @@ toolbar.addOverlay = function() {
 };
 
 toolbar.addTableRow = function(event, response) {
-  var element = $(response.responseText);
-  element.css('display', 'none');
+  var table;
   if (slider.currCenter == 0) {
+    table = 'classes';
+  } else if (slider.currCenter == 1) {
+    table = 'docs';
+  } else {
+    table = 'comments';
+  }
+  toolbar.addTableRowHelper(table, response.responseText);
+};
+  
+toolbar.addTableRowHelper = function(table, text) {
+  var element = $(text);
+  element.css('display', 'none');
+  if (table == 'classes') {
     element.insertAfter($('#classes-table :first :first'));
     slider.addTableClickRow(element, slider.requestDocuments);
-  } else if (slider.currCenter == 1) {
+  } else if (table == 'docs') {
     element.insertAfter($('#docs-table :first :first'));
     slider.addTableClickRow(element, slider.requestComments);
-  } else {
+  } else if (table == 'comments') {
     element.insertAfter($('#comments-table :first :first'));
     slider.addTableClickRow(element, slider.moveDoc);
   }
@@ -63,6 +75,7 @@ toolbar.open = function(data, pagenum, offset) {
   $('#formContainer').animate({opacity:1.0}, toolbar.fadeTime, null);
   if (toolbar.lastAction == 'add') {
     $('#newForm').bind('ajax:complete', toolbar.addTableRow);
+    window.console.log('binding');
     if (slider.currCenter == 2) {
       $('#comment-page').children(0).val(pagenum);
       $('#comment-offset').children(0).val(offset);
@@ -88,6 +101,7 @@ toolbar.add = function(event) {
   } else {
     $.ajax({url: 'new', success: function(data) {toolbar.open(data, event.target.id, event.offsetY)}});
   }
+  toolbar.lastAction = 'add';
 };
 
 toolbar.delete = function() {

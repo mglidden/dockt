@@ -1,3 +1,9 @@
+require 'pusher'
+
+Pusher.app_id = '14401'
+Pusher.key = 'ab37b6148d60ea118769'
+Pusher.secret = 'cbf525b2c7445541cd08'
+
 class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
@@ -143,7 +149,6 @@ class GroupsController < ApplicationController
   end
 
   def add_member
-
     if current_user == nil
       redirect_to :controller => :sessions, :action => :new
       return
@@ -151,7 +156,14 @@ class GroupsController < ApplicationController
       return
     end
 
-    User.find_by_login(params[:login]).add_access_id(params[:group][:id])
+    user = User.find_by_login(params[:login])
+    if !user.can_access_id(params[:group][:id])
+      user.add_access_id(params[:group][:id])
+
+      @group = Group.find(params[:group][:id])
+      data = {:html => (render :partial => 'groups/group_table_row')}
+      Pusher['private-updates-'+user.id.to_s].trigger('private-updates-'+user.id.to_s, data)
+    end
 
     respond_to do |format|
       format.json { head :ok }
