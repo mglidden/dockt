@@ -60,7 +60,7 @@ html, body {
 
 #content {
   padding-top: 20px;
-  padding-bottom: 60px;
+  padding-bottom: 20px;
 }
 
 #footer {
@@ -402,4 +402,12 @@ th {
 .error-close {
   top:7px;
   right:7px;
+}
+
+.comment-marker {
+  background:#c7ba04;
+  height:50px;
+  left:95%;
+  position:absolute;
+  width:5px;
 }

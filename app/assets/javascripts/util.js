@@ -49,7 +49,12 @@ util.getDocNum = function() {
 util.getCommentNum = function() {
   var nums = window.location.pathname.match(/\d+/g);
   if (nums.length >= 3) {
-    return nums[2];
+    return nums[3];
   }
   return null;
 }
+
+util.getCommentPos = function(comment) {
+  return document.getElementById(comment.children[2].innerText).offsetTop +
+    parseInt(comment.children[3].innerText);
+};

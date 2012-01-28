@@ -66,6 +66,7 @@ toolbar.addTableRowHelper = function(table, text) {
   } else if (table == 'comments') {
     element.insertAfter($('#comments-table :first :first'));
     slider.addTableClickRow(element, slider.moveDoc);
+    cm.addMarker(element[0], true);
   }
   element.fadeToggle();
 };
