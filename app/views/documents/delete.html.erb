@@ -3,9 +3,10 @@
     <div id=delete-id>
       <%= f.text_field :id %>
     </div>
+    Are you sure you wish to delete this document?
     <div class ='actions'>
+      <%= button_to_function 'Cancel', 'toolbar.close()' %>
       <input name='commit' type='submit' value='Delete Document' onclick='toolbar.close()'>
     </div>
   <% end %>
-  <img src='/assets/close.png' id=closeButton class=closeButton onclick='toolbar.close()'></img>
 </div>
