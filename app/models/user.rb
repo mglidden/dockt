@@ -73,10 +73,13 @@ class User < ActiveRecord::Base
   end
 
   def can_access(group)
-    return self.groups.split(',').include?(group.id.to_s)
+    return self.can_access_id(group.id)
   end
 
   def can_access_id(group_id)
+    if self.groups == nil
+      return false
+    end
     return self.groups.split(',').include?(group_id.to_s)
   end
 

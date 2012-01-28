@@ -117,6 +117,14 @@ class GroupsController < ApplicationController
       return
     end
 
+    data = {:namespace => 'toolbar', :method => 'removeTableRowHelper',
+            :parm1 => '#group' + @group.id.to_s}
+    @group.users_with_access.each do |user|
+      if user != current_user
+        user.send_message(data)
+      end
+    end
+
     @group.destroy
 
     respond_to do |format|
@@ -157,13 +165,19 @@ class GroupsController < ApplicationController
     end
 
     user = User.find_by_login(params[:login])
+    if !user
+      render :inline => "error"
+      return
+    end
     if !user.can_access_id(params[:group][:id])
       user.add_access_id(params[:group][:id])
 
       @group = Group.find(params[:group][:id])
       @group.touch
       @display_user = user
-      data = {:html => (render :partial => 'groups/group_table_row')}
+      data = {:parm2 => render(:partial => 'groups/group_table_row'),
+              :namespace => 'toolbar', :method => 'addTableRowHelper',
+              :parm1 => 'classes'};
       user.send_message(data)
     end
 
@@ -171,5 +185,4 @@ class GroupsController < ApplicationController
       format.json { head :ok }
     end
   end
-
 end
