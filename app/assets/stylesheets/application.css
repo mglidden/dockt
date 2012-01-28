@@ -218,6 +218,7 @@ th {
   height:300px;
   width:100%;
   -webkit-border-radius: 12px;
+  margin-bottom:4px;
 }
 
 #roundedboxcontent {
@@ -226,7 +227,7 @@ th {
 
 #contentbox {
   background: blue;
-  width: 256px;
+  width: 264px;
   height: 150px;
   display: inline-block;
   -webkit-border-radius: 12px;
@@ -234,9 +235,9 @@ th {
 
 #contentmargin {
   background: red;
-  width: 16px;
+  width: 4px;
   height: 150px;
-  display: inline-block;
+  display: inline;
 }
 #add:hover {
   background: url('/assets/add.png') no-repeat center center, #333333;
