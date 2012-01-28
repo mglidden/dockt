@@ -116,6 +116,7 @@ class GroupsController < ApplicationController
     elsif !current_user.can_access(@group)
       return
     end
+    puts params
 
     data = {:namespace => 'toolbar', :method => 'removeTableRowHelper',
             :parm1 => '#group' + @group.id.to_s}
