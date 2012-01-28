@@ -198,7 +198,7 @@ th {
   padding: 9px 15px;
   position:relative;
   text-decoration: none;
-  top:13px;
+  top:15px;
   vertical-align: middle;
 }
 
@@ -248,6 +248,18 @@ th {
 
 #deleteForm {
   width:300px;
+}
+
+#group_name {
+  text-align:center;
+}
+
+#document_title {
+  text-align:center;
+}
+
+#document_url {
+  text-align:center;
 }
 
 .closeButton {

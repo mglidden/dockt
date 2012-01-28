@@ -8,13 +8,9 @@ search.init = function() {
 };
 
 search.removeText = function() {
-  if ($(search.ID.box).val() == 'Search') {
-    $(search.ID.box).val('');
-  }
+  util.removeText(search.ID.box, 'Search');
 };
 
 search.addText = function() {
-  if ($(search.ID.box).val() == '') {
-    $(search.ID.box).val('Search');
-  }
+  util.addText(search.ID.box, 'Search');
 }

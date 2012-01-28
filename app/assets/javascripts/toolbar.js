@@ -13,13 +13,7 @@ toolbar.showAdd = function() {
 };
 
 toolbar.setupButtons = function(card) {
-  if (card == 0) {
-    toolbar.showAdd();
-  } else if (card == 1) {
-    toolbar.showAdd();
-  } else {
-    toolbar.hideAdd();
-  }
+  toolbar.showAdd();
 };
 
 toolbar.addOverlay = function() {
@@ -118,7 +112,14 @@ toolbar.add = function(event) {
   } else if (slider.currCenter == 1) {
     $.ajax({url: 'new', success: toolbar.open});
   } else {
-    $.ajax({url: 'new', success: function(data) {toolbar.open(data, event.target.id, event.offsetY)}});
+    if (event) {
+      var pagenum = event.target.id;
+      var offset = event.offsetY;
+    } else {
+      var pagenum = 0;
+      var offset = document.getElementById('doc-pages').scrollTop + 60;
+    }
+    $.ajax({url: 'new', success: function(data) {toolbar.open(data, pagenum, offset)}});
   }
   toolbar.lastAction = 'add';
 };

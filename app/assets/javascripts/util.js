@@ -58,3 +58,15 @@ util.getCommentPos = function(comment) {
   return document.getElementById(comment.children[2].innerText).offsetTop +
     parseInt(comment.children[3].innerText);
 };
+
+util.removeText = function(id, defaultText) {
+  if ($(id).val() == defaultText) {
+    $(id).val('');
+  }
+};
+
+util.addText = function(id, defaultText) {
+  if ($(id).val() == '') {
+    $(id).val(defaultText);
+  }
+};

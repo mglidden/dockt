@@ -1,11 +1,10 @@
 <%= form_for([@group, @group.documents.build], :remote=>true) do |f| %>
+  <h2>Add a new document</h2>
   <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :value => 'Title', :onfocus => 'util.removeText(\'#document_title\', \'Title\')', :onblur => 'util.addText(\'#document_title\', \'Title\')'%>
   </div>
   <div class="field">
-    <%= f.label :url %><br/>
-    <%= f.text_area :url%>
+    <%= f.text_field :url, :value => 'URL', :onfocus => "util.removeText('#document_url', 'URL')", :onblur => "util.addText('#document_url', 'URL')"%>
   </div>
   <div class="actions" onclick=toolbar.close()>
     <%= f.submit %>
