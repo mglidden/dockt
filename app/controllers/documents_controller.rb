@@ -18,13 +18,23 @@ class DocumentsController < ApplicationController
     file = 'public/docs/' + @document.id.to_s + '_original.pdf'
 
     Thread.new() {
-      system('wget ' + @document.url + ' -O ' + file + '; convert ' + file + ' public/docs/' + @document.id.to_s + '.png')      
-      @users.each {|u| 
-        @display_user = u
-        data = {:namespace => 'toolbar', :method => 'addDocRowIfVisible',
-                :parm1 => @document.group_id,
-                :parm2 => render_to_string(:partial => 'documents/document_table_row')}
-        u.send_message(data)}
+      response = system('curl ' + @document.url + ' -o ' + file)
+      if response
+        #system('wget ' + @document.url + ' -O ' + file + '; convert ' + file + ' public/docs/' + @document.id.to_s + '.png')      
+        system('convert ' + file + ' public/docs/' + @document.id.to_s + '.png');
+        @users.each {|u| 
+          @display_user = u
+          data = {:namespace => 'toolbar', :method => 'addDocRowIfVisible',
+                  :parm1 => @document.group_id,
+                  :parm2 => render_to_string(:partial => 'documents/document_table_row')}
+          u.send_message(data)
+        }
+      else
+        data = {:namespace => 'alerts', :method => 'showWarning',
+                :parm1 => 'The document ' + @document.title + ' could not be accessed.'}
+        current_user.send_message(data)
+        @document.destroy
+      end
     }
 
     respond_to do |format|

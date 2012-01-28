@@ -229,7 +229,7 @@ th {
   width:600px;
 }
 
-#closeButton {
+.closeButton {
   height:20px;
   position:absolute;
   right:20px;
@@ -345,4 +345,20 @@ th {
 
 #members-id {
   display:none;
+}
+
+.error-box {
+  background:#c7ba04;
+  -webkit-border-radius:5px;
+  height:35px;
+  margin-bottom:10px;
+  padding-top:14px;
+  position:relative;
+  text-align:center;
+  width:100%;
+}
+
+.error-close {
+  top:7px;
+  right:7px;
 }
