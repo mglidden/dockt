@@ -33,6 +33,12 @@ toolbar.addDocRowIfVisible = function(groupId, row) {
   }
 };
 
+toolbar.addCommentIfVisible = function(docId, row) {
+  if (slider.selectedDocument == docId) {
+    toolbar.addTableRowHelper('comments', row);
+  }
+};
+
 toolbar.addTableRow = function(event, response) {
   var table;
   if (slider.currCenter == 0) {
