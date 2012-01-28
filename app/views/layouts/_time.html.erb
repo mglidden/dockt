@@ -1,0 +1,29 @@
+<% time_diff = Time.zone.now - time %>
+<% if time_diff < 10 %>
+  Just now
+<% elsif time_diff < 60 %>
+  <%= time_diff.round %> seconds ago
+<% elsif time_diff < 120 %>
+  1 minute ago
+<% elsif time_diff < 3600 %>
+  <%= (time_diff/60).round %> minutes ago
+<% elsif time_diff < 7200 %>
+  1 hour ago
+<% elsif time_diff < 86400 %>
+  <%= (time_diff/3600).round %> hours ago
+<% elsif time_diff < 172800 %>
+  1 day ago
+<% elsif time_diff < 604800 %>
+  <%= (time_diff/86400).round %> days ago
+<% elsif time_diff < 1209600 %>
+  1 week ago
+<% else %>
+  <%= (time_diff/604800).round %> weeks ago
+<% end %>
+<% if editor != nil %>
+  <% if @display_user == nil && editor == current_user.login %>
+    by you
+  <% else %>
+    by <%= editor %>
+  <% end %>
+<% end %>

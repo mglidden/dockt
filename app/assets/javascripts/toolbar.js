@@ -1,15 +1,8 @@
 toolbar = {}
 toolbar.animationTime = 100;
 toolbar.fadeTime = 300;
-toolbar.lastAction = ''
-
-toolbar.hideMembers = function() {
-  $('#members').fadeOut(toolbar.animationTime);
-};
-
-toolbar.showMembers = function() {
-  $('#members').fadeIn(toolbar.animationTime);
-};
+toolbar.lastAction = '';
+toolbar.lastId = null;
 
 toolbar.hideAdd = function() {
   $('#add').fadeOut(toolbar.animationTime);
@@ -19,27 +12,13 @@ toolbar.showAdd = function() {
   $('#add').fadeIn(toolbar.animationTime);
 };
 
-toolbar.hideDelete = function() {
-  $('#delete').fadeOut(toolbar.animationTime);
-};
-
-toolbar.showDelete = function() {
-  $('#delete').fadeIn(toolbar.animationTime);
-};
-
 toolbar.setupButtons = function(card) {
   if (card == 0) {
-    toolbar.showMembers();
     toolbar.showAdd();
-    toolbar.showDelete();
   } else if (card == 1) {
-    toolbar.hideMembers();
     toolbar.showAdd();
-    toolbar.showDelete();
   } else {
-    toolbar.hideMembers();
     toolbar.hideAdd();
-    toolbar.hideDelete();
   }
 };
 
@@ -49,14 +28,29 @@ toolbar.addOverlay = function() {
 };
 
 toolbar.addTableRow = function(event, response) {
-  var element = $(response.responseText);
-  element.css('display', 'none');
+  var table;
   if (slider.currCenter == 0) {
+    table = 'classes';
+  } else if (slider.currCenter == 1) {
+    table = 'docs';
+  } else {
+    table = 'comments';
+  }
+  toolbar.addTableRowHelper(table, response.responseText);
+};
+  
+toolbar.addTableRowHelper = function(table, text) {
+  var element = $(text);
+  element.css('display', 'none');
+  if (table == 'classes') {
     element.insertAfter($('#classes-table :first :first'));
     slider.addTableClickRow(element, slider.requestDocuments);
-  } else if (slider.currCenter == 1) {
+  } else if (table == 'docs') {
     element.insertAfter($('#docs-table :first :first'));
     slider.addTableClickRow(element, slider.requestComments);
+  } else if (table == 'comments') {
+    element.insertAfter($('#comments-table :first :first'));
+    slider.addTableClickRow(element, slider.moveDoc);
   }
   element.fadeToggle();
 };
@@ -65,7 +59,7 @@ toolbar.removeTableRow = function(event, response) {
   $(response.responseText).fadeToggle();
 }
 
-toolbar.close = function() {
+toolbar.close = function() { 
   $('#overlay').animate({opactiy:0.0}, toolbar.fadeTime/3, function() {
     $('#overlay').css('display', 'none')});
   $('#formContainer').animate({opacity:0.0}, toolbar.fadeTime, function() {
@@ -73,7 +67,7 @@ toolbar.close = function() {
   });
 };
 
-toolbar.open = function(data) {
+toolbar.open = function(data, pagenum, offset) {
   $('#newForm').remove();
   toolbar.addOverlay();
   $('#formContainer').css('display', 'block');
@@ -81,19 +75,31 @@ toolbar.open = function(data) {
   $('#formContainer').animate({opacity:1.0}, toolbar.fadeTime, null);
   if (toolbar.lastAction == 'add') {
     $('#newForm').bind('ajax:complete', toolbar.addTableRow);
+    window.console.log('binding');
+    if (slider.currCenter == 2) {
+      $('#comment-page').children(0).val(pagenum);
+      $('#comment-offset').children(0).val(offset);
+    }
   } else if (toolbar.lastAction == 'delete') {
     $('#deleteForm').bind('ajax:complete', toolbar.removeTableRow);
+    $('#delete-id').children(0).val(parseInt(toolbar.lastId));
+  } else if (toolbar.lastAction == 'members') {
+    $('#members-id').children(0).val(parseInt(toolbar.lastId));
   }
+  return false;
 }
 
 toolbar.init = function() {
+  $('#doc-pages').bind('click', toolbar.add);
 }
 
-toolbar.add = function() {
+toolbar.add = function(event) {
   if (slider.currCenter == 0) {
     $.ajax({url: '/groups/new', success: toolbar.open});
   } else if (slider.currCenter == 1) {
     $.ajax({url: 'new', success: toolbar.open});
+  } else {
+    $.ajax({url: 'new', success: function(data) {toolbar.open(data, event.target.id, event.offsetY)}});
   }
   toolbar.lastAction = 'add';
 };
@@ -104,5 +110,14 @@ toolbar.delete = function() {
   } else if (slider.currCenter == 1) {
     $.ajax({url: 'delete', success:toolbar.open});
   }
+  toolbar.lastId = window.event.target.parentElement.parentElement.children[0].innerText;
   toolbar.lastAction = 'delete';
+  window.event.stopPropagation();
+}
+
+toolbar.members = function() {
+  $.ajax({url: '/groups/members', success: toolbar.open});
+  toolbar.lastId = window.event.target.parentElement.parentElement.children[0].innerText;
+  toolbar.lastAction = 'members';
+  window.event.stopPropagation();
 }

@@ -1,5 +1,5 @@
 <tr class=table_row id=group<%= @group.id %>>
   <td class=idCol><%= @group.id %></td>
-  <td class=leftCol><%= @group.name %></td>
-  <td><%= @group.modified %></td>
+  <td class=leftCol><%= @group.name %><span id=inline-delete class=inline-button onclick=toolbar.delete()> </span><span id=inline-members class=inline-button onclick=toolbar.members()> </span></td>
+  <td><%= render 'layouts/time', :time => @group.updated_at, :editor => @group.editor %></td>
 </tr>

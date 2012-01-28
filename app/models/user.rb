@@ -1,4 +1,9 @@
 require 'digest/sha1'
+require 'pusher'
+
+Pusher.app_id = '14401'
+Pusher.key = 'ab37b6148d60ea118769'
+Pusher.secret = 'cbf525b2c7445541cd08'
 
 class User < ActiveRecord::Base
   include Authentication
@@ -80,8 +85,20 @@ class User < ActiveRecord::Base
   end
 
   def add_access_id(group_id)
-    self.groups = self.groups + ',' + group_id.to_s
+    if self.groups == nil
+      self.groups = group_id.to_s
+    else
+      self.groups = self.groups + ',' + group_id.to_s
+    end
     save :validate => false
+  end
+
+  def send_message(data)
+    Pusher[self.get_channel].trigger(self.get_channel, data)
+  end
+
+  def get_channel
+    return 'private-updates-'+self.id.to_s
   end
 
   protected

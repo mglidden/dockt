@@ -2,12 +2,17 @@ class DocumentsController < ApplicationController
   def create
     @group = Group.find(params[:group_id])
 
-    unless current_user.can_access(@group)
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@group)
       return
     end
 
     @document = @group.documents.create(params[:document])
+    @group.touch
     @doc = @document
+    @document.set_editor(current_user)
     respond_to do |format|
       format.html { render 'documents/_document_table_row.html.erb', :layout => false}
     end
@@ -16,9 +21,11 @@ class DocumentsController < ApplicationController
   def new
     @groups = Group.all
     @group = Group.find(params[:group_id])
-    @document = Document.new
 
-    unless current_user != nil
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@group)
       return
     end
 
@@ -26,28 +33,42 @@ class DocumentsController < ApplicationController
   end
   
   def show 
-    @groups = Group.all
+    @groups = Group.find(:all, :order => 'updated_at').reverse()
     @group = Group.find(params[:group_id])
-    unless current_user.can_access(@group)
+    @pages =[]
+
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@group)
       return
     end
-    @documents = @group.documents
+
+    @documents = @group.documents.sort_by {|doc| doc.updated_at}.reverse()
     @document = Document.find(params[:id])
-    @comments = @document.comments
+    @comments = @document.comments.sort_by {|comment| comment.updated_at }.reverse()
+    pages_cmd = IO.popen('ls public/docs/ | grep ' + params[:id] + '-')
+    @pages = pages_cmd.readlines.collect { |file| ['/docs/' + file[0..-2], file.split('-')[1].to_i] }
+    @pages.sort_by! { |url, filenum|
+      filenum
+    }
 
     render :layout => false
   end
 
   def index
-    @groups = Group.find(:all, :order => 'created_at').reverse()
+    @groups = Group.find(:all, :order => 'updated_at').reverse()
     @group = Group.find(params[:group_id])
-    if current_user == nil or !current_user.can_access(@group)
-      @documents = []
-      @groups = []
-    else
-      @documents = @group.documents
-      @groups = @groups.find_all{|g| current_user.can_access(g)}
+
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@group)
+      return
     end
+
+    @documents = @group.documents.sort_by {|doc| doc.updated_at}.reverse()
+    @groups = @groups.find_all{|g| current_user.can_access(g)}
     
     respond_to do |format|
       format.html
@@ -56,7 +77,16 @@ class DocumentsController < ApplicationController
   end
 
   def destroy
-    @document = Document.find(params[:id])
+    @group = Group.find(params[:group_id])
+
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@group)
+      return
+    end
+
+    @document = Document.find(params[:document][:id])
     @document.destroy
 
     respond_to do |format|
@@ -67,7 +97,29 @@ class DocumentsController < ApplicationController
 
   def delete
     @group = Group.find(params[:group_id])
-    @documents = @group.documents
+
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@group)
+      return
+    end
+
+    @documents = @group.documents.sort_by {|doc| doc.updated_at }.reverse()
     render 'documents/delete', :layout => false
+  end
+
+  def pdf
+    @group = Group.find(params[:group_id])
+
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@group)
+      return
+    end
+
+    @document = Document.find(params[:document_id])
+    render 'documents/pdf', :layout => false
   end
 end

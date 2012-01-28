@@ -15,9 +15,15 @@ Docs::Application.routes.draw do
 
   match '/groups/delete' => 'groups#delete'
   match '/groups/destroy' => 'groups#destroy'
+  match '/groups/members' => 'groups#members'
+  match '/groups/add_members' => 'groups#add_member'
 
   match '/groups/:group_id/documents/delete' => 'documents#delete'
   match '/groups/:group_id/documents/destroy' => 'documents#destroy'
+  match '/groups/:group_id/documents/:document_id/pdf' => 'documents#pdf'
+
+  get 'users/autocomplete_users_login'
+  match '/pusher/auth' => 'pusher#auth'
 
   resources :groups do
     resources :documents do

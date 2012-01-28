@@ -11,7 +11,7 @@ slider.ID.SLIDER = 'slider';
 
 slider.addTableClick = function(table_name, request_fn) {
   $.each($(table_name+' tr'), function(index, row) {
-    if (index != 0) {
+    if (index != 0 || table_name == '#comments-table') {
       slider.addTableClickRow(row, request_fn);
     }
   });
@@ -24,7 +24,6 @@ slider.addTableClickRow = function(row, request_fn) {
     }
   });
 }
-
 
 slider.clearTable = function(table_name) {
   $.each($(table_name + ' tr'), function(index, row) {
@@ -50,8 +49,17 @@ slider.requestDocuments = function(groupId) {
 };
 
 slider.setupCommentsTable = function() {
-  slider.addTableClick('#docs-table', null);
+  //setTimeout('slider.addTableClick(\'#comments-table\', slider.moveDoc)', 3000);
+  slider.addTableClick('#comments-table', slider.moveDoc);
 };
+
+slider.moveDoc = function(commentId) {
+  var comment = document.getElementById('comment'+commentId);
+  var pagenum = comment.children[2].innerText;
+  var offset = comment.children[3].innerText;
+  document.getElementById('doc-pages').scrollTop = document.getElementById(pagenum).offsetTop+parseInt(offset);
+  window.history.replaceState({center:slider.currCenter}, '', commentId);
+}
 
 slider.requestComments = function(docId) {
   $.ajax({url: '/groups/'+slider.selectedGroup+'/documents/'+docId+'/',
@@ -67,10 +75,11 @@ slider.requestComments = function(docId) {
 
 slider.moveSlider = function(pixels) {
   $('#slider').css('left', parseInt($('#slider').css('left')) + pixels + 'px');
+  slider.hideOtherCards();
 };
 
 slider.animateSliderDist = function(pixels) {
-  $('#slider').animate({left:'+='+pixels}, 'fast', null);
+  $('#slider').animate({left:'+='+pixels}, 'fast', slider.hideOtherCards);
 };
 
 slider.animateSliderTo = function(pixels) {
@@ -88,6 +97,18 @@ slider.centerOn = function(card, animate) {
   toolbar.setupButtons(card);
 };
 
+slider.hideOtherCards = function() {
+  if (slider.currCenter < 2) {
+    // hide document
+    $('#doc-pages').html('');
+    $('#comments-bar').html('');
+  }
+  if (slider.currCenter < 1) {
+    // hide document table
+    $('#docs-table :first').html($('#docs-table :first :first').html())
+  }
+};
+
 slider.popstate = function(event) {
   // on popstate is fired on first page load, so we only respond if we have
   // already pushed something onto the history stack
@@ -95,11 +116,7 @@ slider.popstate = function(event) {
     slider.firstPop = false;
     return;
   }
-  if (event['state'] && event['state']['center']) {
-    slider.centerOn(event['state']['center'], true);
-  } else {
-    slider.centerOn(0, true);
-  }
+  slider.centerOn(util.activeCard(), true);
 };
 
 slider.setupGroupsTable = function() {
@@ -113,6 +130,9 @@ slider.init = function() {
     slider.setupDocsTable();
     slider.centerOn(2, false);
     slider.selectedGroup = util.getGroupNum();
+    if (util.getCommentNum() != null) {
+      setTimeout('slider.moveDoc('+util.getCommentNum()+')', 300);
+    }
   } else if (window.location.pathname.indexOf('documents') != -1) {
     slider.setupDocsTable();
     slider.centerOn(1, false);

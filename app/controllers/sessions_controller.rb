@@ -16,9 +16,10 @@ class SessionsController < ApplicationController
       # button. Uncomment if you understand the tradeoffs.
       # reset_session
       self.current_user = user
-      new_cookie_flag = (params[:remember_me] == "1")
+      #new_cookie_flag = (params[:remember_me] == "1")
+      new_cookie_flag = true
       handle_remember_cookie! new_cookie_flag
-      redirect_back_or_default('/', :notice => "Logged in successfully")
+      redirect_to :controller => :groups, :action => :index
     else
       note_failed_signin
       @login       = params[:login]

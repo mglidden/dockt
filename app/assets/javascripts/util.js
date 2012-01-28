@@ -21,16 +21,16 @@ util.showingDocuments = function() {
 }
 
 util.showingGroups = function() {
-  return !util.showingDocumints() && util.urlHasGruop();
+  return !util.showingDocuments() && util.urlHasGroups();
 }
 
 util.activeCard = function() {
-  if (util.showingGroups()) {
-    return 0;
+  if (util.showingComments()) {
+    return 2;
   } else if (util.showingDocuments()) {
     return 1;
-  } else if (util.showingComments()) {
-    return 2;
+  } else if (util.showingGroups()) {
+    return 0;
   }
 }
 
@@ -44,4 +44,12 @@ util.getGroupNum = function() {
 
 util.getDocNum = function() {
   return window.location.pathname.match(/\d+/g)[1];
+}
+
+util.getCommentNum = function() {
+  var nums = window.location.pathname.match(/\d+/g);
+  if (nums.length >= 3) {
+    return nums[2];
+  }
+  return null;
 }
