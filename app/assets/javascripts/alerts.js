@@ -11,7 +11,7 @@ alerts.showWarning = function(message) {
 
 alerts.createNew = function(message) {
   var al = $('<div></div>');
-  al.text(message);
+  al.html(message);
   al.attr('class', 'error-box');
   var closeButton = $('<img></img>');
   closeButton.attr('src', '/assets/close.png');

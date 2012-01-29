@@ -21,6 +21,7 @@ Docs::Application.routes.draw do
   match '/groups/:group_id/documents/delete' => 'documents#delete'
   match '/groups/:group_id/documents/destroy' => 'documents#destroy'
   match '/groups/:group_id/documents/:document_id/pdf' => 'documents#pdf'
+  match '/groups/:group_id/documents/:id/undo' => 'documents#undo'
 
   get 'users/autocomplete_users_login'
   match '/terms' => 'application#search_list'

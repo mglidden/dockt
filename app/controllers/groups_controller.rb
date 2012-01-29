@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @groups = Group.all
-    @documents = @group.documents.sort_by {|doc| doc.updated_at }.reverse()
+    @documents = @group.documents.sort_by {|doc| doc.updated_at }.reverse().find_all {|d| d.visible}
 
     if current_user == nil
       redirect_to :controller => :sessions, :action => :new

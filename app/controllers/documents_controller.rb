@@ -31,7 +31,7 @@ class DocumentsController < ApplicationController
         }
       else
         data = {:namespace => 'alerts', :method => 'showWarning',
-                :parm1 => 'The document ' + @document.title + ' could not be accessed.'}
+                :parm1 => 'The document at \'' + @document.url + '\' could not be reached.'}
         current_user.send_message(data)
         @document.destroy
       end
@@ -91,7 +91,7 @@ class DocumentsController < ApplicationController
       return
     end
 
-    @documents = @group.documents.sort_by {|doc| doc.updated_at}.reverse()
+    @documents = @group.documents.sort_by {|doc| doc.updated_at}.reverse().find_all{|d| d.visible}
     @groups = @groups.find_all{|g| current_user.can_access(g)}
     
     respond_to do |format|
@@ -120,12 +120,44 @@ class DocumentsController < ApplicationController
       end
     end
 
-    @document.destroy
+   # @document.destroy
+    @document.visible = false
+    @document.save :validate => false
+
+    data = {:namespace => 'alerts', :method => 'showWarning',
+            :parm1 => 'You have deleted the document \'' + @document.title + '.\' <a onclick="$.ajax({url:\'/groups/'+@group.id.to_s+'/documents/'+@document.id.to_s+'/undo\'}); alerts.close()">[undo]</a>'}
+    current_user.send_message(data)
 
     respond_to do |format|
       format.html { render :inline => "#doc" + @document.id.to_s }
       format.json {head :ok}
     end
+  end
+
+  def undo
+    @group = Group.find(params[:group_id])
+
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => new
+      return
+    elsif !current_user.can_access(@group)
+      return
+    end
+
+    @document = Document.find(params[:id])
+    @document.visible = true
+    @document.save :validate => false
+    @doc = @document
+
+    @group.users_with_access.each do |u|
+      @display_user = u
+      data = {:namespace => 'toolbar', :method => 'addDocRowIfVisible',
+              :parm1 => @document.group_id,
+              :parm2 => render_to_string(:partial => 'documents/document_table_row')}
+      u.send_message(data)
+    end
+
+    render :inline => ''
   end
 
   def delete
