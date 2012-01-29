@@ -165,7 +165,7 @@ th {
 }
 
 .table_row:hover {
-  background: #777777;
+  background: #999999;
 }
 
 .idCol {
@@ -175,6 +175,10 @@ th {
 .leftCol {
   padding-left:10px;
   width:558px;
+}
+
+.leftCol:hover {
+  text-decoration:underline;
 }
 
 #toolbar {
