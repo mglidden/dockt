@@ -55,6 +55,9 @@ util.getCommentNum = function() {
 }
 
 util.getCommentPos = function(comment) {
+  window.console.log(comment);
+  window.console.log(document.getElementById(comment.children[2].innerText))
+  window.console.log(document.getElementById(comment.children[2].innerText).offsetTop)
   return document.getElementById(comment.children[2].innerText).offsetTop +
     parseInt(comment.children[3].innerText);
 };

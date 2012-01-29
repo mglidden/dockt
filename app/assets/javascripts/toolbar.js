@@ -114,11 +114,10 @@ toolbar.add = function(event) {
   } else if (slider.currCenter == 1) {
     $.ajax({url: 'new', success: toolbar.open});
   } else {
+    pagenum = 0;
     if (event) {
-      var pagenum = event.target.id;
-      var offset = event.offsetY;
+      var offset = document.getElementById(event.target.id).offsetTop + event.offsetY;
     } else {
-      var pagenum = 0;
       var offset = document.getElementById('doc-pages').scrollTop + 60;
     }
     $.ajax({url: 'new', success: function(data) {toolbar.open(data, pagenum, offset)}});

@@ -10,6 +10,5 @@ ts.setupGroupSort = function() {
 };
 
 ts.setupDocSort = function() {
-  window.console.log('here');
   $('#docs-table').tablesorter();
 };

@@ -1,6 +1,6 @@
 <tr class=commentList id=comment<%= @comment.id %>>
   <td class=idCol><%= @comment.id %></td>
-  <td class=leftCol><li class=comments-li><%= @comment.body%> - <%=@comment.commenter %></li></td>
+  <td class=leftColComments><li class=comments-li><%= @comment.body%> - <%=@comment.commenter %></li></td>
   <% if @comment.page != nil and @comment.offset != nil %>
     <td style='display:none'><%= @comment.page %></td>
     <td style='display:none'><%= @comment.offset%></td>

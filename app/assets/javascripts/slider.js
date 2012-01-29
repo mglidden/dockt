@@ -50,15 +50,21 @@ slider.requestDocuments = function(groupId) {
 };
 
 slider.setupCommentsTable = function() {
-  slider.addTableClick('#comments-table', slider.moveDoc);
+  slider.addTableClick('#comments-table', function(id) {slider.moveDoc(id, true);});
   cm.addMarkers();
 };
 
-slider.moveDoc = function(commentId) {
+slider.moveDoc = function(commentId, animate) {
   var comment = document.getElementById('comment'+commentId);
-  document.getElementById('doc-pages').scrollTop = util.getCommentPos(comment);
+  if (animate) {
+    window.console.log('here');
+    $('#doc-pages').animate({scrollTop:util.getCommentPos(comment)-350}, 'fast');
+  } else {
+    document.getElementById('doc-pages').scrollTop = util.getCommentPos(comment)-350;
+  }
   window.history.replaceState({center:slider.currCenter}, '', commentId);
 }
+
 
 slider.requestComments = function(docId) {
   $.ajax({url: '/groups/'+slider.selectedGroup+'/documents/'+docId+'/',
