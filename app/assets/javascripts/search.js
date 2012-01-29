@@ -14,6 +14,7 @@ search.init = function() {
                 source:search.terms,
                 position: { my : "right bottom", at: "right top" },
                 select: function(event, ui) {search.selected(ui.item.value)},
+                autoFocus: true,
                 open: function() {$(this).autocomplete('widget').css('z-index', 4);}
               });
             });
