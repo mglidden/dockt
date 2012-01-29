@@ -1,13 +1,17 @@
 <table id=docs-table class=data-table>
-  <tr>
-    <th class=idCol>ID</th>
-    <th class=leftCol>Title</th>
-    <th>Last Modified</th>
-  </tr>
-  <% if @documents %>
-    <% @documents.each do |doc| %>
-      <% @doc = doc %>
-      <%= render 'documents/document_table_row' %>
+  <thead>
+    <tr>
+      <th class=idCol>ID</th>
+      <th class=leftCol>Title</th>
+      <th>Last Modified</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @documents %>
+      <% @documents.each do |doc| %>
+        <% @doc = doc %>
+        <%= render 'documents/document_table_row' %>
+      <% end %>
     <% end %>
-  <% end %>
+  </tbody>
 </table>

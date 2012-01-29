@@ -70,7 +70,6 @@ bc.createBC = function(id, text) {
 bc.clicked = function(event) {
   var target = parseInt(event.target.id.charAt(2));
   if (target != bc.card) {
-    window.console.log(bc.constructModifiedUrl(target))
     window.history.pushState({center:target}, '', bc.constructModifiedUrl(target));
     slider.centerOn(target, true);
   }

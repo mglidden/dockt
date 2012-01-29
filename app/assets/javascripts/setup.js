@@ -8,6 +8,7 @@ $(document).ready(function() {
   p.init();
   alerts.init();
   cm.init();
+  ts.init();
 
   namespaces.bc = bc;
   namespaces.slider = slider;
@@ -16,6 +17,7 @@ $(document).ready(function() {
   namespaces.p = p;
   namespaces.alerts = alerts;
   namespaces.cm = cm;
+  namespaces.ts = ts;
 
   $('#scroll-cap').scroll(function() {$('#doc-view').scrollTop(this.scrollTop)});
 });

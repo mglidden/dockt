@@ -24,6 +24,7 @@ toolbar.addOverlay = function() {
 toolbar.addDocRowIfVisible = function(groupId, row) {
   if (slider.selectedGroup == groupId) {
     toolbar.addTableRowHelper('docs', row);
+    ts.setupDocSort();
   }
 };
 
@@ -54,6 +55,7 @@ toolbar.addTableRowHelper = function(table, text) {
   if (table == 'classes') {
     element.insertAfter($('#classes-table :first :first'));
     slider.addTableClickRow(element, slider.requestDocuments);
+    ts.setupGroupSort();
   } else if (table == 'docs') {
     element.insertAfter($('#docs-table :first :first'));
     slider.addTableClickRow(element, slider.requestComments);

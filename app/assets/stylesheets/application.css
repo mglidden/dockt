@@ -177,7 +177,7 @@ th {
   width:558px;
 }
 
-.leftCol:hover {
+td.leftCol:hover {
   text-decoration:underline;
 }
 

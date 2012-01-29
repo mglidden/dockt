@@ -35,6 +35,7 @@ slider.clearTable = function(table_name) {
 
 slider.setupDocsTable = function() {
   slider.addTableClick('#docs-table', slider.requestComments);
+  ts.setupDocSort();
 };
 
 slider.requestDocuments = function(groupId) {
