@@ -113,17 +113,32 @@ slider.popstate = function(event) {
     slider.firstPop = false;
     return;
   }
-  var activeCard = data['center'];
-  if (activeCard == 1) {
-    slider.requestDocuments(util.getDocNum());
-  } else if (activeCard == 2) {
-    slider.requestComments(util.getDocNum());
-    $.ajax({url: '/groups/'+util.getGroupNum(),
-            success: function(data) { 
-            $('#documents').html(data);
-            slider.setupDocsTable();}});
+  var activeCard = util.activeCard();
+  if (activeCard < slider.currCenter || activeCard == 0) {
+    slider.centerOn(activeCard, true);
   } else {
-    slider.centerOn(0, true);
+    setTimeout(function() {
+      if (activeCard == 1) {
+        $.ajax({url: '/groups/'+util.getGroupNum(),
+                success: function(data) { 
+                $('#documents').html(data);
+                slider.setupDocsTable();}});
+        slider.selectedGroup = util.getGroupNum();
+      } else if (activeCard == 2) {
+        $.ajax({url: '/groups/'+slider.selectedGroup+'/documents/'+util.getDocNum()+'/',
+                success: function(data) {
+                  $('#comments').html(data);
+                  slider.setupCommentsTable();}});
+        $.ajax({url: '/groups/'+util.getGroupNum(),
+                success: function(data) { 
+                $('#documents').html(data);
+                slider.setupDocsTable();}});
+        slider.selectedGroup = util.getGroupNum();
+        slider.selectedDocument = util.getDocNum();
+      }
+      slider.centerOn(activeCard, true);
+      slider.currCenter = activeCard;
+    },0);
   }
 };
 
