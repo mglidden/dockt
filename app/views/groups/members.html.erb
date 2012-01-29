@@ -1,4 +1,5 @@
 <div id=membersForm class=form>
+  <h2>Add a new member</h2>
   <%= form_for @groups, :url => {:action => 'add_member'}, :remote => true do |f| %>
     <div id=members-id>
       <%= f.text_field :id %>

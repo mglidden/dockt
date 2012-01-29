@@ -262,6 +262,10 @@ th {
   text-align:center;
 }
 
+#login {
+  text-align:center;
+}
+
 .closeButton {
   height:20px;
   position:absolute;
