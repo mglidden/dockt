@@ -7,4 +7,11 @@ class Document < ActiveRecord::Base
     Group.find(self.group_id).set_editor(user)
     save :validate => false
   end
+
+  def get_pages
+    pages_cmd = IO.popen('ls public/docs/ | grep ' + self.id.to_s + '-')
+    pages = pages_cmd.readlines.collect {|file| ['/docs/' + file[0..-2], file.split('-')[1].to_i]}
+    pages.sort_by! { |url, filenum| filenum }
+    return pages
+  end
 end

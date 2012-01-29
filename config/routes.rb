@@ -23,6 +23,8 @@ Docs::Application.routes.draw do
   match '/groups/:group_id/documents/:document_id/pdf' => 'documents#pdf'
 
   get 'users/autocomplete_users_login'
+  match '/terms' => 'application#search_list'
+  match '/search/:query' => 'application#query'
   match '/pusher/auth' => 'pusher#auth'
 
   resources :groups do

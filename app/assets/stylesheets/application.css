@@ -302,7 +302,7 @@ th {
   position:fixed;
   top:0;
   width:100%;
-  z-index:4;
+  z-index:5;
 }
 
 #formContainer {
@@ -310,7 +310,7 @@ th {
   position:absolute;
   top:0;
   width:100%;
-  z-index:4;
+  z-index:5;
 }
 
 .doc-page {
