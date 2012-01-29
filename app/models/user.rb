@@ -104,10 +104,13 @@ class User < ActiveRecord::Base
     return 'private-updates-'+self.id.to_s
   end
 
+  def viewable_groups
+    return Group.all.find_all {|g| self.can_access(g)}
+  end
+
   protected
     
   def make_activation_code
       self.activation_code = self.class.make_token
   end
-
 end

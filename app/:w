@@ -1,0 +1,13 @@
+<%= form_for([@group, @group.documents.build], :remote=>true) do |f| %>
+  <h2>Add a new document</h2>
+  <div class="field">
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.text_field :url%>
+  </div>
+  <div class="actions" onclick=toolbar.close()>
+    <%= f.submit %>
+  </div>
+<% end %>
+

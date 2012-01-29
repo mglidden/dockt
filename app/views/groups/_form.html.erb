@@ -10,10 +10,10 @@
       </ul>
     </div>
   <% end %>
+  <h2>Create a new group</h2>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :value => 'Group name', :onfocus => 'util.removeText(\'#group_name\', \'Group name\')', :onblur => 'util.addText(\'#group_name\', \'Group name\')'%>
   </div>
   <div class="actions" onclick=toolbar.close()>
     <%= f.submit %>

@@ -10,7 +10,7 @@ class GroupsController < ApplicationController
   def index
     if current_user != nil
       @groups = Group.find(:all, :order => 'updated_at').reverse()
-      viewable_groups = @groups.find_all{|group| current_user.can_access(group)}
+      viewable_groups = current_user.viewable_groups
     else
       @groups = []
       viewable_groups = []
@@ -140,7 +140,7 @@ class GroupsController < ApplicationController
     end
 
     @groups = Group.find(:all, :order => 'updated_at').reverse()
-    @visible_groups = @groups.find_all{|group| current_user.can_access(group)}
+    @visible_groups = current_user.viewable_groups
     render 'groups/delete', :layout => false
   end
 
@@ -151,7 +151,7 @@ class GroupsController < ApplicationController
     end
 
     @groups = Group.find(:all, :order => 'updated_at').reverse()
-    @visible_groups = @groups.find_all{|group| current_user.can_access(group)}
+    @visible_groups = current_user.viewable_groups
     @users = User.all
     render 'groups/members', :layout => false
   end

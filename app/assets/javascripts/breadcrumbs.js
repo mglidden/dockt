@@ -70,6 +70,7 @@ bc.createBC = function(id, text) {
 bc.clicked = function(event) {
   var target = parseInt(event.target.id.charAt(2));
   if (target != bc.card) {
+    window.console.log(bc.constructModifiedUrl(target))
     window.history.pushState({center:target}, '', bc.constructModifiedUrl(target));
     slider.centerOn(target, true);
   }
@@ -95,14 +96,12 @@ bc.moveBCDist = function(id, pixels) {
 
 bc.determineName = function(cardNum) {
   if (cardNum == 0) {
-    return 'Groups&nbsp';
+    return 'Groups';
   }
   if (cardNum == 1) {
-    return '&nbsp' + $('#group'+util.getGroupNum()).children('.leftCol').text() +
-      '&nbsp';
+    return '&nbsp' + $('#group'+util.getGroupNum()).children('.leftCol').text();
   }
   if (cardNum == 2) {
-    return '&nbsp' + $('#doc'+util.getDocNum()).children('.leftCol').text() +
-      '&nbsp';
+    return '&nbsp' + $('#doc'+util.getDocNum()).children('.leftCol').text();
   }
 };

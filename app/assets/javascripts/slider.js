@@ -1,4 +1,4 @@
-var slider = {};
+slider = {};
 slider.selectedGroup;
 slider.selectedDocument;
 slider.selectedComment;
@@ -23,7 +23,7 @@ slider.addTableClickRow = function(row, request_fn) {
       request_fn($(this).children()[0].innerText);
     }
   });
-}
+};
 
 slider.clearTable = function(table_name) {
   $.each($(table_name + ' tr'), function(index, row) {
@@ -49,15 +49,13 @@ slider.requestDocuments = function(groupId) {
 };
 
 slider.setupCommentsTable = function() {
-  //setTimeout('slider.addTableClick(\'#comments-table\', slider.moveDoc)', 3000);
   slider.addTableClick('#comments-table', slider.moveDoc);
+  cm.addMarkers();
 };
 
 slider.moveDoc = function(commentId) {
   var comment = document.getElementById('comment'+commentId);
-  var pagenum = comment.children[2].innerText;
-  var offset = comment.children[3].innerText;
-  document.getElementById('doc-pages').scrollTop = document.getElementById(pagenum).offsetTop+parseInt(offset);
+  document.getElementById('doc-pages').scrollTop = util.getCommentPos(comment);
   window.history.replaceState({center:slider.currCenter}, '', commentId);
 }
 
@@ -115,7 +113,18 @@ slider.popstate = function(event) {
     slider.firstPop = false;
     return;
   }
-  slider.centerOn(util.activeCard(), true);
+  var activeCard = util.activeCard();
+  if (activeCard == 1) {
+    slider.requestDocuments(util.getDocNum());
+  } else if (activeCard == 2) {
+    slider.requestComments(util.getDocNum());
+    $.ajax({url: '/groups/'+util.getGroupNum(),
+            success: function(data) { 
+            $('#documents').html(data);
+            slider.setupDocsTable();}});
+  } else {
+    slider.centerOn(0, true);
+  }
 };
 
 slider.setupGroupsTable = function() {
