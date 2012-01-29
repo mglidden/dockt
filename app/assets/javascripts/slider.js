@@ -113,7 +113,18 @@ slider.popstate = function(event) {
     slider.firstPop = false;
     return;
   }
-  slider.centerOn(util.activeCard(), true);
+  var activeCard = util.activeCard();
+  if (activeCard == 1) {
+    slider.requestDocuments(util.getDocNum());
+  } else if (activeCard == 2) {
+    slider.requestComments(util.getDocNum());
+    $.ajax({url: '/groups/'+util.getGroupNum(),
+            success: function(data) { 
+            $('#documents').html(data);
+            slider.setupDocsTable();}});
+  } else {
+    slider.centerOn(0, true);
+  }
 };
 
 slider.setupGroupsTable = function() {
