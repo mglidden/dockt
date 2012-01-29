@@ -113,7 +113,7 @@ slider.popstate = function(event) {
     slider.firstPop = false;
     return;
   }
-  var activeCard = util.activeCard();
+  var activeCard = data['center'];
   if (activeCard == 1) {
     slider.requestDocuments(util.getDocNum());
   } else if (activeCard == 2) {
