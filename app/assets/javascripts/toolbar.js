@@ -202,5 +202,7 @@ toolbar.logoutResp = function(resp) {
   $('#content').fadeToggle('fast', function() {
     $('#content').html(resp);
     $('#content').fadeToggle('fast')
+    window.history.replaceState({}, '', '/');
+    toolbar.rerenderUserBar();
   });
 };
