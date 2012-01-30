@@ -64,20 +64,22 @@ toolbar.addTableRowHelper = function(table, text) {
     text = text[0];
   }
   var element = $(text);
+  var sortingFunction = null;
   element.css('display', 'none');
   if (table == 'classes') {
     element.insertAfter($('#classes-table :first :first'));
     slider.addTableClickRow(element, slider.requestDocuments);
-    ts.setupGroupSort();
+    sortingFunction = ts.setupGroupSort;
   } else if (table == 'docs') {
     element.insertAfter($('#docs-table :first :first'));
     slider.addTableClickRow(element, slider.requestComments);
+    sortingFunction = ts.setupDocSort;
   } else if (table == 'comments') {
     element.insertAfter($('#comments-table :first :first'));
     slider.addTableClickRow(element, function(id) {slider.moveDoc(id, true)});
     cm.addMarker(element[0], true);
   }
-  element.fadeToggle();
+  element.fadeToggle(sortingFunction);
 };
 
 toolbar.removeTableRow = function(event, response) {
