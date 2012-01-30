@@ -5,19 +5,28 @@ toolbar.lastAction = '';
 toolbar.lastId = null;
 
 toolbar.hideAdd = function() {
-  $('#add').fadeOut(toolbar.animationTime);
+  $('#add').css('display', 'none');
 };
 
 toolbar.showAdd = function() {
-  $('#add').fadeIn(toolbar.animationTime);
+  $('#add').css('display', 'inline');
 };
 
 toolbar.setupButtons = function(card) {
-  if (util.urlHasGroups()) {
+  var title = '';
+  if (util.urlHasComments()) {
+    title = 'Create a new comment';
+    toolbar.showAdd();
+  } else if (util.urlHasDocuments()) {
+    title = 'Create a new document';
+    toolbar.showAdd();
+  } else if (util.urlHasGroups()) {
+    title = 'Create a new group';
     toolbar.showAdd();
   } else {
     toolbar.hideAdd();
   }
+  $('#add').attr('title', title);
 };
 
 toolbar.addOverlay = function() {
