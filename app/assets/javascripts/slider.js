@@ -160,6 +160,7 @@ slider.init = function() {
     slider.setupDocsTable();
     slider.centerOn(2, false);
     slider.selectedGroup = util.getGroupNum();
+    slider.selectedDocument = util.getDocNum();
     if (util.getCommentNum() != null) {
       setTimeout('slider.moveDoc('+util.getCommentNum()+')', 300);
     }

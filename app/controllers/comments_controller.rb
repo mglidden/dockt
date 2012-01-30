@@ -15,6 +15,7 @@ class CommentsController < ApplicationController
     @group.touch
     @document.touch
     @document.set_editor(current_user)
+    @curr_login = nil 
 
     data = {:namespace => 'toolbar', :method => 'addCommentIfVisible',
             :parm1 => @document.id,
@@ -75,6 +76,8 @@ class CommentsController < ApplicationController
       @groups = @groups.find_all{|g| current_user.can_access(g)}
       @pages = @document.get_pages
     end
+
+    @curr_login = current_user.login
 
     respond_to do |format|
       format.html

@@ -1,6 +1,11 @@
 <tr class=commentList id=comment<%= @comment.id %>>
   <td class=idCol><%= @comment.id %></td>
-  <td class=leftColComments><li class=comments-li>"<%= @comment.body%>" - <%=@comment.commenter %></li></td>
+  <td class=leftColComments><li class=comments-li>"<%= @comment.body%>" - 
+    <% if @curr_login == @comment.commenter %>
+      you
+    <% else %>
+      <%=@comment.commenter %></li></td>
+    <% end %>
   <% if @comment.page != nil and @comment.offset != nil %>
     <td style='display:none'><%= @comment.page %></td>
     <td style='display:none'><%= @comment.offset%></td>
