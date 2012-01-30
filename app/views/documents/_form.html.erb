@@ -1,6 +1,6 @@
 <%= form_for([@group, @group.documents.build], :remote=>true) do |f| %>
   <h2>Add a new document</h2>
-  Enter the url of a PDF, and we'll display it for you.
+  Enter the URL of a PDF, and we'll display it for you.
   <div class="field" style='margin-top:10px'>
     <%= f.text_field :url, :value => 'URL', :onfocus => "util.removeText('#document_url', 'URL')", :onblur => "util.addText('#document_url', 'URL')", :class => 'text-grey'%>
   </div>

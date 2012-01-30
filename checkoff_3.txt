@@ -1,0 +1,13 @@
+1) Login at ebola.mit.edu:3000 (username: tet13, password 1234567890), then click on one of the groups to see the documents page.
+
+2) When you click on a group, your browser requests the next page from the server, and then animates the table over.
+
+3) Since it is faster than a full-page refresh, it allows the user to get to the content quickly and not be distracted by long load times.
+
+4) We sacrificed ease of implementation for lower load times.
+
+5) We are using jQuery to make the ajax request and do the resulting animation. On the backend, Rails thinks it's responding to a standard query.
+
+6) When you select a group, an ajax call is made to a special url. The server fills out a few templates and sends them back to the user (it knows not to render the full layout / header as well). A handler function enters the html into the new page, and animates it into view.
+
+7) Chrome

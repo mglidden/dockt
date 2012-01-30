@@ -88,6 +88,9 @@ html, body {
 
 .comments-li {
   cursor:pointer;
+  padding-bottom:2px;
+  padding-left:10px;
+  padding-top:2px;
   width:200px;
 }
 
@@ -181,7 +184,6 @@ th {
 }
 
 .leftColComments {
-  padding-left:10px;
   width:100%;
 }
 
@@ -431,6 +433,9 @@ td.leftCol:hover {
 .comment-selected {
   border-style: solid;
   border-width: 2px;
+  padding-bottom:0;
+  padding-left:8px;
+  padding-top:0;
 }
 
 .nickname {
