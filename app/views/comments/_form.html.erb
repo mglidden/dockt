@@ -9,8 +9,8 @@
   <div class='field' id=comment-offset style='display:none'>
     <%= f.text_field :offset%>
   </div>
-  <div class="actions" onclick=toolbar.close()>
-    <%= f.submit %>
+  <div class="actions">
+    <%= f.submit :onclick => 'toolbar.close()' %>
   </div>
 <% end %>
 

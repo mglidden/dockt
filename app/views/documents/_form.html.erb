@@ -7,8 +7,8 @@
   <div class="field">
     <%= f.text_field :title, :value => 'Title', :onfocus => 'util.removeText(\'#document_title\', \'Title\')', :onblur => 'util.addText(\'#document_title\', \'Title\')', :class => 'text-grey'%>
   </div>
-  <div class="actions" onclick=toolbar.close()>
-    <%= f.submit %>
+  <div class="actions">
+    <%= f.submit :onclick => 'toolbar.close()' %>
   </div>
 <% end %>
 

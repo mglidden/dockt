@@ -15,7 +15,7 @@
   <div class="field">
     <%= f.text_field :name, :value => 'Group name', :onfocus => 'util.removeText(\'#group_name\', \'Group name\')', :onblur => 'util.addText(\'#group_name\', \'Group name\')', :class => 'text-grey'%>
   </div>
-  <div class="actions" onclick=toolbar.close()>
-    <%= f.submit %>
+  <div class="actions">
+    <%= f.submit :onclick => 'toolbar.close()' %>
   </div>
 <% end %>

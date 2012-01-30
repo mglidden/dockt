@@ -11,8 +11,8 @@
   <p><%= label_tag 'password' %><br/>
   <%= password_field_tag 'password', nil, :style => 'text-align:center' %></p>
 
-  <div class='actions' onclick=toolbar.close()>
-    <p><%= submit_tag 'Log in' %></p>
+  <div class='actions'>
+    <p><%= submit_tag 'Log in', :onclick => 'toolbar.close()' %></p>
   </div>
   <% end -%>
   <img src='/assets/close.png' class=closeButton id=closeButton onclick='toolbar.close()'></img>
