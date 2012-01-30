@@ -18,6 +18,10 @@ class GroupsController < ApplicationController
       return
     end
 
+    if viewable_groups.length == 0
+      @group_alert = 'You have not created any groups yet. To begin, click on the plus icon to the right.'
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: viewable_groups}
@@ -36,6 +40,10 @@ class GroupsController < ApplicationController
       return
     elsif !current_user.can_access(@group)
       return
+    end
+
+    if @documents.length == 0
+      @doc_alert = 'You have not added any documents yet. To begin, click on the plus icon to the right.'
     end
 
     render :layout => false

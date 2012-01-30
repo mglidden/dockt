@@ -1,3 +1,9 @@
+<% if @group_alert != nil %>
+  <div class=error-box>
+    <%= @group_alert %>
+    <img src=/assets/close.png class='closeButton error-close' onclick='alerts.close()'>
+  </div>
+<% end %>
 <table id=classes-table class=data-table>
   <thead>
     <tr class='table-header'>

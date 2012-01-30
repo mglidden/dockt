@@ -94,6 +94,10 @@ class DocumentsController < ApplicationController
 
     @documents = @group.documents.sort_by {|doc| doc.updated_at}.reverse().find_all{|d| d.visible or d.visible == nil}
     @groups = @groups.find_all{|g| current_user.can_access(g)}
+
+    if @documents.length == 0
+      @doc_alert = 'You have not added any documents yet. To begin, click on the plus icon to the right.'
+    end
     
     respond_to do |format|
       format.html

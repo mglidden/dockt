@@ -1,3 +1,9 @@
+<% if @doc_alert != nil %>
+  <div class=error-box>
+    <%= @doc_alert %>
+    <img src=/assets/close.png class='closeButton error-close' onclick='alerts.close()'>
+  </div>
+<% end %>
 <table id=docs-table class=data-table>
   <thead>
     <tr>
