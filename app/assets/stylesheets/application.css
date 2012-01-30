@@ -418,6 +418,7 @@ td.leftCol:hover {
 }
 
 .commentList {
+  border-width:2px;
   color:#a6a6a6;
   font-size:14pt;
 }
@@ -425,6 +426,11 @@ td.leftCol:hover {
 .commentList:hover {
   background: #777777;
   color:black;
+}
+
+.comment-selected {
+  border-style: solid;
+  border-width: 2px;
 }
 
 .nickname {
@@ -485,10 +491,16 @@ td.leftCol:hover {
 
 .comment-marker {
   background:#c7ba04;
+  cursor:pointer;
   height:50px;
   left:95%;
+  opacity:0.55;
   position:absolute;
-  width:5px;
+  width:6px;
+}
+
+.comment-marker-selected {
+  opacity: 1.0;
 }
 
 .text-grey {

@@ -57,11 +57,11 @@ slider.setupCommentsTable = function() {
 slider.moveDoc = function(commentId, animate) {
   var comment = document.getElementById('comment'+commentId);
   if (animate) {
-    window.console.log('here');
     $('#doc-pages').animate({scrollTop:util.getCommentPos(comment)-350}, 'fast');
   } else {
     document.getElementById('doc-pages').scrollTop = util.getCommentPos(comment)-350;
   }
+  cm.markerSelected(null, comment.id + '-marker', comment.id);
   window.history.replaceState({center:slider.currCenter}, '', commentId);
 }
 
@@ -163,6 +163,7 @@ slider.init = function() {
     slider.selectedDocument = util.getDocNum();
     if (util.getCommentNum() != null) {
       setTimeout('slider.moveDoc('+util.getCommentNum()+')', 300);
+      cm.markerSelected(null, 'comment'+util.getCommentNum()+'-marker', 'comment'+util.getCommentNum());
     }
   } else if (window.location.pathname.indexOf('documents') != -1) {
     slider.setupDocsTable();
