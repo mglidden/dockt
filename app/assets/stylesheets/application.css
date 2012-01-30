@@ -467,7 +467,7 @@ td.leftCol:hover {
 }
 
 #log-in-link, #sign-up-link, #logout-link {
-  cursor:auto;
+  cursor:pointer;
   text-decoration: underline;
 }
 
