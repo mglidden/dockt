@@ -296,7 +296,7 @@ td.leftCol:hover {
   text-align:center;
 }
 
-#login {
+#members-login {
   text-align:center;
 }
 
@@ -443,9 +443,14 @@ td.leftCol:hover {
   font-size:13pt;
 }
 
-#log-in-link:hover, #sign-up-link:hover, #profile-link:hover {
+#log-in-link:hover, #sign-up-link:hover, #logout-link:hover {
   background:transparent;
   color:white;
+}
+
+#profile-link:hover {
+  background:transparent;
+  color:#a6a6a6;
 }
 
 #delete-id {
