@@ -4,7 +4,7 @@
     <div id=members-id>
       <%= f.text_field :id %>
     </div>
-    <%= text_field_tag 'login', '', :autocomplete => users_autocomplete_users_login_path, :id => 'members-login' %>
+    <%= text_field_tag 'login', '', :id => 'members-login' %>
     <div class ='actions'>
       <input name='commit' type='submit' value='Add Member' onclick='toolbar.close()'>
     </div>

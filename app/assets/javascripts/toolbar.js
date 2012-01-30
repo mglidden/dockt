@@ -115,6 +115,9 @@ toolbar.open = function(data, pagenum, offset) {
     $('#delete-id').children(0).val(parseInt(toolbar.lastId));
   } else if (toolbar.lastAction == 'members') {
     $('#members-id').children(0).val(parseInt(toolbar.lastId));
+    $('#members-login').autocomplete({
+      source: '/users/index',
+    });
   } else if (toolbar.lastAction == 'login') {
     $('#loginForm').bind('ajax:complete', toolbar.loginResp);
   } else if (toolbar.lastAction == 'signup') {

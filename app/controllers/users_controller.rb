@@ -37,4 +37,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    puts params
+    query = params[:term]
+
+    render :json => User.all.find_all{|u| u.login.index(query) != nil}.collect {|u| u.login}
+  end
 end

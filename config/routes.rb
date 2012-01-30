@@ -27,6 +27,7 @@ Docs::Application.routes.draw do
   match '/groups/:id/undo' => 'groups#undo'
 
   get 'users/autocomplete_users_login'
+  match '/users/index?term=:term' => 'users#show'
   match '/terms' => 'application#search_list'
   match '/search/:query' => 'application#query'
   match '/pusher/auth' => 'pusher#auth'
