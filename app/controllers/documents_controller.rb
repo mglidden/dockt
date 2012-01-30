@@ -3,7 +3,7 @@ class DocumentsController < ApplicationController
     @group = Group.find(params[:group_id])
 
     if current_user == nil
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     elsif !current_user.can_access(@group)
       return
@@ -47,7 +47,7 @@ class DocumentsController < ApplicationController
     @group = Group.find(params[:group_id])
 
     if current_user == nil
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     elsif !current_user.can_access(@group)
       return
@@ -62,7 +62,7 @@ class DocumentsController < ApplicationController
     @pages =[]
 
     if current_user == nil
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     elsif !current_user.can_access(@group)
       return
@@ -86,7 +86,7 @@ class DocumentsController < ApplicationController
     @group = Group.find(params[:group_id])
 
     if current_user == nil
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     elsif !current_user.can_access(@group)
       return
@@ -109,7 +109,7 @@ class DocumentsController < ApplicationController
     @group = Group.find(params[:group_id])
 
     if current_user == nil
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     elsif !current_user.can_access(@group)
       return
@@ -142,7 +142,7 @@ class DocumentsController < ApplicationController
     @group = Group.find(params[:group_id])
 
     if current_user == nil
-      redirect_to :controller => :sessions, :action => new
+      redirect_to :controller => :home, :action => :index
       return
     elsif !current_user.can_access(@group)
       return
@@ -168,7 +168,7 @@ class DocumentsController < ApplicationController
     @group = Group.find(params[:group_id])
 
     if current_user == nil
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     elsif !current_user.can_access(@group)
       return
@@ -182,7 +182,7 @@ class DocumentsController < ApplicationController
     @group = Group.find(params[:group_id])
 
     if current_user == nil
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     elsif !current_user.can_access(@group)
       return

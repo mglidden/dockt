@@ -14,7 +14,7 @@ class GroupsController < ApplicationController
     else
       @groups = []
       viewable_groups = []
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     end
 
@@ -41,7 +41,7 @@ class GroupsController < ApplicationController
     @documents = @group.documents.sort_by {|doc| doc.updated_at }.reverse().find_all {|d| d.visible or d.visible == nil}
 
     if current_user == nil
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     elsif !current_user.can_access(@group)
       return
@@ -60,7 +60,7 @@ class GroupsController < ApplicationController
     @group = Group.new
 
     if current_user == nil
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     end
 
@@ -76,7 +76,7 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     if current_user == nil
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     end
 
@@ -101,7 +101,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
 
     if current_user == nil
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     elsif !current_user.can_access(@group)
       return
@@ -124,7 +124,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:group][:id])
 
     if current_user == nil
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     elsif !current_user.can_access(@group)
       return
@@ -153,7 +153,7 @@ class GroupsController < ApplicationController
 
   def delete
     if current_user == nil
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     end
 
@@ -164,7 +164,7 @@ class GroupsController < ApplicationController
 
   def members
     if current_user == nil
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     end
 
@@ -176,7 +176,7 @@ class GroupsController < ApplicationController
 
   def add_member
     if current_user == nil
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     elsif !current_user.can_access_id(params[:group][:id])
       return
@@ -208,7 +208,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
 
     if current_user == nil
-      redirect_to :controller => :sessions, :action => :new
+      redirect_to :controller => :home, :action => :index
       return
     elsif !current_user.can_access(@group)
       return
