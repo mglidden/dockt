@@ -204,5 +204,7 @@ toolbar.logoutResp = function(resp) {
     $('#content').fadeToggle('fast')
     window.history.replaceState({}, '', '/');
     toolbar.rerenderUserBar();
+    namespaces.init();
+    $(document.getElementById('breadcrumbs').children[0]).html('');
   });
 };

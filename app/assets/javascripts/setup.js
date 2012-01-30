@@ -19,6 +19,8 @@ namespaces.init = function() {
   namespaces.cm = cm;
   namespaces.ts = ts;
 
+  $('body').keyup(function(event) { if (event.keyCode == 27) { toolbar.close() }});
+
   $('#scroll-cap').scroll(function() {$('#doc-view').scrollTop(this.scrollTop)});
 };
 
