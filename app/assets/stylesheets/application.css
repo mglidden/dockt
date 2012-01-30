@@ -428,12 +428,33 @@ td.leftCol:hover {
 #user-bar-greeting {
   color:#a6a6a6;
   display:inline;
+  float:left;
+  font-size:13pt;
 }
 
 #user-bar-action {
   color:#a6a6a6;
   display:inline;
   float:right;
+  width:100%;
+}
+
+#log-in-link, #sign-up-link, #profile-link, #logout-link {
+  color:#a6a6a6;
+  font-size:13pt;
+}
+
+#log-in-link {
+  float:left;
+}
+
+#sign-up-link {
+  float:right;
+}
+
+#log-in-link:hover, #sign-up-link:hover, #profile-link:hover {
+  background:transparent;
+  color:white;
 }
 
 #delete-id {
