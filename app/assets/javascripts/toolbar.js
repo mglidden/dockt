@@ -193,3 +193,14 @@ toolbar.signup = function() {
 toolbar.signupResp = function(event, resp) {
   alerts.showWarning(resp.responseText);
 }
+
+toolbar.logout = function() {
+  $.ajax({url: '/logout', success: toolbar.logoutResp});
+};
+
+toolbar.logoutResp = function(resp) {
+  $('#content').fadeToggle('fast', function() {
+    $('#content').html(resp);
+    $('#content').fadeToggle('fast')
+  });
+};

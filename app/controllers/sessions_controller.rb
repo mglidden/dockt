@@ -43,7 +43,8 @@ class SessionsController < ApplicationController
 
   def destroy
     logout_killing_session!
-    redirect_back_or_default('/', :notice => "You have been logged out.")
+    render :partial => 'home/home.html.erb', :layout => false
+    #redirect_back_or_default('/', :notice => "You have been logged out.")
   end
 
   def bar
