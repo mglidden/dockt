@@ -109,7 +109,7 @@ slider.hideOtherCards = function() {
   }
   if (slider.currCenter < 1) {
     // hide document table
-    $('#docs-table :first').html($('#docs-table :first :first').html())
+    $('#docs-table').html($('#docs-table :first').html())
   }
 };
 
