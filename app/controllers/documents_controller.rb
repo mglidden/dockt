@@ -96,7 +96,7 @@ class DocumentsController < ApplicationController
     @groups = @groups.find_all{|g| current_user.can_access(g)}
 
     if @documents.length == 0
-      @doc_alert = 'You have not added any documents yet. To begin, click on the plus icon to the right.'
+      @doc_alert = 'You have not added any documents yet. To begin, click on the plus icon to the right and give us a link to a PDF.'
     end
     
     respond_to do |format|

@@ -62,11 +62,13 @@ util.getCommentPos = function(comment) {
 util.removeText = function(id, defaultText) {
   if ($(id).val() == defaultText) {
     $(id).val('');
+    $(id).removeClass('text-grey');
   }
 };
 
 util.addText = function(id, defaultText) {
   if ($(id).val() == '') {
     $(id).val(defaultText);
+    $(id).addClass('text-grey');
   }
 };

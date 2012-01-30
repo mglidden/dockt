@@ -490,3 +490,7 @@ td.leftCol:hover {
   position:absolute;
   width:5px;
 }
+
+.text-grey {
+  color: #666;
+}
