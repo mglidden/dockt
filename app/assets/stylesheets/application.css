@@ -223,8 +223,8 @@ td.leftCol:hover {
   cursor:pointer;
 }
 
-#delete:hover {
-  background: url('/assets/trash.png') no-repeat center center, #333333;
+#inline-delete:hover {
+  background: url('/assets/trash_inv.png') no-repeat center center;
 }
 
 #members {
@@ -234,13 +234,17 @@ td.leftCol:hover {
   padding-right:20px;
 }
 
-#members:hover {
-  background: url('/assets/members.png') no-repeat center center, #333333;
+#inline-members:hover {
+  background: url('/assets/members_inv.png') no-repeat center center;
 }
 
 #add {
   background: url('/assets/add.png') no-repeat center center, -webkit-linear-gradient(top, #c7c7c7, #808080);
   cursor:pointer;
+}
+
+#add:hover {
+  background: url('/assets/add_inv.png') no-repeat center center, #333333;
 }
 
 #roundedbox {
@@ -269,9 +273,6 @@ td.leftCol:hover {
   width: 4px;
   height: 150px;
   display: inline;
-}
-#add:hover {
-  background: url('/assets/add.png') no-repeat center center, #333333;
 }
 
 .form {
