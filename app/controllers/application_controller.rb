@@ -11,11 +11,15 @@ class ApplicationController < ActionController::Base
     search_terms = []
 
     @groups.each do |group|
-      search_terms.push group.name
-      group.documents.each do |doc|
-        search_terms.push group.name + ' > ' + doc.title
-        doc.comments.each do |comment|
-          search_terms.push group.name + ' > ' + doc.title + ' > ' + comment.body
+      if group.visible or group.visible == nil
+        search_terms.push group.name
+        group.documents.each do |doc|
+          if doc.visible or doc.visible == nil
+            search_terms.push group.name + ' > ' + doc.title
+            doc.comments.each do |comment|
+              search_terms.push group.name + ' > ' + doc.title + ' > ' + comment.body
+            end
+          end
         end
       end
     end
