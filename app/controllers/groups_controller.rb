@@ -27,9 +27,6 @@ class GroupsController < ApplicationController
       use_layout = false
     end
 
-    puts use_layout
-    puts params
-
     respond_to do |format|
       format.html { render :layout => use_layout }# index.html.erb
       format.json { render json: viewable_groups}

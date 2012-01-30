@@ -466,7 +466,7 @@ td.leftCol:hover {
   color:white;
 }
 
-#log-in-link {
+#log-in-link, #sign-up-link {
   text-decoration: underline;
 }
 
@@ -486,12 +486,17 @@ td.leftCol:hover {
 .error-box {
   background:#c7ba04;
   -webkit-border-radius:5px;
-  height:35px;
+  min-height:35px;
   margin-bottom:10px;
-  padding-top:14px;
+  padding-bottom:6px;
+  padding-top:20px;
   position:relative;
   text-align:center;
   width:100%;
+}
+
+.error-box li {
+  display:block;
 }
 
 .error-close {

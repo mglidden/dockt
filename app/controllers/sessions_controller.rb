@@ -10,7 +10,13 @@ class SessionsController < ApplicationController
 
   def create
     logout_keeping_session!
-    user = User.authenticate(params[:login], params[:password])
+    if params[:cp] != nil
+      user = User.find_by_crypted_password(params[:cp])
+    else
+      user = User.authenticate(params[:login], params[:password])
+    end
+    puts user
+    puts params
     if user
       # Protects against session fixation attacks, causes request forgery
       # protection if user resubmits an earlier form using back
@@ -20,7 +26,13 @@ class SessionsController < ApplicationController
       #new_cookie_flag = (params[:remember_me] == "1")
       new_cookie_flag = true
       handle_remember_cookie! new_cookie_flag
-      redirect_to :controller => :groups, :action => :index, :layout => 'false'
+
+      use_layout = 'false'
+      if params[:layout] == 'true'
+        use_layout = 'true'
+      end
+
+      redirect_to :controller => :groups, :action => :index, :layout => use_layout
     else
       note_failed_signin
       @login       = params[:login]

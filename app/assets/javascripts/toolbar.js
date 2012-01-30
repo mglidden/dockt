@@ -117,6 +117,8 @@ toolbar.open = function(data, pagenum, offset) {
     $('#members-id').children(0).val(parseInt(toolbar.lastId));
   } else if (toolbar.lastAction == 'login') {
     $('#loginForm').bind('ajax:complete', toolbar.loginResp);
+  } else if (toolbar.lastAction == 'signup') {
+    $('#signupForm').bind('ajax:complete', toolbar.signupResp);
   }
   return false;
 }
@@ -181,4 +183,13 @@ toolbar.rerenderUserBar = function() {
   $.ajax({url: '/user_bar', success: function(data) {
     $('#user-info').html(data);}});
 }
-  
+
+toolbar.signup = function() {
+  $.ajax({url: '/signup', success: toolbar.open});
+  toolbar.lastAction = 'signup';
+  window.event.stopPropagation();
+}
+
+toolbar.signupResp = function(event, resp) {
+  alerts.showWarning(resp.responseText);
+}

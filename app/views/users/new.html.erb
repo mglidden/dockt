@@ -1,19 +1,22 @@
-<h1>Sign up as a new user</h1>
-<% @user.password = @user.password_confirmation = nil %>
+<div id=signupForm class=form>
+  <h1>Sign up as a new user</h1>
+  <% @user.password = @user.password_confirmation = nil %>
 
-<%= error_messages_for :user %>
-<%= form_for :user, :url => users_path do |f| -%>
-<p><%= label_tag 'login' %><br/>
-<%= f.text_field :login %></p>
+  <%= error_messages_for :user %>
+  <%= form_for :user, :url => users_path, :remote => true do |f| -%>
+  <%= f.text_field :login, :value => 'Username', :onfocus => 'util.removeText(\'#user_login\', \'Username\')', :onblur => 'util.addText(\'#user_login\', \'Username\')', :class => 'text-grey', :style => 'text-align:center' %></p>
 
-<p><%= label_tag 'email' %><br/>
-<%= f.text_field :email %></p>
+  <%= f.text_field :email, :value => 'Email', :onfocus => 'util.removeText(\'#user_email\', \'Email\')', :onblur => 'util.addText(\'#user_email\', \'Email\')', :class => 'text-grey', :style => 'text-align:center' %></p>
 
-<p><%= label_tag 'password' %><br/>
-<%= f.password_field :password %></p>
+  <p><%= label_tag 'password' %><br/>
+  <%= f.password_field :password, :style => 'text-align:center'%></p>
 
-<p><%= label_tag 'password_confirmation', 'Confirm Password' %><br/>
-<%= f.password_field :password_confirmation %></p>
+  <p><%= label_tag 'password_confirmation', 'Confirm Password' %><br/>
+  <%= f.password_field :password_confirmation, :style => 'text-align:center'%></p>
 
-<p><%= submit_tag 'Sign up' %></p>
-<% end -%>
+  <div class='actions' onclick=toolbar.close()>
+    <p><%= submit_tag 'Sign up' %></p>
+  </div>
+  <% end -%>
+  <img src='/assets/close.png' id=closeButton class=closeButton onclick=toolbar.close()></img>
+</div>

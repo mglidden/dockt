@@ -1,6 +1,8 @@
 Docs::Application.routes.draw do
   resources :users
 
+  match 'session' => 'sessions#create'
+
   resource :session, :only => [:new, :create, :destroy]
 
   match 'signup' => 'users#new', :as => :signup
