@@ -1,7 +1,6 @@
-<br/>
 <% if logged_in? -%>
   <div id="user-bar-action"  ><a id=profile-link><%= current_user.login %></a> / <%= link_to "Log out", logout_path, { :id => 'logout-link', :title => "Log out" }    %></div>
 <% else -%>
-  <div id="user-bar-action"  ><%= link_to "Log in",  login_path,  { :id => 'log-in-link', :title => "Log in" } %> / 
+  <div id="user-bar-action"  ><a id='log-in-link' title='Log in' onclick='toolbar.login()'>Log In</a> / 
     <%= link_to "Sign up", signup_path, { :id => 'sign-up-link', :title => "Create an account" } %></div>
 <% end -%>

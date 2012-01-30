@@ -115,6 +115,8 @@ toolbar.open = function(data, pagenum, offset) {
     $('#delete-id').children(0).val(parseInt(toolbar.lastId));
   } else if (toolbar.lastAction == 'members') {
     $('#members-id').children(0).val(parseInt(toolbar.lastId));
+  } else if (toolbar.lastAction == 'login') {
+    $('#loginForm').bind('ajax:complete', toolbar.loginResp);
   }
   return false;
 }
@@ -158,3 +160,25 @@ toolbar.members = function() {
   toolbar.lastAction = 'members';
   window.event.stopPropagation();
 }
+
+toolbar.login = function() {
+  $.ajax({url: '/login', success:toolbar.open});
+  toolbar.lastAction = 'login';
+  window.event.stopPropagation();
+};
+
+toolbar.loginResp = function(event, resp) {
+  if (resp.responseText == 'failed') {
+    alerts.showWarning('Your username or password was incorrect. Please try again.');
+  } else {
+    $('#content').fadeToggle('fast', function() { $('#content').html(resp.responseText); namespaces.init(); $('#content').fadeToggle('fast')});
+    toolbar.rerenderUserBar();
+    window.history.replaceState({center:0}, '', '/groups/');
+  }
+}
+
+toolbar.rerenderUserBar = function() {
+  $.ajax({url: '/user_bar', success: function(data) {
+    $('#user-info').html(data);}});
+}
+  

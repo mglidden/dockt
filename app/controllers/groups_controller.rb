@@ -22,8 +22,16 @@ class GroupsController < ApplicationController
       @group_alert = 'You have not created any groups yet. To begin, click on the plus icon to the right.'
     end
 
+    use_layout = true
+    if params[:layout] == 'false'
+      use_layout = false
+    end
+
+    puts use_layout
+    puts params
+
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :layout => use_layout }# index.html.erb
       format.json { render json: viewable_groups}
     end
   end

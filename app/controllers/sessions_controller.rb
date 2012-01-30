@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
 
   # render new.rhtml
   def new
+    render :layout => false
   end
 
   def create
@@ -19,18 +20,22 @@ class SessionsController < ApplicationController
       #new_cookie_flag = (params[:remember_me] == "1")
       new_cookie_flag = true
       handle_remember_cookie! new_cookie_flag
-      redirect_to :controller => :groups, :action => :index
+      redirect_to :controller => :groups, :action => :index, :layout => 'false'
     else
       note_failed_signin
       @login       = params[:login]
       @remember_me = params[:remember_me]
-      render :action => 'new'
+      render :inline => 'failed'
     end
   end
 
   def destroy
     logout_killing_session!
     redirect_back_or_default('/', :notice => "You have been logged out.")
+  end
+
+  def bar
+    render :partial => 'users/user_bar'
   end
 
 protected

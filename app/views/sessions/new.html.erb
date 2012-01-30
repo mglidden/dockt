@@ -1,15 +1,19 @@
-<h1>Log In</h1>
+<div id=loginForm class=form>
+  <h1>Log In</h1>
 
-<h2 style='color:red'>
-  <%= flash[:error] %>
-</h2>
+  <h2 style='color:red'>
+    <%= flash[:error] %>
+  </h2>
 
-<%= form_tag session_path do -%>
-<p><%= label_tag 'login' %><br />
-<%= text_field_tag 'login', @login %></p>
+  <%= form_tag session_path, :remote => true do -%>
+    <%= text_field_tag 'login', @login, :value => 'Username', :onfocus => 'util.removeText(\'#login\', \'Username\')', :onblur => 'util.addText(\'#login\', \'Username\')', :class => 'text-grey', :style => 'text-align:center' %></p>
 
-<p><%= label_tag 'password' %><br/>
-<%= password_field_tag 'password', nil %></p>
+  <p><%= label_tag 'password' %><br/>
+  <%= password_field_tag 'password', nil %></p>
 
-<p><%= submit_tag 'Log in' %></p>
-<% end -%>
+  <div class='actions' onclick=toolbar.close()>
+    <p><%= submit_tag 'Log in' %></p>
+  </div>
+  <% end -%>
+  <img src='/assets/close.png' class=closeButton id=closeButton onclick='toolbar.close()'></img>
+</div>

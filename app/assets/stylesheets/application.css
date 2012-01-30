@@ -431,6 +431,7 @@ td.leftCol:hover {
 }
 
 .comment-selected {
+  border-color:#c7ba04;
   border-style: solid;
   border-width: 2px;
   padding-bottom:0;
@@ -463,6 +464,10 @@ td.leftCol:hover {
 #log-in-link:hover, #sign-up-link:hover, #logout-link:hover {
   background:transparent;
   color:white;
+}
+
+#log-in-link {
+  text-decoration: underline;
 }
 
 #profile-link:hover {

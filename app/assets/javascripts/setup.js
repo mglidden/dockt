@@ -1,6 +1,6 @@
 namespaces = {};
 
-$(document).ready(function() {
+namespaces.init = function() {
   bc.init();
   slider.init();
   toolbar.init();
@@ -20,4 +20,6 @@ $(document).ready(function() {
   namespaces.ts = ts;
 
   $('#scroll-cap').scroll(function() {$('#doc-view').scrollTop(this.scrollTop)});
-});
+};
+
+$(document).ready(namespaces.init);
