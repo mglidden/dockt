@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
     if current_user != nil
-      @groups = Group.find(:all, :order => 'updated_at').reverse()
+      @groups = Group.find(:all, :order => 'updated_at').reverse().find_all{|g| g.visible or g.visible == nil}
       viewable_groups = current_user.viewable_groups
     else
       @groups = []
@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @groups = Group.all
-    @documents = @group.documents.sort_by {|doc| doc.updated_at }.reverse().find_all {|d| d.visible}
+    @documents = @group.documents.sort_by {|doc| doc.updated_at }.reverse().find_all {|d| d.visible or d.visible == nil}
 
     if current_user == nil
       redirect_to :controller => :sessions, :action => :new
@@ -125,7 +125,12 @@ class GroupsController < ApplicationController
       end
     end
 
-    @group.destroy
+    @group.visible = false
+    @group.save :validate => false
+
+    data = {:namespace => 'alerts', :method => 'showWarning',
+            :parm1 => 'You have deleted the group \'' + @group.name + '.\' <a onclick="$.ajax({url:\'/groups/' + @group.id.to_s + '/undo\'}); alerts.close()">[undo]</a>'}
+    current_user.send_message(data)
 
     respond_to do |format|
       format.html { render :inline => "#group" + @group.id.to_s }
@@ -184,5 +189,29 @@ class GroupsController < ApplicationController
     respond_to do |format|
       format.json { head :ok }
     end
+  end
+
+  def undo
+    @group = Group.find(params[:id])
+
+    if current_user == nil
+      redirect_to :controller => :sessions, :action => :new
+      return
+    elsif !current_user.can_access(@group)
+      return
+    end
+
+    @group.visible = true
+    @group.save :validate => false
+
+    @group.users_with_access.each do |u|
+      @display_user = u
+      data = {:namespace => 'toolbar', :method => 'addTableRowHelper',
+        :parm1 => 'classes',
+        :parm2 => render_to_string(:partial => 'groups/group_table_row')}
+      u.send_message(data)
+    end
+
+    render :inline => ''
   end
 end

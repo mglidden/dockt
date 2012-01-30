@@ -92,7 +92,7 @@ class DocumentsController < ApplicationController
       return
     end
 
-    @documents = @group.documents.sort_by {|doc| doc.updated_at}.reverse().find_all{|d| d.visible}
+    @documents = @group.documents.sort_by {|doc| doc.updated_at}.reverse().find_all{|d| d.visible or d.visible == nil}
     @groups = @groups.find_all{|g| current_user.can_access(g)}
     
     respond_to do |format|
@@ -121,7 +121,6 @@ class DocumentsController < ApplicationController
       end
     end
 
-   # @document.destroy
     @document.visible = false
     @document.save :validate => false
 
