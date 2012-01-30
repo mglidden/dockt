@@ -13,7 +13,11 @@ toolbar.showAdd = function() {
 };
 
 toolbar.setupButtons = function(card) {
-  toolbar.showAdd();
+  if (util.urlHasGroups()) {
+    toolbar.showAdd();
+  } else {
+    toolbar.hideAdd();
+  }
 };
 
 toolbar.addOverlay = function() {
@@ -105,6 +109,7 @@ toolbar.open = function(data, pagenum, offset) {
 }
 
 toolbar.init = function() {
+  toolbar.setupButtons();
   $('#doc-pages').bind('click', toolbar.add);
 }
 
