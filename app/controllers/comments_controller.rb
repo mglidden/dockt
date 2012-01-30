@@ -26,6 +26,7 @@ class CommentsController < ApplicationController
       end
     }
 
+    @curr_login = current_user.login
     respond_to do |format|
       format.html { render 'comments/_comment_table_row.html.erb', :layout => false}
     end
