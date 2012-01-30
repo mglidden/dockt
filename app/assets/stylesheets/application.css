@@ -54,6 +54,7 @@ html, body {
   -webkit-border-bottom-right-radius:16px 25px;
   -webkit-border-top-right-radius:16px 25px;
   -webkit-box-shadow:2px 0px 2px black;
+  cursor:pointer;
   display:inline-block;
   height:100%;
 }
@@ -86,6 +87,7 @@ html, body {
 }
 
 .comments-li {
+  cursor:pointer;
   width:200px;
 }
 
@@ -161,6 +163,7 @@ th {
   border-top-style:solid;
   border-top-color:#919599;
   border-width:1px;
+  cursor:pointer;
   height:30px;
 }
 
@@ -217,6 +220,7 @@ td.leftCol:hover {
 
 #delete {
   background: url('/assets/trash.png') no-repeat center center, -webkit-linear-gradient(top, #c7c7c7, #808080);
+  cursor:pointer;
 }
 
 #delete:hover {
@@ -225,6 +229,7 @@ td.leftCol:hover {
 
 #members {
   background: url('/assets/members.png') no-repeat center center, -webkit-linear-gradient(top, #c7c7c7, #808080);
+  cursor:pointer;
   padding-left:20px;
   padding-right:20px;
 }
@@ -235,6 +240,7 @@ td.leftCol:hover {
 
 #add {
   background: url('/assets/add.png') no-repeat center center, -webkit-linear-gradient(top, #c7c7c7, #808080);
+  cursor:pointer;
 }
 
 #roundedbox {
