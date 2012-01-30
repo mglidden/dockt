@@ -9,7 +9,7 @@
     <%= text_field_tag 'login', @login, :value => 'Username', :onfocus => 'util.removeText(\'#login\', \'Username\')', :onblur => 'util.addText(\'#login\', \'Username\')', :class => 'text-grey', :style => 'text-align:center' %></p>
 
   <p><%= label_tag 'password' %><br/>
-  <%= password_field_tag 'password', nil %></p>
+  <%= password_field_tag 'password', nil, :style => 'text-align:center' %></p>
 
   <div class='actions' onclick=toolbar.close()>
     <p><%= submit_tag 'Log in' %></p>
