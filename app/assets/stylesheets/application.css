@@ -292,7 +292,7 @@ td.leftCol:hover {
 
 #main-small-2 {
   background: url('/assets/docktmember.png'), #306199;
-  -webkit-box-shadow: 0 5px 7px 0px #306199 inset;
+  -webkit-box-shadow: 5px 5px 7px 0px #306199 inset, -5px 0 7px 0px #306199 inset, 0 -72px 5px 0px #306199 inset;
 }
 
 #main-small-3 {
