@@ -296,6 +296,8 @@ td.leftCol:hover {
 }
 
 #main-small-3 {
+  background: url('/assets/search_homepage.png'), #306199;
+  -webkit-box-shadow: 5px -5px 5px 0px #306199 inset, -5px 0 5px 0 #306199 inset;
   margin-right:0;
 }
 
@@ -319,6 +321,11 @@ td.leftCol:hover {
 
 #small-2-content {
   margin-top:34%;
+  text-align:center;
+}
+
+#small-3-content {
+  margin-top:5%;
   text-align:center;
 }
 
