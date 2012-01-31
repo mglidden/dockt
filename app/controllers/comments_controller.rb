@@ -62,8 +62,8 @@ class CommentsController < ApplicationController
       return
     end
 
-    @groups = Group.find(:all, :order => 'updated_at').reverse()
-    @documents = @group.documents.sort_by {|doc| doc.updated_at}.reverse
+    @groups = Group.find(:all, :order => 'updated_at').reverse().find_all{|g| g.visible or g.visible == nil}
+    @documents = @group.documents.sort_by {|doc| doc.updated_at}.reverse().find_all{|d| d.visible or d.visible == nil}
     @document = Document.find(params[:document_id])
     @pages = []
 

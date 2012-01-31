@@ -88,7 +88,7 @@ class DocumentsController < ApplicationController
   end
 
   def index
-    @groups = Group.find(:all, :order => 'updated_at').reverse()
+    @groups = Group.find(:all, :order => 'updated_at').reverse().find_all{|g| g.visible or g.visible == nil}
     @group = Group.find(params[:group_id])
 
     if current_user == nil

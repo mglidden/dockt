@@ -10,7 +10,7 @@ class GroupsController < ApplicationController
   def index
     if current_user != nil
       @groups = Group.find(:all, :order => 'updated_at').reverse().find_all{|g| g.visible or g.visible == nil}
-      viewable_groups = current_user.viewable_groups
+      viewable_groups = current_user.viewable_groups.find_all{|g| g.visible or g.visible == nil}
     else
       @groups = []
       viewable_groups = []
@@ -37,7 +37,7 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @group = Group.find(params[:id])
-    @groups = Group.all
+    @groups = Group.find(:all, :order => 'updated_at').reverse().find_all{|g| g.visible or g.visible == nil}
     @documents = @group.documents.sort_by {|doc| doc.updated_at }.reverse().find_all {|d| d.visible or d.visible == nil}
 
     if current_user == nil
