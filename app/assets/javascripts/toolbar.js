@@ -3,6 +3,7 @@ toolbar.animationTime = 100;
 toolbar.fadeTime = 300;
 toolbar.lastAction = '';
 toolbar.lastId = null;
+toolbar.commentMessag = null;
 
 toolbar.hideAdd = function() {
   $('#add').css('display', 'none');
@@ -109,6 +110,9 @@ toolbar.open = function(data, pagenum, offset) {
     if (slider.currCenter == 2) {
       $('#comment-page').children(0).val(pagenum);
       $('#comment-offset').children(0).val(offset);
+      if (toolbar.commentMessage != null) {
+        $('#comment-message').text(toolbar.commentMessage);
+      }
     }
   } else if (toolbar.lastAction == 'delete') {
     $('#deleteForm').bind('ajax:complete', toolbar.removeTableRow);
@@ -137,11 +141,14 @@ toolbar.add = function(event) {
   } else if (slider.currCenter == 1) {
     $.ajax({url: 'new', success: toolbar.open});
   } else {
+    window.console.log('here');
     pagenum = 0;
     if (event) {
       var offset = document.getElementById(event.target.id).offsetTop + event.offsetY;
+      toolbar.commentMessage = null;
     } else {
       var offset = document.getElementById('doc-pages').scrollTop + 60;
+      toolbar.commentMessage = 'You can also insert a comment by directly clicking on the document.';
     }
     $.ajax({url: 'new', success: function(data) {toolbar.open(data, pagenum, offset)}});
   }
