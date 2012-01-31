@@ -28,3 +28,7 @@ alerts.close = function() {
 alerts.closeAll = function() {
   $.each($('.error-box'), function(i, el) { $(el).hide()});
 };
+
+alerts.fadeAll = function() {
+  $.each($('.error-box'), function(i, el) { $(el).fadeOut('fast')});
+};

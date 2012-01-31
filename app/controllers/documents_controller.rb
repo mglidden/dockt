@@ -20,8 +20,11 @@ class DocumentsController < ApplicationController
     Thread.new() {
       response = system('curl ' + @document.url + ' -o ' + file)
       if response
-        #system('wget ' + @document.url + ' -O ' + file + '; convert ' + file + ' public/docs/' + @document.id.to_s + '.png')      
         system('convert ' + file + ' public/docs/' + @document.id.to_s + '.png');
+
+        data = {:namespace => 'alerts', :method => 'fadeAll'}
+        current_user.send_message(data)
+
         @users.each {|u| 
           @display_user = u
           data = {:namespace => 'toolbar', :method => 'addDocRowIfVisible',
@@ -36,6 +39,9 @@ class DocumentsController < ApplicationController
         @document.destroy
       end
     }
+    data = {:namespace => 'alerts', :method => 'showWarning',
+            :parm1 => 'Please wait a moment as we download your document.'}
+    current_user.send_message(data)
 
     respond_to do |format|
       format.html { render :inline => '' }
