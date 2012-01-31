@@ -96,6 +96,7 @@ slider.centerOn = function(card, animate) {
   } else {
     slider.moveSlider(-slider.CARD_WIDTH*card);
   }
+  alerts.closeAll();
   slider.currCenter = card;
   bc.changeCard(card);
   toolbar.setupButtons(card);

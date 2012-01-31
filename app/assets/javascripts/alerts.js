@@ -6,7 +6,7 @@ alerts.showWarning = function(message) {
   var al = alerts.createNew(message);
   al.css('display', 'none')
   $('#content').prepend(al);
-  al.slideToggle('fast')
+  al.fadeToggle('fast')
 };
 
 alerts.createNew = function(message) {
@@ -21,7 +21,10 @@ alerts.createNew = function(message) {
   return al;
 };
 
-
 alerts.close = function() {
-  $(window.event.target.parentElement).slideToggle('fast');
+  $(window.event.target.parentElement).fadeToggle('fast');
+};
+
+alerts.closeAll = function() {
+  $.each($('.error-box'), function(i, el) { $(el).hide()});
 };
