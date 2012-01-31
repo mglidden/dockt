@@ -3,13 +3,13 @@ class UserMailer < ActionMailer::Base
   def signup_notification(user)
     setup_email(user)
     @subject    += 'Please activate your new account'
-    @url  = "http://localhost:3000/activate/#{user.activation_code}"
+    @url  = "http://ebola.mit.edu/activate/#{user.activation_code}"
   end
   
   def activation(user)
     setup_email(user)
     @subject    += 'Your account has been activated!'
-    @url  = "http://localhost:3000/"
+    @url  = "http://ebola.mit.edu/"
   end
   
   protected
@@ -17,10 +17,9 @@ class UserMailer < ActionMailer::Base
   def setup_email(user)
     @recipients  = "#{user.email}"
     @from        = "ADMINEMAIL"
-    @subject     = "[localhost:3000]"
+    @subject     = ""
     @sent_on     = Time.now
     @user = user
-    puts "here \n\n\n\n\n\n\n"
   end
 
 end
