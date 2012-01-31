@@ -273,6 +273,36 @@ td.leftCol:hover {
   margin-bottom:10px;
 }
 
+.contentbox {
+  padding-top: 1px;
+  -webkit-box-shadow: 5px -5px 10px 10px #BBB inset;
+  width: 264px;
+  height: 150px;
+  display: inline-block;
+  -webkit-border-radius: 12px;
+  margin-bottom:4px;
+}
+#contentbox1 {
+  background: url('/assets/docktgroups.png'), #BBB;
+  font-size:15pt;
+  line-height:2.8;
+  margin-right:20px;
+  padding-left: 12px;
+  width: 136px;
+}
+
+#contentbox2 {
+  background: url('/assets/docktmember.png'), #BBB;
+  float:right;
+  font-size:15pt;
+  line-height:1.4;
+  margin-right:20px;
+  padding-left: 12px;
+  width: 244px;
+}
+
+#contentbox3 {
+}
 .blue-button {
    border-top: 1px solid #96d1f8;
    background: #31609e;
@@ -303,14 +333,6 @@ td.leftCol:hover {
 #blue-button-box {
   margin-left:35px;
   margin-top:55px;
-}
-
-#contentbox {
-  background: blue;
-  width: 264px;
-  height: 150px;
-  display: inline-block;
-  -webkit-border-radius: 12px;
 }
 
 #contentmargin {
