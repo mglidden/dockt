@@ -50,6 +50,10 @@ html, body {
   padding-top:15px;
 }
 
+.breadcrumb:hover {
+  color:#c7ba04;
+}
+
 .bc_cont {
   -webkit-border-bottom-right-radius:16px 25px;
   -webkit-border-top-right-radius:16px 25px;
@@ -330,7 +334,7 @@ td.leftCol:hover {
 }
 
 .blue-button {
-   border-top: 1px solid #96d1f8;
+   border-top: 1px solid #31609E;
    background: #31609e;
    background: -webkit-gradient(linear, left top, left bottom, from(#84a9c2), to(#31609e));
    background: -webkit-linear-gradient(top, #84a9c2, #31609e);
@@ -340,7 +344,7 @@ td.leftCol:hover {
    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
    text-shadow: rgba(0,0,0,.4) 0 1px 0;
    color: #ffffff;
-   font-size: 24px;
+   font-size:32px;
    font-family: Helvetica, Arial, Sans-Serif;
    text-decoration: none;
    vertical-align: middle;
@@ -358,8 +362,8 @@ td.leftCol:hover {
 }
 
 #blue-button-box {
-  margin-left:35px;
-  margin-top:55px;
+  margin-left:16px;
+  margin-top:64px;
 }
 
 #contentmargin {

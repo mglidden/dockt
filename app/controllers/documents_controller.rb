@@ -78,8 +78,7 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
     @comments = @document.comments.sort_by {|comment| comment.updated_at }.reverse()
     @curr_login = current_user.login
-    pages_cmd = IO.popen('ls public/docs/ | grep ' + params[:id] + '-')
-    @pages = pages_cmd.readlines.collect { |file| ['/docs/' + file[0..-2], file.split('-')[1].to_i] }
+    @pages = @document.get_pages
     @pages.sort_by! { |url, filenum|
       filenum
     }
