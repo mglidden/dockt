@@ -273,6 +273,38 @@ td.leftCol:hover {
   margin-bottom:10px;
 }
 
+.blue-button {
+   border-top: 1px solid #96d1f8;
+   background: #31609e;
+   background: -webkit-gradient(linear, left top, left bottom, from(#84a9c2), to(#31609e));
+   background: -webkit-linear-gradient(top, #84a9c2, #31609e);
+   padding: 11px 22px;
+   -webkit-border-radius: 17px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: #ffffff;
+   font-size: 24px;
+   font-family: Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+}
+
+.blue-button:hover {
+   border-top-color: #31609e;
+   background: #31609e;
+   color: #ccc;
+}
+
+.blue-button:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+}
+
+#blue-button-box {
+  margin-left:35px;
+  margin-top:55px;
+}
+
 #contentbox {
   background: blue;
   width: 264px;
