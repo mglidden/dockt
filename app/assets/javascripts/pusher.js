@@ -3,6 +3,10 @@ p.userId = null;
 
 p.init = function() {
   if (document.getElementById('user-username')) {
+    if (p.pusher != null) {
+      p.pusher.disconnect();
+      p.pusher = null;
+    }
     p.pusher = new Pusher('ab37b6148d60ea118769');
     p.userId = $('#user-username').text();
     p.channel = p.pusher.subscribe('private-updates-'+p.userId);
