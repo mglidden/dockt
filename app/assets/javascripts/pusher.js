@@ -2,9 +2,9 @@ p = {}
 p.userId = null;
 
 p.init = function() {
-  if (document.getElementById('user-login')) {
+  if (document.getElementById('user-username')) {
     p.pusher = new Pusher('ab37b6148d60ea118769');
-    p.userId = $('#user-login').text();
+    p.userId = $('#user-username').text();
     p.channel = p.pusher.subscribe('private-updates-'+p.userId);
     p.channel.bind('private-updates-'+p.userId, p.gotMessage);
   }
