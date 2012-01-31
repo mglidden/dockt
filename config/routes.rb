@@ -17,7 +17,7 @@ Docs::Application.routes.draw do
 
   match '/groups/delete' => 'groups#delete'
   match '/groups/destroy' => 'groups#destroy'
-  match '/groups/members' => 'groups#members'
+  match '/groups/members/:id' => 'groups#members'
   match '/groups/add_members' => 'groups#add_member'
 
   match '/groups/:group_id/documents/delete' => 'documents#delete'

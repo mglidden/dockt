@@ -166,8 +166,8 @@ toolbar.delete = function() {
   window.event.stopPropagation();
 }
 
-toolbar.members = function() {
-  $.ajax({url: '/groups/members', success: toolbar.open});
+toolbar.members = function(id) {
+  $.ajax({url: '/groups/members/'+id, success: toolbar.open});
   toolbar.lastId = window.event.target.parentElement.parentElement.children[0].innerText;
   toolbar.lastAction = 'members';
   window.event.stopPropagation();

@@ -1,0 +1,2 @@
+Users with access: <br />
+<%= (['you']+@group.users_with_access.find_all{|u| u != current_user}.collect{|u| u.login}).join(', ') %>

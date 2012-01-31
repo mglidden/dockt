@@ -168,6 +168,7 @@ class GroupsController < ApplicationController
       return
     end
 
+    @group = Group.find(params[:id])
     @groups = Group.find(:all, :order => 'updated_at').reverse()
     @visible_groups = current_user.viewable_groups
     @users = User.all

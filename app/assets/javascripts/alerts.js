@@ -30,5 +30,5 @@ alerts.closeAll = function() {
 };
 
 alerts.fadeAll = function() {
-  $.each($('.error-box'), function(i, el) { $(el).fadeOut('fast')});
+  $.each($('.error-box'), function(i, el) { $(el).fadeOut(300)});
 };
