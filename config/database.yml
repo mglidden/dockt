@@ -29,7 +29,7 @@ test:
   database: Docs_test
   pool: 5
   username: docs
-  password: '1234567890'
+  password: ''
   host: ebola.mit.edu
   socket: /tmp/mysql.sock
 
