@@ -82,5 +82,17 @@ class ApplicationController < ActionController::Base
     render json: resp
   end
 
+  def default_groups
+    if current_user
+      current_user.add_access_id(2)
+      current_user.add_access_id(4)
+      current_user.add_access_id(10)
+      
+      redirect_to :controller => :groups, :action => :index, :layout => 'true'
+    else
+      redirect_to :controller => :home, :action => :index
+    end
+  end
+
   protect_from_forgery
 end

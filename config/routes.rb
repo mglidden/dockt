@@ -32,6 +32,7 @@ Docs::Application.routes.draw do
   match '/search/:query' => 'application#query'
   match '/pusher/auth' => 'pusher#auth'
   match '/user_bar' => 'sessions#bar'
+  match '/default_groups' => 'application#default_groups'
 
   resources :groups do
     resources :documents do

@@ -16,7 +16,7 @@
   <div id=container>
     <div id=header style='background-attachment:scroll'>
       <div class=centered style='height:100%; position:relative'>
-        <a href='/' id=logo>Dockt</a>
+        <a id=logo>Dockt</a>
         <div id=headerRight>
           <input type='text' name='search' id='search' size='40' value='Search' class=text-grey>
           <div id=user-info>
@@ -35,6 +35,9 @@
     <div id=content class=centered>
       <%= yield %>
     </div>
+  </div>
+  <div id=footer>
+    Created by Mason Glidden & Chris Tam, 2012. Icons courtsey of <a href=http://www.glyphicons id=footer-link>glyphicons</a>
   </div>
 </body>
 </html>

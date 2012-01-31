@@ -69,11 +69,19 @@ html, body {
 }
 
 #footer {
-  background: yellow;
   bottom: 0;
-  height: 40px;
+  color:#A6A6A6;
+  cursor:default;
+  font-size:7pt;
+  height: 20px;
   position: absolute;
+  text-align:center;
   width: 100%;
+}
+
+#footer-link {
+  background:transparent;
+  color:#A6A6A6;
 }
 
 .data-table {
@@ -119,8 +127,9 @@ html, body {
 }
 
 #logo {
-  background: 'transparent';
+  background:transparent;
   color:#a6a6a6;
+  cursor:default;
   font-family: 'Aclonica', sans-serif;
   font-size:36pt;
   margin-left:-5px;
