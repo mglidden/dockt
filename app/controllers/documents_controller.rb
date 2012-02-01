@@ -19,7 +19,12 @@ class DocumentsController < ApplicationController
 
     Thread.new() {
       response = system('curl ' + @document.url + ' -o ' + file)
-      if response
+      if @document.url[-4..-1] != '.pdf'
+        data = {:namespace => 'alerts', :method => 'showWarning',
+                :parm1 => 'Please give us a link to a PDF document'}
+        current_user.send_message(data)
+        @document.destroy
+      elsif response
         system('convert ' + file + ' public/docs/' + @document.id.to_s + '.png');
 
         data = {:namespace => 'alerts', :method => 'fadeAll'}
@@ -39,9 +44,11 @@ class DocumentsController < ApplicationController
         @document.destroy
       end
     }
-    data = {:namespace => 'alerts', :method => 'showWarning',
-            :parm1 => 'Please wait a moment as we download your document.'}
-    current_user.send_message(data)
+    if @document.url[-4..-1] == '.pdf'
+      data = {:namespace => 'alerts', :method => 'showWarning',
+              :parm1 => 'Please wait a moment as we download your document.'}
+      current_user.send_message(data)
+    end
 
     respond_to do |format|
       format.html { render :inline => '' }
