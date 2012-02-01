@@ -215,6 +215,9 @@ toolbar.logoutResp = function(resp) {
     window.history.replaceState({}, '', '/');
     toolbar.rerenderUserBar();
     namespaces.init();
-    $(document.getElementById('breadcrumbs').children[0]).html('');
+    toolbar.hideAdd();
+    $('.bc_cont').remove();
+
+    //$(document.getElementById('breadcrumbs').children[0]).hide();
   });
 };
